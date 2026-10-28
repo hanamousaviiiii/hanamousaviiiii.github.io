@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ساخت ویدیو با هوش مصنوعی: مفاهیم پایه برای شروع | هانا موسوی</title>
+<meta name="description" content="آشنایی با ساخت ویدیو با هوش مصنوعی: متن‌به‌ویدیو، تصویر‌به‌ویدیو و نکات ساخت کلیپ‌های طبیعی‌تر.">
+<meta name="theme-color" content="#05060b">
+<meta property="og:title" content="ساخت ویدیو با هوش مصنوعی: مفاهیم پایه برای شروع | هانا موسوی">
+<meta property="og:description" content="آشنایی با ساخت ویدیو با هوش مصنوعی: متن‌به‌ویدیو، تصویر‌به‌ویدیو و نکات ساخت کلیپ‌های طبیعی‌تر.">
+<link rel="icon" href="../assets/img/mark.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+<svg class="sprite" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+ <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe0ff"/><stop offset=".45" stop-color="#cfd8ff"/><stop offset="1" stop-color="#ff5a6e"/></linearGradient>
+ <linearGradient id="gl2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4CC9F0"/><stop offset="1" stop-color="#D7263D"/></linearGradient>
+ <radialGradient id="gcore" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".4" stop-color="#ff5a6e" stop-opacity=".35"/><stop offset="1" stop-color="#2F6BFF" stop-opacity="0"/></radialGradient>
+ <symbol id="frame" viewBox="0 0 250 370">
+  <g fill="none" stroke="url(#gl)" stroke-linecap="round">
+   <rect x="9" y="9" width="232" height="352" rx="14" stroke-width=".9" opacity=".9"/>
+   <rect x="17" y="17" width="216" height="336" rx="9" stroke-width=".5" opacity=".55"/>
+   <!-- ornate corners (top-left / bottom-right) -->
+   <g id="corner" stroke-width=".8">
+     <path d="M17 62C17 36 36 17 62 17"/>
+     <path d="M25 70V40q0-15 15-15h30" opacity=".7"/>
+     <path d="M33 33l8 8M41 33l-8 8" opacity=".6"/>
+     <path d="M37 27l6 6-6 6-6-6z"/>
+     <circle cx="70" cy="25" r="1.6" fill="url(#gl)" stroke="none"/><circle cx="25" cy="70" r="1.6" fill="url(#gl)" stroke="none"/>
+   </g>
+   <use href="#corner" transform="rotate(180 125 185)"/>
+   <!-- top & bottom crest -->
+   <g id="crest" stroke-width=".7">
+     <path d="M92 17c12 0 20 4 33 14 13-10 21-14 33-14" />
+     <path d="M125 22l5 5-5 5-5-5z" fill="rgba(255,90,110,.35)"/>
+     <path d="M104 25h-14M146 25h14" opacity=".5"/>
+   </g>
+   <use href="#crest" transform="rotate(180 125 185)"/>
+   <!-- side beads -->
+   <g opacity=".6" stroke-width=".6"><path d="M17 160v50M233 160v50"/><circle cx="17" cy="185" r="3"/><circle cx="233" cy="185" r="3"/></g>
+   <!-- emblem halo rings -->
+   <circle cx="125" cy="152" r="78" stroke-width=".5" opacity=".35" stroke-dasharray="1 5"/>
+   <circle cx="125" cy="152" r="86" stroke-width=".4" opacity=".2"/>
+   <!-- title cartouche -->
+   <path d="M46 268h158M46 316h158" stroke-width=".5" opacity=".45"/>
+   <path d="M46 268l-8 24 8 24M204 268l8 24-8 24" stroke-width=".6" opacity=".55"/>
+  </g>
+ </symbol>
+ <symbol id="emb-editor" viewBox="0 0 120 120">
+  <g fill="none" stroke="url(#gl)" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="60" cy="60" r="56" stroke-width="5" stroke-dasharray=".8 6.2" opacity=".8" class="spin"/>
+   <circle cx="60" cy="60" r="47" stroke-width="1"/>
+   <circle cx="60" cy="60" r="43" stroke-width=".5" opacity=".5"/>
+   <path d="M60 13v10M60 97v10M13 60h10M97 60h10" stroke-width="1"/>
+   <rect x="34" y="34" width="52" height="52" rx="3" transform="rotate(45 60 60)" stroke-width="1"/>
+   <!-- film frame -->
+   <rect x="40" y="44" width="40" height="32" rx="4" stroke-width="1.2"/>
+   <path d="M40 50h40M40 70h40" stroke-width=".7" opacity=".7"/>
+   <path d="M45 47h2M51 47h2M57 47h2M63 47h2M69 47h2M75 47h0M45 73h2M51 73h2M57 73h2M63 73h2M69 73h2" stroke-width="1.2" opacity=".8"/>
+   <path d="M55 54v12l10-6z" fill="url(#gl)" stroke-width="1"/>
+   <circle cx="60" cy="60" r="3" fill="#fff" stroke="none" opacity=".0"/>
+  </g>
+ </symbol>
+ <symbol id="emb-assistant" viewBox="0 0 120 120">
+  <g fill="none" stroke="url(#gl)" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="60" cy="60" r="56" stroke-width="5" stroke-dasharray=".8 6.2" opacity=".8" class="spin"/>
+   <circle cx="60" cy="60" r="47" stroke-width="1"/>
+   <path d="M60 18 70 50 102 60 70 70 60 102 50 70 18 60 50 50z" stroke-width="1"/>
+   <path d="M60 30 66 54 90 60 66 66 60 90 54 66 30 60 54 54z" stroke-width=".5" opacity=".5" transform="rotate(45 60 60)"/>
+   <!-- eye -->
+   <path d="M38 60c8-10 16-14 22-14s14 4 22 14c-8 10-16 14-22 14s-14-4-22-14z" stroke-width="1.2"/>
+   <circle cx="60" cy="60" r="8" stroke-width="1.2"/>
+   <circle cx="60" cy="60" r="3.2" fill="url(#gl)" stroke="none"/>
+   <!-- neural nodes -->
+   <g fill="url(#gl)" stroke="none"><circle cx="60" cy="18" r="2.2"/><circle cx="102" cy="60" r="2.2"/><circle cx="60" cy="102" r="2.2"/><circle cx="18" cy="60" r="2.2"/></g>
+  </g>
+ </symbol>
+ <symbol id="mark" viewBox="0 0 40 40">
+  <g fill="none" stroke-linecap="round">
+   <circle cx="20" cy="20" r="17" stroke="url(#gl)" stroke-width="1.2"/>
+   <path d="M13 11v18M27 11v18M13 20h14" stroke="#fff" stroke-width="2.2"/>
+   <circle cx="20" cy="20" r="2.4" fill="#ff5a6e"/>
+  </g>
+ </symbol>
+</defs></svg>
+<div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="nav"><div class="nav-pill glass">
+  <a class="brand" href="../index.html" aria-label="hana.aistudio — خانه"><svg class="brand-mark"><use href="#mark"/></svg><span>hana<b>.</b>aistudio</span></a>
+  <nav class="nav-links" aria-label="منوی اصلی"><a href="../index.html#courses">دوره‌ها</a><a href="../challenge.html">چالش</a><a href="../blog.html" aria-current=page>مجله</a><a href="../links.html">لینک‌ها</a><a href="../contact.html">همکاری</a></nav>
+  <div class="nav-cta"><a class="btn btn-primary btn-sm mag" href="../challenge.html">شروع چالش</a><button class="menu-btn" aria-label="منو" aria-expanded="false"><i></i></button></div>
+</div></header>
+<nav class="sheet glass" aria-label="منوی موبایل"><a href="../index.html">خانه<small>Home</small></a><a href="../index.html#courses">دوره‌ها<small>Courses</small></a><a href="../challenge.html">چالش<small>Challenge</small></a><a href="../blog.html">مجله<small>Journal</small></a><a href="../links.html">لینک‌ها<small>Links</small></a><a href="../contact.html">همکاری<small>Collab</small></a></nav>
+<main><article class="reading">
+ <header class="art-head"><div class="wrap narrow">
+  <div class="crumbs rv"><a href="../index.html">خانه</a><span>/</span><a href="../blog.html">مجله</a><span>/</span><span>ویدیو</span></div>
+  <h1 class="h-lg rv">ساخت ویدیو با هوش مصنوعی: مفاهیم پایه برای شروع</h1>
+  <div class="byline rv"><span class="av"><svg viewBox="0 0 40 40"><use href="#mark"/></svg></span><span><b>هانا موسوی</b><small>۷ دقیقه مطالعه</small></span></div>
+ </div></header>
+ <div class="wrap narrow"><div class="art-cover rv"><div class="art a6"></div><div class="gridlines"></div></div></div>
+ <div class="wrap narrow prose"><p>ساخت ویدیو با هوش مصنوعی تا چند سال پیش بیشتر یک آزمایش جالب بود، ولی امروز بسیاری از تولیدکننده‌های محتوا از اون برای ساخت ریلز، تبلیغ و کلیپ‌های خلاقانه استفاده می‌کنن. توی این مقاله با مفاهیم پایه آشنا می‌شی تا بدونی دقیقاً با چی سروکار داری.</p>
+
+  <h2>روش‌های اصلی ساخت ویدیو با AI</h2>
+  <h3> متن‌به‌ویدیو (Text-to-Video)</h3>
+  <p>یک صحنه رو با کلمات توصیف می‌کنی و مدل یک کلیپ کوتاه می‌سازه. برای ایده‌های خیالی و صحنه‌هایی که فیلم‌برداریشون سخته عالیه، ولی کنترل دقیق روی جزئیات کمتره.</p>
+  <h3> تصویر‌به‌ویدیو (Image-to-Video)</h3>
+  <p>یک تصویر (مثلاً کاوری که با AI ساختی) رو می‌دی و ابزار اون رو متحرک می‌کنه. چون ظاهر صحنه از قبل مشخصه، نتیجه قابل‌پیش‌بینی‌تر و یکدست‌تره. برای شروع، این روش معمولاً راحت‌تره.</p>
+  <h3> آواتار سخنگو و صداگذاری</h3>
+  <p>بعضی ابزارها یک چهره یا کاراکتر رو با متن یا صدا هماهنگ می‌کنن تا حرف بزنه. ابزارهای تبدیل متن به گفتار هم برای صداگذاری روی ویدیو استفاده می‌شن.</p>
+  <h3> ویرایش با کمک AI</h3>
+  <p>زیرنویس خودکار، حذف پس‌زمینه، برش هوشمند ویدیوی بلند به کلیپ‌های کوتاه و بهبود کیفیت صدا، کارهایی‌اند که حتی بدون ساخت ویدیوی کامل با AI، تدوین رو خیلی سریع‌تر می‌کنن.</p>
+
+  <aside class="callout glass"><b>واقعیت مهم:</b> بیشتر ابزارهای فعلی در هر بار تولید، کلیپ‌های <b>چند ثانیه‌ای</b> می‌سازن. ویدیوهای بلندتر معمولاً از کنار هم گذاشتن چند کلیپ کوتاه در یک نرم‌افزار تدوین ساخته می‌شن.</aside>
+
+  <h2>پرامپت ویدیو: حرکت رو توصیف کن</h2>
+  <p>تفاوت اصلی پرامپت ویدیو با تصویر اینه که باید <b>حرکت</b> رو هم بگی:</p>
+  <ul>
+    <li><b>حرکت سوژه:</b> «دختر لبخند می‌زنه و سرش رو به سمت دوربین می‌چرخونه».</li>
+    <li><b>حرکت دوربین:</b> زوم آهسته به جلو، چرخش دور سوژه، حرکت افقی (پن).</li>
+    <li><b>سرعت و حال‌وهوا:</b> آرام و سینمایی، پرانرژی، اسلوموشن.</li>
+    <li><b>یک اتفاق در هر کلیپ:</b> درخواست چند اتفاق پشت سر هم در یک کلیپ کوتاه، معمولاً نتیجه‌ی به‌هم‌ریخته می‌ده.</li>
+  </ul>
+  <pre dir="auto">Slow camera push-in on a cute 3D robot waving at the camera, soft purple background, gentle lighting, smooth motion, vertical 9:16</pre>
+
+  <h2>یک روند کاری ساده برای ساخت ریلز</h2>
+  <ol>
+    <li><b>سناریو:</b> با یک چت‌بات، ایده و متن ریلز رو در چند صحنه‌ی کوتاه بنویس.</li>
+    <li><b>تصویر صحنه‌ها:</b> برای هر صحنه یک تصویر با سبک یکسان بساز.</li>
+    <li><b>متحرک‌سازی:</b> تصاویر رو با ابزار تصویر‌به‌ویدیو متحرک کن.</li>
+    <li><b>صدا و موسیقی:</b> صداگذاری کن یا موسیقی مناسب و مجاز اضافه کن.</li>
+    <li><b>تدوین:</b> کلیپ‌ها رو کنار هم بذار، زیرنویس اضافه کن و خروجی عمودی ۹:۱۶ بگیر.</li>
+  </ol>
+
+  <h2>چالش‌ها و نکات اخلاقی</h2>
+  <ul>
+    <li><b>ثبات کاراکتر:</b> نگه داشتن ظاهر یکسان یک شخصیت در چند کلیپ هنوز چالش‌برانگیزه؛ استفاده از یک تصویر مرجع ثابت کمک می‌کنه.</li>
+    <li><b>خطاهای بصری:</b> دست‌ها، متن داخل تصویر و حرکت‌های پیچیده گاهی عجیب درمیان. چند نسخه بساز و بهترین رو انتخاب کن.</li>
+    <li><b>هزینه و اعتبار:</b> بسیاری از ابزارها با سیستم اعتبار (Credit) کار می‌کنن؛ قبل از تولید نهایی، پرامپت رو با تنظیمات ارزان‌تر تست کن.</li>
+    <li><b>صداقت با مخاطب:</b> از چهره یا صدای دیگران بدون اجازه استفاده نکن و در صورت لزوم مشخص کن که محتوا با AI ساخته شده. قوانین هر پلتفرم رو هم درباره‌ی برچسب محتوای AI بررسی کن.</li>
+  </ul>
+
+  <h2>جمع‌بندی</h2>
+  <p>برای شروع، با تصویر‌به‌ویدیو و کلیپ‌های چندثانیه‌ای کار کن، حرکت رو ساده و دقیق توصیف کن و کلیپ‌ها رو در تدوین کنار هم بچین. با تمرین، کم‌کم سبک بصری مخصوص خودت رو پیدا می‌کنی.</p></div>
+ <div class="wrap narrow">
+  <div class="final glass" style="padding:44px 26px;margin-top:60px"><div class="orb o1"></div><div class="orb o2"></div>
+   <h2 class="h-md" style="margin-bottom:12px">می‌خوای این‌ها رو قدم‌به‌قدم و عملی یاد بگیری؟</h2>
+   <p class="muted" style="margin:0 0 24px">اول سطحت رو با چالش بسنج، یا برای اطلاعات دوره‌ها در تلگرام پیام بده.</p>
+   <div class="cta-row" style="justify-content:center"><a class="btn btn-primary" href="../challenge.html">شروع چالش <svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="btn btn-glass" href="https://t.me/hanatrick" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.6 2.8 10.9c-.8.3-.8 1.4 0 1.7l4.6 1.6 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6L22.9 5c.2-.9-.6-1.7-1.4-1.4ZM7.6 14.2l11-7.4-8.6 8.4"/></svg> تلگرام</a></div>
+  </div>
+  <h3 style="margin:60px 0 16px;font-size:18px">مقاله‌های دیگر</h3><div class="link-list"><a class="link-row glass" href="start-ai-content.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>شروع تولید محتوا با هوش مصنوعی: از کجا شروع کنم؟</b><small>۶ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="better-prompts.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>هنر پرامپت‌نویسی: چطور از AI جواب بهتر بگیریم؟</b><small>۷ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+ </div>
+</article></main><footer>
+ <div class="wrap">
+  <div class="foot">
+   <div><a class="brand" href="../index.html" style="padding:0;margin-bottom:14px;display:inline-flex"><svg class="brand-mark"><use href="#mark"/></svg><span>hana<b>.</b>aistudio</span></a>
+    <p>آموزش ادیت موبایل و خلق محتوا با هوش مصنوعی، توسط هانا موسوی.</p></div>
+   <div><h4>صفحه‌ها</h4><a href="../index.html#courses">دوره‌ها</a><a href="../challenge.html">چالش سطح AI</a><a href="../blog.html">مجله</a><a href="../contact.html">همکاری با برندها</a></div>
+   <div><h4>ارتباط</h4><a href="https://instagram.com/hana.aistudio" target="_blank" rel="noopener">Instagram · hana.aistudio</a><a href="https://t.me/hanatrick" target="_blank" rel="noopener">Telegram · hanatrick</a><a href="../links.html">همه‌ی لینک‌ها</a></div>
+  </div>
+  <div class="big-word" aria-hidden="true">hana.aistudio</div>
+  <div class="foot-bottom"><span>© <span data-year></span> hana.aistudio · تمام حقوق محفوظ است.</span><span class="latin" style="font-size:11px">Crafted with intelligence</span></div>
+ </div>
+</footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body></html>
