@@ -75,3 +75,10 @@ screenshots/          اسکرین‌شات‌های QA
 
 ## انتشار
 هر هاست استاتیک (GitHub Pages، Netlify، Cloudflare Pages، یا هاست ایرانی). پوشه‌های `_build` و `screenshots` لازم نیستند.
+
+## فونت‌ها (Fonts)
+- **متن صفحه: IRANSansX** — فونت تجاری است و فایلش در این پروژه نیست. فایل‌های دارای لایسنس خود را با همین نام‌ها در `assets/fonts/` بگذارید تا خودکار فعال شوند:
+  `IRANSansX-Regular.woff2` (400)، `IRANSansX-Medium.woff2` (500)، `IRANSansX-Bold.woff2` (700)، `IRANSansX-Black.woff2` (900).
+  (برای ارقام فارسی از نسخه‌ی FaNum/«اعداد فارسی» استفاده کنید.) تا وقتی فایل‌ها نیستند، Vazirmatn (OFL) جایگزین نمایش داده می‌شود. خرید: fontiran.com
+- **تیتر اصلی هیرو: Reem Kufi Bold** — SIL Open Font License 1.1 (Google Fonts)، فایل: `assets/fonts/reemkufi-700.woff2`.
+- **متن‌های لاتین تزئینی: Cormorant Garamond** و **Vazirmatn** — هر دو OFL.
