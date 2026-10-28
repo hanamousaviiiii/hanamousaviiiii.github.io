@@ -23,7 +23,7 @@
   d.body.appendChild(pal);
   const svg = pal.querySelector('svg'), eye = pal.querySelector('.eye'), tag = pal.querySelector('.tag');
 
-  const ids = [['why', 'WHY NOW'], ['challenge', 'LEVEL UP'], ['courses', 'THE DECK'], ['showcase', 'MADE WITH AI'], ['voices', 'VOICES'], ['about', 'HUMAN + AI'], ['faq', 'ASK ME'], [null, 'THE FUTURE']];
+  const ids = [['why', 'WHY NOW'], ['challenge', 'LEVEL UP'], ['courses', 'THE DECK'], ['showcase', 'MADE WITH AI'], ['voices', 'VOICES'], ['about', 'HUMAN + AI'], ['ai-faq', 'ASK AI'], ['faq', 'ASK ME'], [null, 'THE FUTURE']];
   let W = innerWidth, H = innerHeight, pts = [], size = 78;
 
   function build() {

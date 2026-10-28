@@ -80,5 +80,6 @@ screenshots/          اسکرین‌شات‌های QA
 - **متن صفحه: IRANSansX** — فونت تجاری است و فایلش در این پروژه نیست. فایل‌های دارای لایسنس خود را با همین نام‌ها در `assets/fonts/` بگذارید تا خودکار فعال شوند:
   `IRANSansX-Regular.woff2` (400)، `IRANSansX-Medium.woff2` (500)، `IRANSansX-Bold.woff2` (700)، `IRANSansX-Black.woff2` (900).
   (برای ارقام فارسی از نسخه‌ی FaNum/«اعداد فارسی» استفاده کنید.) تا وقتی فایل‌ها نیستند، Vazirmatn (OFL) جایگزین نمایش داده می‌شود. خرید: fontiran.com
-- **تیتر اصلی هیرو: Reem Kufi Bold** — SIL Open Font License 1.1 (Google Fonts)، فایل: `assets/fonts/reemkufi-700.woff2`.
+- **تیتر اصلی هیرو: Lalezar** (بُرنا ایزدپناه) — SIL Open Font License 1.1 (Google Fonts)، فایل: `assets/fonts/lalezar.woff2`. نزدیک‌ترین فونت آزاد به حس سنگین و پوستری «پتک».
+- **جای خالی فونت «پتک» (Potk):** پتک اثر مهدی ارشادی و تجاری است (فروش انحصاری در fontiran.com) و نسخه‌ی رایگان ندارد؛ استفاده در وب‌سایت لایسنس وب جداگانه می‌خواهد. بعد از خرید لایسنس وب، فایل را با نام `assets/fonts/Potk.woff2` در پوشه بگذارید (و فایل لایسنس FontLicense.txt را کنارش) — `@font-face` آن از قبل در `style.css` تعریف شده و تیتر هیرو خودکار با پتک نمایش داده می‌شود؛ Lalezar فقط جایگزین می‌ماند.
 - **متن‌های لاتین تزئینی: Cormorant Garamond** و **Vazirmatn** — هر دو OFL.
