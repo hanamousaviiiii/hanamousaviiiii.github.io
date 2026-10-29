@@ -24,10 +24,10 @@
   const svg = pal.querySelector('svg'), eye = pal.querySelector('.eye'), tag = pal.querySelector('.tag');
 
   const ids = [['why', 'WHY NOW'], ['challenge', 'LEVEL UP'], ['courses', 'THE DECK'], ['showcase', 'MADE WITH AI'], ['voices', 'VOICES'], ['about', 'HUMAN + AI'], ['ai-faq', 'ASK AI'], ['faq', 'ASK ME'], [null, 'THE FUTURE']];
-  let W = innerWidth, H = innerHeight, pts = [], size = 78;
+  let W = innerWidth, H = innerHeight, pts = [], size = 88;
 
   function build() {
-    W = innerWidth; H = innerHeight; size = W <= 640 ? 46 : 78;
+    W = innerWidth; H = innerHeight; size = W <= 640 ? 58 : 88;
     const max = Math.max(1, d.documentElement.scrollHeight - H);
     const gutter = Math.max(8, Math.min(60, (W - Math.min(W - 40, 1180)) / 2 - size * .35));
     const L = gutter, R = W - gutter - size;
@@ -59,21 +59,18 @@
   const trail = [];
   if (!reduce) for (let i = 0; i < 5; i++) { const t = d.createElement('i'); t.className = 'pal-trail' + (i % 2 ? ' c' : ''); d.body.appendChild(t); trail.push({ el: t, x: 0, y: 0 }); }
 
-  let x = -200, y = H * .6, vx = 0, vy = 0, rot = 0, first = true;
+  let x = -200, y = H * .6, vx = 0, vy = 0, rot = 0, first = true, last = 0;
   function frame() {
-    const sy = scrollY, show = sy > H * .55;
+    last = Date.now();
+    const sy = scrollY, show = sy > H * .3;
     pal.classList.toggle('on', show); d.body.classList.toggle('pal-on', show);
-    if (reduce) {
-      pal.style.transform = `translate3d(${W <= 640 ? 10 : 24}px,${H - size - 24}px,0)`;
-      return;
-    }
     const tg = target(sy);
-    if (first) { x = tg.x; y = tg.y; first = false; }
+    if (first || reduce) { x = tg.x; y = tg.y; first = false; }
     const nx = lerp(x, tg.x, .08), ny = lerp(y, tg.y, .08);
     vx = nx - x; vy = ny - y; x = nx; y = ny;
-    rot = lerp(rot, Math.max(-35, Math.min(35, vx * 1.6)), .12);
-    const bob = Math.sin(performance.now() / 900) * 4;
-    const sc = 1 + Math.min(.25, Math.hypot(vx, vy) * .012);
+    rot = reduce ? 0 : lerp(rot, Math.max(-35, Math.min(35, vx * 1.6)), .12);
+    const bob = reduce ? 0 : Math.sin(performance.now() / 900) * 4;
+    const sc = reduce ? 1 : 1 + Math.min(.25, Math.hypot(vx, vy) * .012);
     pal.style.transform = `translate3d(${x.toFixed(1)}px,${(y + bob).toFixed(1)}px,0)`;
     svg.style.transform = `rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
     const px = Math.max(-4, Math.min(4, vx * .6)), py = Math.max(-4, Math.min(4, vy * .6));
@@ -88,7 +85,11 @@
   build(); addEventListener('resize', () => { build(); });
   addEventListener('load', build);
   setTimeout(build, 1500);
-  if (reduce) { addEventListener('scroll', frame, { passive: true }); frame(); }
-  else { loop(); d.addEventListener('visibilitychange', () => { cancelAnimationFrame(raf); if (!d.hidden) loop(); }); }
+  if (reduce) pal.classList.add('calm');
+  // also update straight from scroll events, so the orb keeps up even where rAF is throttled (low-power mode, in-app browsers)
+  addEventListener('scroll', frame, { passive: true });
+  // watchdog: if the browser stops delivering animation frames, keep the orb in sync with a timer
+  setInterval(() => { if (!d.hidden && Date.now() - last > 180) frame(); }, 120);
+  loop(); d.addEventListener('visibilitychange', () => { cancelAnimationFrame(raf); if (!d.hidden) loop(); });
   window.__pal = { build, pts: () => pts };
 })();

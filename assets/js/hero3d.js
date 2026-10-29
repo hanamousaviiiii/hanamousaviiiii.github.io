@@ -1,5 +1,5 @@
 /* hana.aistudio — hero AI core (Three.js, no build step) */
-import * as THREE from 'three';
+import * as THREE from './vendor/three.module.min.js';
 
 const canvas = document.getElementById('core');
 const root = document.documentElement;

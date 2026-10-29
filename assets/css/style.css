@@ -794,3 +794,26 @@ code{font-size:.9em;background:rgba(255,255,255,.06);padding:2px 8px;border-radi
   .cmp td:last-child{margin-bottom:0}
 }
 .hq .h-lg .grad-b{white-space:nowrap;display:inline-block}
+
+/* ---------- traveling AI companion ---------- */
+.ai-pal{position:fixed;left:0;top:0;z-index:30;width:88px;height:88px;pointer-events:none;opacity:0;will-change:transform,opacity;transition:opacity .6s var(--ease)}
+.ai-pal.on{opacity:1}
+.ai-pal svg{position:relative;z-index:1;display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 10px rgba(215,38,61,.55)) drop-shadow(0 0 18px rgba(47,107,255,.35))}
+.ai-pal .orbit{transform-origin:50px 50px;transform-box:view-box}
+.ai-pal .o1{animation:spin 9s linear infinite}
+.ai-pal .o2{animation:spin 14s linear infinite reverse}
+.ai-pal .glow{position:absolute;inset:-70%;border-radius:50%;background:radial-gradient(closest-side,rgba(215,38,61,.5),rgba(47,107,255,.26) 55%,transparent 76%);filter:blur(6px);animation:palGlow 3.2s ease-in-out infinite}
+.ai-pal::after{content:"";position:absolute;inset:-14%;border-radius:50%;box-shadow:0 0 0 1px rgba(76,201,240,.45),0 0 22px rgba(76,201,240,.25);animation:palRing 2.8s ease-out infinite;pointer-events:none}
+@keyframes palGlow{50%{transform:scale(1.15);opacity:.75}}
+@keyframes palRing{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.45);opacity:0}}
+.ai-pal .tag{position:absolute;top:50%;left:calc(100% + 14px);transform:translateY(-50%);white-space:nowrap;font-size:11.5px;letter-spacing:.2em;color:rgba(210,232,255,.85);font-family:var(--serif);direction:ltr;opacity:0;transition:opacity .5s}
+.ai-pal.talk .tag{opacity:1}
+.ai-pal.r .tag{left:auto;right:calc(100% + 14px)}
+.pal-trail{position:fixed;left:0;top:0;z-index:29;width:9px;height:9px;margin:-4.5px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(76,201,240,.95),rgba(47,107,255,0) 70%);opacity:0;transition:opacity .6s}
+.pal-trail.c{background:radial-gradient(circle,rgba(255,90,110,.95),rgba(215,38,61,0) 70%)}
+.pal-on .pal-trail{opacity:.6}
+/* reduced motion: stays visible, glides with scroll, only slow ambient animation */
+.ai-pal.calm{transition:none}
+.ai-pal.calm .o1{animation-duration:40s}.ai-pal.calm .o2{animation-duration:60s}
+.ai-pal.calm .glow{animation:none}.ai-pal.calm::after{animation:none;opacity:.5}
+@media (max-width:640px){.ai-pal{width:58px;height:58px}.ai-pal .tag{display:none}}
