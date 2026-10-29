@@ -20,7 +20,9 @@
    <g class="eye"><circle cx="50" cy="50" r="11.5" fill="#06070d" stroke="#4CC9F0" stroke-width="1.3"/><circle class="pupil" cx="50" cy="50" r="5" fill="#4CC9F0"/><circle cx="52.2" cy="47.6" r="1.6" fill="#fff"/></g>
    <circle cx="50" cy="50" r="29" fill="url(#palGlass)"/>
   </svg><span class="tag"></span>`;
-  d.body.appendChild(pal);
+  // a clipping layer keeps the glow from ever widening the page (iOS Safari counts fixed overflow)
+  const layer = d.createElement('div'); layer.className = 'pal-layer'; layer.setAttribute('aria-hidden', 'true'); d.body.appendChild(layer);
+  layer.appendChild(pal);
   const svg = pal.querySelector('svg'), eye = pal.querySelector('.eye'), tag = pal.querySelector('.tag');
 
   const ids = [['why', 'WHY NOW'], ['challenge', 'LEVEL UP'], ['courses', 'THE DECK'], ['showcase', 'MADE WITH AI'], ['voices', 'VOICES'], ['about', 'HUMAN + AI'], ['ai-faq', 'ASK AI'], ['faq', 'ASK ME'], [null, 'THE FUTURE']];
@@ -57,7 +59,7 @@
   }
 
   const trail = [];
-  if (!reduce) for (let i = 0; i < 5; i++) { const t = d.createElement('i'); t.className = 'pal-trail' + (i % 2 ? ' c' : ''); d.body.appendChild(t); trail.push({ el: t, x: 0, y: 0 }); }
+  if (!reduce) for (let i = 0; i < 5; i++) { const t = d.createElement('i'); t.className = 'pal-trail' + (i % 2 ? ' c' : ''); layer.appendChild(t); trail.push({ el: t, x: 0, y: 0 }); }
 
   let x = -200, y = H * .6, vx = 0, vy = 0, rot = 0, first = true, last = 0;
   function frame() {
