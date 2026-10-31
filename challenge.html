@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>چالش: سطح هوش مصنوعی تو چیه؟ | hana.aistudio</title>
-<meta name="description" content="در ۳ دقیقه سطح هوش مصنوعی‌ات رو بسنج و دوره‌ی مناسب خودت رو پیدا کن.">
+<meta name="description" content="یک ارزیابی سناریومحور ۳ دقیقه‌ای: سطح هوش مصنوعی‌ات رو بسنج، تحلیل مهارت‌هات رو ببین و دوره‌ی مناسب خودت رو پیدا کن.">
 <meta name="theme-color" content="#05060b">
 <meta property="og:title" content="چالش: سطح هوش مصنوعی تو چیه؟ | hana.aistudio">
-<meta property="og:description" content="در ۳ دقیقه سطح هوش مصنوعی‌ات رو بسنج و دوره‌ی مناسب خودت رو پیدا کن.">
+<meta property="og:description" content="یک ارزیابی سناریومحور ۳ دقیقه‌ای: سطح هوش مصنوعی‌ات رو بسنج، تحلیل مهارت‌هات رو ببین و دوره‌ی مناسب خودت رو پیدا کن.">
 <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
@@ -94,10 +94,14 @@
   <div class="nav-cta"><a class="btn btn-primary btn-sm mag" href="challenge.html">شروع چالش</a><button class="menu-btn" aria-label="منو" aria-expanded="false"><i></i></button></div>
 </div></header>
 <nav class="sheet glass" aria-label="منوی موبایل"><a href="index.html">خانه<small>Home</small></a><a href="index.html#courses">دوره‌ها<small>Courses</small></a><a href="challenge.html">چالش<small>Challenge</small></a><a href="student-works.html">نمونه‌کارها<small>Works</small></a><a href="ai-faq.html">سؤالات AI<small>AI FAQ</small></a><a href="blog.html">مجله<small>Journal</small></a><a href="links.html">لینک‌ها<small>Links</small></a><a href="contact.html">همکاری<small>Collab</small></a></nav>
-<main class="quiz-page">
- <div class="quiz-wrap">
-  <div class="quiz-progress"><span id="qstep">آماده‌ای؟</span><div class="track"><i id="qbar"></i></div></div>
-  <div class="quiz glass" id="quiz" aria-live="polite"><noscript><p style="padding:30px">برای شرکت در چالش، جاوااسکریپت مرورگر رو فعال کنید.</p></noscript></div>
+<main class="quiz-page cx-page">
+ <div class="quiz-wrap cx-wrap">
+  <div class="quiz-progress cx-progress" role="progressbar" aria-label="پیشرفت چالش" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+   <span id="qstep">آماده‌ای؟</span>
+   <div class="cx-segs" id="qsegs" aria-hidden="true"></div>
+   <div class="track" hidden><i id="qbar"></i></div>
+  </div>
+  <div class="quiz glass cx-card" id="quiz" aria-live="polite"><span class="cx-sheen" aria-hidden="true"></span><noscript><p style="padding:30px">برای شرکت در چالش، جاوااسکریپت مرورگر رو فعال کنید.</p></noscript></div>
  </div>
 </main><script src="assets/js/config.js"></script>
 <script src="assets/js/data.js"></script>

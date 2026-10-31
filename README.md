@@ -67,11 +67,13 @@ screenshots/          اسکرین‌شات‌های QA
 5. The site POSTs JSON as `text/plain` (no CORS preflight). Apps Script appends a row to sheet `Challenge` (quiz) or `Collaborations` (brand form), creates headers on first use, keeps phones as text, and guards against formula injection.
 6. Empty endpoint = local test mode (localStorage only; export at `challenge.html?export=1`). Failed sends are queued locally and retried on the next visit.
 
-## منطق چالش
-- ۱۰ سؤال: ۷ سؤال امتیازدار (۰ تا ۳، جمع ۲۱) + ۳ سؤال پروفایل (هدف، چالش، زمان).
-- سطح‌ها: ۰–۵ کاوشگر (I)، ۶–۱۰ سازنده (II)، ۱۱–۱۶ خالق (III)، ۱۷–۲۱ معمار AI (IV).
-- دوره‌ی پیشنهادی: از روی سؤال هدف (وزن ۲) و چالش (وزن ۱) — ادیت/کاور → ادیتور پلاس؛ تصویر/صدا/درآمد/سناریو/وقت → دستیار هوشمند. در تساوی: سطح III و IV → دستیار هوشمند، بقیه → ادیتور پلاس. (قابل تغییر در `assets/js/challenge.js`.)
-- اطلاعات تماس قبل از نمایش نتیجه گرفته می‌شود: نام، موبایل ایران (۰۹…، +۹۸…، با ارقام فارسی هم قبول است)، آیدی تلگرام/اینستاگرام اختیاری، تیک رضایت الزامی.
+## منطق چالش (نسخه‌ی ۲)
+- ۱۲ سؤال: ۹ سؤال سناریومحور امتیازدار (هر گزینه ۰ تا ۳، جمع ۲۷) در ۶ مهارت — پرامپت‌نویسی، تصویرسازی، صدا و لیپ‌سینک، ویدیو از عکس، ادیت موبایل، کسب درآمد — به‌علاوه‌ی ۳ سؤال پروفایل (هدف، مانع اصلی، زمان آزاد).
+- سطح‌ها: ۰–۷ کاوشگر (I)، ۸–۱۴ سازنده (II)، ۱۵–۲۱ خالق (III)، ۲۲–۲۷ معمار AI (IV).
+- نتیجه: درصد امتیاز روی حلقه، نمودار ۶ مهارت، نقاط قوت (مهارت‌های ≥۶۷٪)، قدم‌های بعدی (دو مهارت ضعیف‌تر + یک قدم مخصوص سطح)، دوره‌ی پیشنهادی + مسیر جایگزین، دکمه‌ی تلگرام.
+- دوره‌ی پیشنهادی: سؤال هدف (وزن ۲) و مانع اصلی (وزن ۱)؛ اگر مهارت ادیت زیر ۵۰٪ باشد یک امتیاز به ادیتور پلاس اضافه می‌شود. در تساوی: سطح II به بالا → دستیار هوشمند، سطح I → ادیتور پلاس. همه در `assets/js/challenge.js`.
+- اطلاعات تماس قبل از نمایش نتیجه گرفته می‌شود: نام، موبایل ایران (۰۹…، +۹۸…، با ارقام فارسی هم قبول است)، آیدی اختیاری، تیک رضایت الزامی.
+- **داده‌ی ارسالی (`type: "challenge"`, `version: "challenge-v2"`):** `name`, `phone`, `social`, `consent`, `score`, `max_score`, `percent`, `level`, `level_key`, `level_num`, `recommended_course`, `recommended_course_id`, `recommended_course_price`, `strengths`, `growth_areas`, `goal`, `main_obstacle`, `weekly_time`, `skill_prompt` … `skill_business` (درصد)، `q1`…`q12`، `answers` (آرایه: id, skill, question, answer, option, points, max)، `answers_json`، `summary_text` (متن فارسی آماده برای ربات تلگرام)، `timestamp` (ISO)، `local_time` (تهران)، `source`, `page`, `user_agent`, `id`.
 
 ## انتشار
 هر هاست استاتیک (GitHub Pages، Netlify، Cloudflare Pages، یا هاست ایرانی). پوشه‌های `_build` و `screenshots` لازم نیستند.
