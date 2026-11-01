@@ -67,13 +67,15 @@ screenshots/          اسکرین‌شات‌های QA
 5. The site POSTs JSON as `text/plain` (no CORS preflight). Apps Script appends a row to sheet `Challenge` (quiz) or `Collaborations` (brand form), creates headers on first use, keeps phones as text, and guards against formula injection.
 6. Empty endpoint = local test mode (localStorage only; export at `challenge.html?export=1`). Failed sends are queued locally and retried on the next visit.
 
-## منطق چالش (نسخه‌ی ۲)
-- ۱۲ سؤال: ۹ سؤال سناریومحور امتیازدار (هر گزینه ۰ تا ۳، جمع ۲۷) در ۶ مهارت — پرامپت‌نویسی، تصویرسازی، صدا و لیپ‌سینک، ویدیو از عکس، ادیت موبایل، کسب درآمد — به‌علاوه‌ی ۳ سؤال پروفایل (هدف، مانع اصلی، زمان آزاد).
-- سطح‌ها: ۰–۷ کاوشگر (I)، ۸–۱۴ سازنده (II)، ۱۵–۲۱ خالق (III)، ۲۲–۲۷ معمار AI (IV).
-- نتیجه: درصد امتیاز روی حلقه، نمودار ۶ مهارت، نقاط قوت (مهارت‌های ≥۶۷٪)، قدم‌های بعدی (دو مهارت ضعیف‌تر + یک قدم مخصوص سطح)، دوره‌ی پیشنهادی + مسیر جایگزین، دکمه‌ی تلگرام.
-- دوره‌ی پیشنهادی: سؤال هدف (وزن ۲) و مانع اصلی (وزن ۱)؛ اگر مهارت ادیت زیر ۵۰٪ باشد یک امتیاز به ادیتور پلاس اضافه می‌شود. در تساوی: سطح II به بالا → دستیار هوشمند، سطح I → ادیتور پلاس. همه در `assets/js/challenge.js`.
+## منطق چالش (نسخه‌ی ۳)
+- محتوا در `assets/js/challenge-data.js` (سؤال‌ها، مهارت‌ها، سطح‌ها، برنامه‌ی ۴ هفته‌ای، ابزارها) و منطق در `assets/js/challenge.js`.
+- ۱۷ سؤال: ۱۴ سؤال سناریومحور امتیازدار (هر گزینه ۰ تا ۳، جمع ۴۲) در ۹ مهارت — پرامپت‌نویسی، تصویرسازی، ویدیو از عکس، صدا و لیپ‌سینک، ادیت موبایل، ابزار و اشتراک، استراتژی محتوا، کسب درآمد، روند کاری — به‌علاوه‌ی ۳ سؤال پروفایل (هدف، مانع اصلی، زمان آزاد).
+- گزینه‌ها هم‌طول و هم‌شکل نوشته شده‌اند و ترتیبشان در هر بار شرکت به‌صورت تصادفی عوض می‌شود؛ در طول چالش درست/غلط نمایش داده نمی‌شود و کلید پاسخ هم در نتیجه نمایش داده نمی‌شود (تا با تکرار، جواب‌ها لو نرود).
+- سطح‌ها: ۰–۱۲ کاوشگر (I)، ۱۳–۲۳ سازنده (II)، ۲۴–۳۳ خالق (III)، ۳۴–۴۲ معمار AI (IV).
+- نتیجه: حلقه‌ی امتیاز، تحلیل متنی هر ۹ مهارت (قوی ≥۸۴٪، در حال رشد ۵۰–۸۳٪، نیاز به تمرین <۵۰٪)، نقاط قوت، برنامه‌ی ۴ هفته‌ای (بر اساس دو مهارت ضعیف‌تر، هدف، مانع اصلی، زمان آزاد و سطح)، ابزارهای مناسب سطح، دوره‌ی پیشنهادی با فصل‌های مرتبط از سرفصل همان دوره، مسیر جایگزین، کارت استوری ۱۰۸۰×۱۹۲۰ (JPG، در خود مرورگر ساخته می‌شود)، دکمه‌ی تلگرام.
+- دوره‌ی پیشنهادی: سؤال هدف (وزن ۲) و مانع اصلی (وزن ۱)؛ اگر مهارت ادیت زیر ۵۰٪ باشد یک امتیاز به ادیتور پلاس اضافه می‌شود. در تساوی: سطح II به بالا → دستیار هوشمند، سطح I → ادیتور پلاس.
 - اطلاعات تماس قبل از نمایش نتیجه گرفته می‌شود: نام، موبایل ایران (۰۹…، +۹۸…، با ارقام فارسی هم قبول است)، آیدی اختیاری، تیک رضایت الزامی.
-- **داده‌ی ارسالی (`type: "challenge"`, `version: "challenge-v2"`):** `name`, `phone`, `social`, `consent`, `score`, `max_score`, `percent`, `level`, `level_key`, `level_num`, `recommended_course`, `recommended_course_id`, `recommended_course_price`, `strengths`, `growth_areas`, `goal`, `main_obstacle`, `weekly_time`, `skill_prompt` … `skill_business` (درصد)، `q1`…`q12`، `answers` (آرایه: id, skill, question, answer, option, points, max)، `answers_json`، `summary_text` (متن فارسی آماده برای ربات تلگرام)، `timestamp` (ISO)، `local_time` (تهران)، `source`, `page`, `user_agent`, `id`.
+- **داده‌ی ارسالی (`type: "challenge"`, `version: "challenge-v3"`):** همه‌ی فیلدهای نسخه‌ی ۲ (`name`, `phone`, `social`, `consent`, `score`, `max_score`, `percent`, `level`, `level_key`, `level_num`, `recommended_course`, `recommended_course_id`, `recommended_course_price`, `strengths`, `growth_areas`, `goal`, `main_obstacle`, `weekly_time`, `tag_editor`, `tag_assistant`, `answers`, `answers_json`, `summary_text`, `timestamp`, `local_time`, `source`, `page`, `user_agent`, `id`) + `skill_*` برای ۹ مهارت، `q1`…`q17`، و فیلدهای تازه‌ی `correct_count`, `scored_questions`, `total_questions`. در `answers`، فیلد `option` حرفی است که کاربر واقعاً دیده (بعد از جابه‌جایی گزینه‌ها).
 
 ## انتشار
 هر هاست استاتیک (GitHub Pages، Netlify، Cloudflare Pages، یا هاست ایرانی). پوشه‌های `_build` و `screenshots` لازم نیستند.
