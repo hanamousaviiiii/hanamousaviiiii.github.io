@@ -1,10 +1,14 @@
 # hana.aistudio — وب‌سایت (نسخه‌ی ۲)
 
-سایت استاتیک (HTML/CSS/JS خالص، بدون build). تم تیره، رنگ‌های برند: زرشکی `#9B111E / #D7263D` و آبی `#2F6BFF / #4CC9F0`، رابط Liquid Glass، هسته‌ی سه‌بعدی Three.js در هیرو.
+> **منبع اصلی (source of truth): شاخه‌ی `main` همین مخزن** — محتوا در `content/` و قالب‌ها در `_build/`.
+> هر push به main (از پنل `/admin/` یا از کامپیوتر) با GitHub Actions سایت را می‌سازد و منتشر می‌کند (Pages source = GitHub Actions).
+> پوشه‌های قدیمی `/workspace/hana-site-v2` و `/workspace/hana-deploy` روی ماشین کاری دیگر مسیر انتشار نیستند؛ HTML آن‌ها را روی مخزن کپی نکنید. برای تغییر، مخزن را clone/pull کنید، `content/` یا `_build/` را ویرایش، `python3 _build/gen.py` (برای پیش‌نمایش) و push کنید. قبل از push حتماً pull کنید، چون پنل هم مستقیم روی main commit می‌کند.
+
+سایت استاتیک (HTML/CSS/JS خالص؛ صفحه‌ها با `_build/gen.py` از `content/` ساخته می‌شوند). تم تیره، رنگ‌های برند: زرشکی `#9B111E / #D7263D` و آبی `#2F6BFF / #4CC9F0`، رابط Liquid Glass، هسته‌ی سه‌بعدی Three.js در هیرو.
 
 ## پیش‌نمایش محلی
 ```bash
-cd hana-site-v2
+python3 _build/gen.py
 python3 -m http.server 8080   # → http://localhost:8080
 ```
 (از روی `file://` باز نکنید؛ ماژول‌ها و فونت‌ها نیاز به سرور دارند.)
@@ -34,7 +38,7 @@ screenshots/          اسکرین‌شات‌های QA
 
 ## پنل مدیریت (Decap CMS) و ساخت خودکار
 - `admin/` — پنل مدیریت فارسی (Decap CMS 3، فایل‌ها self-host در `admin/vendor/`)، تنظیمات در `admin/config.yml`، افزونه‌های پنل در `admin/cms.js`.
-- ورود با ایمیل و رمز از طریق DecapBridge (`backend: git-gateway` در config.yml؛ شناسه‌ی سایت DecapBridge را جایگزین `DECAPBRIDGE_SITE_ID` کنید).
+- ورود با ایمیل و رمز از طریق DecapBridge (`backend: git-gateway`، نوع Classic، سایت `b74f0f16-7146-42af-af07-72f7b9601037`؛ مالک: h.h.mousavi73@gmail.com). توکن گیت‌هاب داخل DecapBridge تاریخ انقضا دارد؛ قبل از انقضا تمدیدش کنید وگرنه ذخیره در پنل کار نمی‌کند.
 - `content/` — home.json (ترتیب و نمایش بخش‌ها، کارت‌ها، متن‌ها)، works.json (فصل‌ها و نمونه‌کارها)، testimonials.json، courses.json، links.json، site.json (لینک‌ها و افزونه‌ها)، ai-faq.json، `articles/*.json`، `faq/*.json`.
 - `.github/workflows/deploy.yml` — روی هر push به main: `gen.py` را اجرا، کاور ویدیوهای بدون کاور را با ffmpeg می‌سازد و سایت را روی GitHub Pages منتشر می‌کند. (Settings → Pages → Source باید «GitHub Actions» باشد.)
 - آپلودهای پنل در `assets/media/uploads/` ذخیره می‌شوند. فایل‌هایی که دستی در `assets/media/students/<فصل>/` می‌گذارید را با `python3 _build/import_media.py` به works.json اضافه کنید.

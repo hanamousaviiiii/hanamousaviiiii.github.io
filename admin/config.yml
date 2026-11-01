@@ -3,11 +3,11 @@
 # Field labels are in Persian for Hana. Docs: https://decapcms.org/docs/configuration-options/
 
 backend:
-  # Email/password login through DecapBridge (https://decapbridge.com). Replace SITE_ID after creating the site there.
+  # Email/password login through DecapBridge (https://decapbridge.com), "Classic" auth type (no auth_type key).
   name: git-gateway
   repo: hanamousaviiiii/hanamousaviiiii.github.io
   branch: main
-  identity_url: https://auth.decapbridge.com/sites/DECAPBRIDGE_SITE_ID
+  identity_url: https://auth.decapbridge.com/sites/b74f0f16-7146-42af-af07-72f7b9601037
   gateway_url: https://gateway.decapbridge.com
   commit_messages:
     create: "پنل: ایجاد {{collection}} «{{slug}}» ({{author-name}})"
