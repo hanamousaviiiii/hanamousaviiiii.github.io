@@ -2,6 +2,8 @@
 <html lang="fa" dir="rtl" class="no-js">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'none'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>همکاری با برندها | hana.aistudio</title>
 <meta name="description" content="درخواست همکاری تبلیغاتی، تولید محتوا با هوش مصنوعی و ورکشاپ آموزشی با هانا موسوی.">
@@ -105,17 +107,17 @@
    <div class="ct glass"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7Z"/></svg><b>تولید محتوا با AI</b></div>
    <div class="ct glass"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg><b>ورکشاپ و آموزش تیمی</b></div>
   </div>
-  <div class="sig rv" style="margin-top:26px"><a class="chip" href="https://t.me/hanatrick" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.6 2.8 10.9c-.8.3-.8 1.4 0 1.7l4.6 1.6 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6L22.9 5c.2-.9-.6-1.7-1.4-1.4ZM7.6 14.2l11-7.4-8.6 8.4"/></svg> hanatrick</a><a class="chip" href="https://instagram.com/hana.aistudio" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".7"/></svg> hana.aistudio</a></div>
+  <div class="sig rv" style="margin-top:26px"><a class="chip" href="https://t.me/hanatrick" target="_blank" rel="noopener noreferrer"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.6 2.8 10.9c-.8.3-.8 1.4 0 1.7l4.6 1.6 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6L22.9 5c.2-.9-.6-1.7-1.4-1.4ZM7.6 14.2l11-7.4-8.6 8.4"/></svg> hanatrick</a><a class="chip" href="https://instagram.com/hana.aistudio" target="_blank" rel="noopener noreferrer"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".7"/></svg> hana.aistudio</a></div>
  </div>
  <form class="glass form-card rv" id="contactForm" novalidate>
   <h2 class="h-md" style="margin-bottom:22px">فرم درخواست همکاری</h2>
-  <div class="row2"><div class="field"><label for="cf-brand">نام برند / کسب‌وکار</label><input class="input" id="cf-brand" name="brand" required autocomplete="organization"><span class="msg">نام برند رو وارد کنید.</span></div>
-  <div class="field"><label for="cf-name">نام شما</label><input class="input" id="cf-name" name="name" required autocomplete="name"><span class="msg">نام رو وارد کنید.</span></div></div>
-  <div class="field"><label for="cf-contact">ایمیل یا شماره‌ی تماس</label><input class="input" id="cf-contact" name="contact" dir="ltr" required><span class="msg">یک ایمیل معتبر یا شماره‌ی موبایل وارد کنید.</span></div>
+  <div class="row2"><div class="field"><label for="cf-brand">نام برند / کسب‌وکار</label><input class="input" id="cf-brand" name="brand" required maxlength="80" autocomplete="organization"><span class="msg">نام برند رو وارد کنید.</span></div>
+  <div class="field"><label for="cf-name">نام شما</label><input class="input" id="cf-name" name="name" required maxlength="60" autocomplete="name"><span class="msg">نام رو وارد کنید.</span></div></div>
+  <div class="field"><label for="cf-contact">ایمیل یا شماره‌ی تماس</label><input class="input" id="cf-contact" name="contact" dir="ltr" required maxlength="80"><span class="msg">یک ایمیل معتبر یا شماره‌ی موبایل وارد کنید.</span></div>
   <div class="row2"><div class="field"><label for="cf-type">نوع همکاری</label><select class="input" id="cf-type" name="type"><option>تبلیغ و معرفی محصول</option><option>تولید محتوا با هوش مصنوعی</option><option>ورکشاپ و آموزش تیمی</option><option>سایر</option></select></div>
-  <div class="field"><label for="cf-budget">بودجه‌ی تقریبی <small>(اختیاری)</small></label><input class="input" id="cf-budget" name="budget"></div></div>
-  <div class="field"><label for="cf-msg">توضیحات</label><textarea class="input" id="cf-msg" name="message" required></textarea><span class="msg">چند خط درباره‌ی همکاری بنویسید.</span></div>
-  <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <div class="field"><label for="cf-budget">بودجه‌ی تقریبی <small>(اختیاری)</small></label><input class="input" id="cf-budget" name="budget" maxlength="40"></div></div>
+  <div class="field"><label for="cf-msg">توضیحات</label><textarea class="input" id="cf-msg" name="message" required maxlength="2000"></textarea><span class="msg">چند خط درباره‌ی همکاری بنویسید.</span></div>
+  <input class="hp" name="website" tabindex="-1" maxlength="100" autocomplete="off" aria-hidden="true">
   <button class="btn btn-primary btn-block" type="submit">ارسال درخواست <svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
   <p class="form-note" id="cf-done" hidden>درخواست شما ثبت شد. ممنون؛ به‌زودی پاسخ می‌دیم. برای پیگیری سریع‌تر در تلگرام هم پیام بدید.</p>
  </form>
@@ -125,7 +127,7 @@
    <div><a class="brand" href="index.html" style="padding:0;margin-bottom:14px;display:inline-flex"><svg class="brand-mark"><use href="#mark"/></svg><span>hana<b>.</b>aistudio</span></a>
     <p>آموزش ادیت موبایل و خلق محتوا با هوش مصنوعی، توسط هانا موسوی.</p></div>
    <div><h4>صفحه‌ها</h4><a href="index.html#courses">دوره‌ها</a><a href="challenge.html">چالش سطح AI</a><a href="student-works.html">نمونه‌کار هنرجوها</a><a href="ai-faq.html">سؤالات پرتکرار AI</a><a href="blog.html">مجله</a><a href="contact.html">همکاری با برندها</a></div>
-   <div><h4>ارتباط</h4><a href="https://instagram.com/hana.aistudio" target="_blank" rel="noopener">Instagram · hana.aistudio</a><a href="https://t.me/hanatrick" target="_blank" rel="noopener">Telegram · hanatrick</a><a href="links.html">همه‌ی لینک‌ها</a></div>
+   <div><h4>ارتباط</h4><a href="https://instagram.com/hana.aistudio" target="_blank" rel="noopener noreferrer">Instagram · hana.aistudio</a><a href="https://t.me/hanatrick" target="_blank" rel="noopener noreferrer">Telegram · hanatrick</a><a href="links.html">همه‌ی لینک‌ها</a></div>
   </div>
   <div class="big-word" aria-hidden="true">hana.aistudio</div>
   <div class="foot-bottom"><span>© <span data-year></span> hana.aistudio · تمام حقوق محفوظ است.</span><span class="latin" style="font-size:11px">Crafted with intelligence</span></div>

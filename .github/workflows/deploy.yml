@@ -36,8 +36,12 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
+          # only the website itself is published: build scripts, raw content JSON, the Apps Script
+          # source, docs and dotfiles stay in the repo but are not served
           rsync -a --exclude '.git' --exclude '.github' --exclude '_build' --exclude '_site' \
-                --exclude 'screenshots' --exclude '__pycache__' ./ _site/
+                --exclude 'screenshots' --exclude '__pycache__' --exclude 'content' --exclude 'apps-script' \
+                --exclude 'README.md' --exclude '*.md' --exclude '.gitignore' --exclude '*.bak' --exclude '*.zip' \
+                --exclude '*.map' --exclude '.env*' --exclude '*.py' --exclude '*.gs' --exclude '.DS_Store' ./ _site/
           touch _site/.nojekyll
 
       - uses: actions/configure-pages@v5

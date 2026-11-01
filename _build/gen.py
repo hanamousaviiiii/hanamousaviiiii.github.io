@@ -2,13 +2,13 @@
 # Run: python3 _build/gen.py     (GitHub Actions runs it on every push, see .github/workflows/deploy.yml)
 import sys, os, glob, json
 sys.path.insert(0, os.path.dirname(__file__))
-import content
+import content, security
 import page_index, page_course, page_misc, page_challenge, page_faq, page_works
 OUT = os.path.join(os.path.dirname(__file__), '..')
 
 def w(p, build, *a):
     content.CURRENT = p
-    s = build(*a)
+    s = security.harden(build(*a), p)
     os.makedirs(os.path.dirname(os.path.join(OUT, p)) or OUT, exist_ok=True)
     open(os.path.join(OUT, p), 'w', encoding='utf-8').write(s); print('wrote', p)
 

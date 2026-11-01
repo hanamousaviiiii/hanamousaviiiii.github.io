@@ -533,3 +533,4 @@ collections:
                   - { label: "پایین صفحه (قبل از body/)", value: body }
               - { label: "فقط در این صفحه‌ها (اختیاری)", name: pages, widget: string, required: false, hint: "مثلاً index.html, blog.html — خالی = همه‌ی صفحه‌ها" }
               - { label: "کد", name: code, widget: code, default_language: html, output_code_only: true, allow_language_selection: false }
+              - { label: "دامنه‌های مجاز (امنیت، اختیاری)", name: csp, widget: string, required: false, hint: "اگه افزونه کار نکرد، دامنه‌هایی که سرویس اعلام کرده رو با فاصله بنویسید؛ مثلاً www.googletagmanager.com www.google-analytics.com. دامنه‌های داخل خود کد خودکار مجاز می‌شن." }

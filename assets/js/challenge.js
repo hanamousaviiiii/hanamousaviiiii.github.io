@@ -180,10 +180,10 @@
       <h2 class="h-md" data-focus tabindex="-1" style="text-align:center;margin-bottom:8px">تحلیل سطحت آماده شد</h2>
       <p class="muted" style="text-align:center;margin:0 0 24px">برای دیدن نتیجه‌ی کامل، تحلیل مهارت‌ها و مسیر پیشنهادی، نام و شماره‌ات رو وارد کن.</p>
       <form id="cform" novalidate>
-        <div class="field"><label for="f-name">نام و نام خانوادگی</label><input class="input" id="f-name" name="name" autocomplete="name" required aria-describedby="m-name"><span class="msg" id="m-name">لطفاً نامت رو وارد کن.</span></div>
-        <div class="field"><label for="f-phone">شماره موبایل</label><input class="input" id="f-phone" name="phone" type="tel" inputmode="tel" dir="ltr" placeholder="09xx xxx xxxx" autocomplete="tel" required aria-describedby="m-phone"><span class="msg" id="m-phone">شماره موبایل معتبر نیست؛ مثلاً ۰۹۱۲۱۲۳۴۵۶۷</span></div>
-        <div class="field"><label for="f-social">آیدی تلگرام یا اینستاگرام <small>(اختیاری)</small></label><input class="input" id="f-social" name="social" dir="ltr" placeholder="@username" aria-describedby="m-social"><span class="msg" id="m-social">آیدی فقط می‌تونه شامل حروف انگلیسی، عدد، نقطه و _ باشه.</span></div>
-        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="f-name">نام و نام خانوادگی</label><input class="input" id="f-name" name="name" autocomplete="name" required maxlength="60" aria-describedby="m-name"><span class="msg" id="m-name">لطفاً نامت رو وارد کن.</span></div>
+        <div class="field"><label for="f-phone">شماره موبایل</label><input class="input" id="f-phone" name="phone" type="tel" maxlength="20" inputmode="tel" dir="ltr" placeholder="09xx xxx xxxx" autocomplete="tel" required aria-describedby="m-phone"><span class="msg" id="m-phone">شماره موبایل معتبر نیست؛ مثلاً ۰۹۱۲۱۲۳۴۵۶۷</span></div>
+        <div class="field"><label for="f-social">آیدی تلگرام یا اینستاگرام <small>(اختیاری)</small></label><input class="input" id="f-social" name="social" dir="ltr" maxlength="40" placeholder="@username" aria-describedby="m-social"><span class="msg" id="m-social">آیدی فقط می‌تونه شامل حروف انگلیسی، عدد، نقطه و _ باشه.</span></div>
+        <input class="hp" name="website" tabindex="-1" maxlength="100" autocomplete="off" aria-hidden="true">
         <label class="check" id="f-consent-wrap"><input type="checkbox" id="f-consent" name="consent"><span>موافقم نتیجه و اطلاعات دوره‌ها برام ارسال بشه و برای مشاوره با من تماس گرفته بشه.</span></label>
         <button class="btn btn-primary btn-block" type="submit" style="margin-top:20px"><span>دیدن نتیجه</span> ${I.arrow}</button>
         <p class="cx-privacy">${I.lock}<span>اطلاعاتت فقط برای ارسال نتیجه و هماهنگی مشاوره‌ی دوره استفاده می‌شه.</span></p>
@@ -213,7 +213,7 @@
     e.preventDefault();
     const f = e.target, V = window.HanaValid;
     if (f.website.value) return;
-    const name = f.name.value.trim().replace(/\s+/g, ' '), phone = V.phone(f.phone.value), social = f.social.value.trim(), consent = f.consent.checked;
+    const name = f.name.value.trim().replace(/\s+/g, ' ').slice(0, 60), phone = V.phone(f.phone.value), social = f.social.value.trim().slice(0, 40), consent = f.consent.checked;
     const set = (el, bad) => { el.closest('.field').classList.toggle('err', bad); el.setAttribute('aria-invalid', bad); return !bad; };
     let ok = set(f.name, name.length < 2);
     ok = set(f.phone, !phone) && ok;
@@ -247,7 +247,7 @@
     row.answers = answers;
     row.answers_json = JSON.stringify(answers);
     row.summary_text = summaryText(row, r);
-    try { await window.HanaSubmit.send('challenge', row); } catch (err) { console.warn('[hana] submit error', err); }
+    try { await window.HanaSubmit.send('challenge', row); } catch (err) { /* result is still shown */ }
     lastResult = r; result(r, name);
   }
 
@@ -309,23 +309,23 @@
       <div class="rec glass cx-rec">
         <div class="rec-badge latin">Recommended path · ${c.numeral || ''}</div>
         <div class="rec-emb"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#${r.course === 'editor-plus' ? 'emb-editor' : 'emb-assistant'}"/></svg></div>
-        <div class="rec-tx"><small>دوره‌ی پیشنهادی برای تو</small><h3>${c.name || ''}</h3><p class="muted">${c.subtitle || ''}</p><p class="rec-why">${REASON[r.course]}</p><b class="rec-price">${c.price || ''}</b></div>
+        <div class="rec-tx"><small>دوره‌ی پیشنهادی برای تو</small><h3>${esc(c.name || '')}</h3><p class="muted">${esc(c.subtitle || '')}</p><p class="rec-why">${REASON[r.course]}</p><b class="rec-price">${esc(c.price || '')}</b></div>
         <div class="cx-chs"><small>فصل‌هایی از این دوره که مستقیم روی نقاط رشد تو کار می‌کنن</small><ul>${chs}</ul></div>
-        <div class="rec-btns"><a class="btn btn-primary" href="course.html?c=${r.course}">جزئیات دوره ${I.arrow}</a><a class="btn btn-glass" href="${TG}" target="_blank" rel="noopener">مشاوره در تلگرام</a></div>
-        <a class="cx-alt" href="course.html?c=${altId}"><span>مسیر جایگزین</span><b>${alt.name || ''}</b><em>${alt.price || ''}</em>${I.arrow}</a>
+        <div class="rec-btns"><a class="btn btn-primary" href="course.html?c=${r.course}">جزئیات دوره ${I.arrow}</a><a class="btn btn-glass" href="${TG}" target="_blank" rel="noopener noreferrer">مشاوره در تلگرام</a></div>
+        <a class="cx-alt" href="course.html?c=${altId}"><span>مسیر جایگزین</span><b>${esc(alt.name || '')}</b><em>${esc(alt.price || '')}</em>${I.arrow}</a>
       </div>
       <section class="cx-panel glass cx-share" aria-labelledby="sh-h">
         <div class="cx-share-tx"><h3 id="sh-h">${I.dl} کارت نتیجه برای استوری</h3><p class="cx-sub">یک کارت ۹:۱۶ با سطح و امتیازت، آماده‌ی استوری اینستاگرام.</p>
           <button type="button" class="btn btn-primary" id="dlcard" disabled><span>در حال ساخت کارت…</span> ${I.dl}</button></div>
         <div class="cx-share-pv"><img id="cardpv" alt="پیش‌نمایش کارت نتیجه برای استوری" width="216" height="384"></div>
       </section>
-      <a class="cx-tg glass" href="${TG}" target="_blank" rel="noopener"><span class="ic">${I.tg}</span><span><b>نتیجه‌ات رو در تلگرام بفرست</b><span>برای مشاوره و انتخاب مسیر، سطحت رو بگو: <bdi>${lv.name}</bdi>، امتیاز ${FA(r.percent)}٪</span></span>${I.arrow}</a>
+      <a class="cx-tg glass" href="${TG}" target="_blank" rel="noopener noreferrer"><span class="ic">${I.tg}</span><span><b>نتیجه‌ات رو در تلگرام بفرست</b><span>برای مشاوره و انتخاب مسیر، سطحت رو بگو: <bdi>${lv.name}</bdi>، امتیاز ${FA(r.percent)}٪</span></span>${I.arrow}</a>
       <button type="button" class="q-back" id="again" style="margin:22px auto 0">${I.again} شروع دوباره</button>
     </div>`, 1, n => {
       const go = () => { n.querySelector('.arc').classList.add('go'); n.classList.add('play'); };
       reduce ? go() : requestAnimationFrame(() => setTimeout(go, 220));
       n.querySelector('#again').onclick = () => { ans.fill(null); intro(); };
-      shareCard(r, n).catch(e => { console.warn('[hana] card', e); const b = n.querySelector('#dlcard'); if (b) b.closest('.cx-share').hidden = true; });
+      shareCard(r, n).catch(() => { const b = n.querySelector('#dlcard'); if (b) b.closest('.cx-share').hidden = true; });
     });
   }
 

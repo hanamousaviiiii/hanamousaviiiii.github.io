@@ -21,12 +21,10 @@ window.HanaSubmit = (() => {
     const payload = Object.assign({ type }, data);
     if (!endpoint) {               // test mode: nothing leaves the browser
       const all = read(LOCAL(type)); all.push(payload); write(LOCAL(type), all);
-      console.info('[hana] CHALLENGE_ENDPOINT is empty — saved to localStorage only (' + LOCAL(type) + ').');
       return { mode: 'local' };
     }
     try { await post(payload); return { mode: 'remote' }; }
     catch (e) {                    // network / filter issue: keep and retry on next visit
-      console.warn('[hana] send failed, queued for retry:', e && e.message);
       const q = read(PENDING); q.push(payload); write(PENDING, q);
       return { mode: 'queued' };
     }

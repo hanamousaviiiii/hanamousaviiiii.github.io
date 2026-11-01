@@ -1,6 +1,12 @@
 /* hana.aistudio — shared interactions */
 (() => {
   const d = document, root = d.documentElement;
+  /* anti-clickjacking: GitHub Pages cannot send X-Frame-Options, so refuse to run inside another site's frame */
+  if (window.top !== window.self) {
+    root.style.display = 'none';
+    try { window.top.location.replace(window.self.location.href); } catch (e) {}
+    return;
+  }
   root.classList.remove('no-js');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;

@@ -9,6 +9,12 @@ FAQ = [(g['url'], g.get('number', ''), g.get('question', ''), g.get('title', '')
 
 QUICK = [(x.get('q', ''), x.get('a', '')) for x in _HUB.get('quick') or []]
 
+
+def _safe_url(u):
+    import html as _html
+    u = (u or '').strip()
+    return _html.escape(u, quote=True) if u.startswith(('https://', 'http://')) else '#'
+
 def _qcard(k, f, pre=''):
     slug, n, q, t, short, d, m, tag = f
     return f'''<a class="qcard glass rv" style="--d:{k*0.08:.2f}s" href="{pre}faq/{slug}.html">
@@ -62,7 +68,7 @@ def article(i):
     slug, n, q, t, short, d, m, tag = FAQ[i]
     g = _GUIDES[i]
     toc = ''.join(f'<a href="#s{k+1}"><i>{"۰۱۲۳۴۵۶۷۸۹"[k+1] if k < 9 else k+1}</i>{x}</a>' for k, x in enumerate(md.headings(g.get('body', ''))))
-    src = ''.join(f'<li><a href="{x.get("url", "")}" target="_blank" rel="noopener" dir="ltr">{x.get("title", "")}</a></li>' for x in g.get('sources') or [])
+    src = ''.join(f'<li><a href="{_safe_url(x.get("url", ""))}" target="_blank" rel="noopener" dir="ltr">{x.get("title", "")}</a></li>' for x in g.get('sources') or [])
     others = ''.join(_qcard(k, f, '../') for k, f in enumerate(FAQ) if f[0] != slug)
     body = md.render(g.get('body', ''), '../', h2_ids=True).replace('{reviewed}', REVIEWED)
     html = head(f'{t} | hana.aistudio', d, '../')

@@ -23,7 +23,7 @@ def inline(s, pre=''):
     def link(m):
         t, u = m.group(1), m.group(2)
         ext = u.startswith('http')
-        return f'<a href="{_rel(u, pre)}"' + (' target="_blank" rel="noopener"' if ext else '') + f'>{t}</a>'
+        return f'<a href="{_rel(u, pre)}"' + (' target="_blank" rel="noopener noreferrer"' if ext else '') + f'>{t}</a>'
     s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', link, s)
     s = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', s)
     s = re.sub(r'__(.+?)__', r'<b>\1</b>', s)
@@ -34,9 +34,12 @@ def inline(s, pre=''):
     return s
 
 def _rel(u, pre):
+    # only web/mail/phone links and relative paths; javascript:, data: etc. are dropped
+    if re.match(r'^\s*[A-Za-z][A-Za-z0-9+.-]*:', u) and not re.match(r'^\s*(https?|mailto|tel):', u, re.I):
+        return '#'
     if u.startswith('/') and not u.startswith('//'):
-        return pre + u.lstrip('/')
-    return u
+        u = pre + u.lstrip('/')
+    return u.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
 
 _LI = re.compile(r'^\s*([-*+]|\d+[.)])\s+(.*)$')
 

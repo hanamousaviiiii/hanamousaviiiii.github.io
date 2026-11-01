@@ -15,8 +15,8 @@
       id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
       timestamp: new Date().toISOString(),
       local_time: new Date().toLocaleString('fa-IR', { timeZone: 'Asia/Tehran' }),
-      brand: f.brand.value.trim(), name: f.name.value.trim(),
-      contact: V.phone(c) || c, collab_type: f.type.value, budget: f.budget.value.trim(), message: f.message.value.trim(),
+      brand: f.brand.value.trim().slice(0, 80), name: f.name.value.trim().slice(0, 60),
+      contact: V.phone(c) || c.slice(0, 80), collab_type: f.type.value, budget: f.budget.value.trim().slice(0, 40), message: f.message.value.trim().slice(0, 2000),
       page: location.pathname, user_agent: navigator.userAgent
     });
     f.querySelectorAll('.field,.row2,button[type=submit]').forEach(x => x.hidden = true);

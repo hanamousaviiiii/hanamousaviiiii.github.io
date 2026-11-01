@@ -112,13 +112,13 @@ def contact():
  </div>
  <form class="glass form-card rv" id="contactForm" novalidate>
   <h2 class="h-md" style="margin-bottom:22px">فرم درخواست همکاری</h2>
-  <div class="row2"><div class="field"><label for="cf-brand">نام برند / کسب‌وکار</label><input class="input" id="cf-brand" name="brand" required autocomplete="organization"><span class="msg">نام برند رو وارد کنید.</span></div>
-  <div class="field"><label for="cf-name">نام شما</label><input class="input" id="cf-name" name="name" required autocomplete="name"><span class="msg">نام رو وارد کنید.</span></div></div>
-  <div class="field"><label for="cf-contact">ایمیل یا شماره‌ی تماس</label><input class="input" id="cf-contact" name="contact" dir="ltr" required><span class="msg">یک ایمیل معتبر یا شماره‌ی موبایل وارد کنید.</span></div>
+  <div class="row2"><div class="field"><label for="cf-brand">نام برند / کسب‌وکار</label><input class="input" id="cf-brand" name="brand" required maxlength="80" autocomplete="organization"><span class="msg">نام برند رو وارد کنید.</span></div>
+  <div class="field"><label for="cf-name">نام شما</label><input class="input" id="cf-name" name="name" required maxlength="60" autocomplete="name"><span class="msg">نام رو وارد کنید.</span></div></div>
+  <div class="field"><label for="cf-contact">ایمیل یا شماره‌ی تماس</label><input class="input" id="cf-contact" name="contact" dir="ltr" required maxlength="80"><span class="msg">یک ایمیل معتبر یا شماره‌ی موبایل وارد کنید.</span></div>
   <div class="row2"><div class="field"><label for="cf-type">نوع همکاری</label><select class="input" id="cf-type" name="type"><option>تبلیغ و معرفی محصول</option><option>تولید محتوا با هوش مصنوعی</option><option>ورکشاپ و آموزش تیمی</option><option>سایر</option></select></div>
-  <div class="field"><label for="cf-budget">بودجه‌ی تقریبی <small>(اختیاری)</small></label><input class="input" id="cf-budget" name="budget"></div></div>
-  <div class="field"><label for="cf-msg">توضیحات</label><textarea class="input" id="cf-msg" name="message" required></textarea><span class="msg">چند خط درباره‌ی همکاری بنویسید.</span></div>
-  <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <div class="field"><label for="cf-budget">بودجه‌ی تقریبی <small>(اختیاری)</small></label><input class="input" id="cf-budget" name="budget" maxlength="40"></div></div>
+  <div class="field"><label for="cf-msg">توضیحات</label><textarea class="input" id="cf-msg" name="message" required maxlength="2000"></textarea><span class="msg">چند خط درباره‌ی همکاری بنویسید.</span></div>
+  <input class="hp" name="website" tabindex="-1" maxlength="100" autocomplete="off" aria-hidden="true">
   <button class="btn btn-primary btn-block" type="submit">ارسال درخواست {icon('arrow','arrow')}</button>
   <p class="form-note" id="cf-done" hidden>درخواست شما ثبت شد. ممنون؛ به‌زودی پاسخ می‌دیم. برای پیگیری سریع‌تر در تلگرام هم پیام بدید.</p>
  </form>
