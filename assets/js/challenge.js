@@ -101,7 +101,7 @@
     const chip = q.profile ? `<span class="cx-topic prof">${I.user} درباره‌ی تو</span>` : `<span class="cx-topic">${I[q.sk]} ${sk.name}</span>`;
     const sel = ans[i];
     const opts = ORDER[i].map((ok, pos) => { const o = q.o[ok];
-      return `<button type="button" class="opt${sel === ok ? ' sel' : ''}${q.kind ? ' k-' + q.kind : ''}" role="radio" aria-checked="${sel === ok}" tabindex="${(sel == null ? pos === 0 : sel === ok) ? 0 : -1}" data-k="${ok}" data-pos="${pos}" style="--d:${pos * 0.05 + .08}s"><span class="key" aria-hidden="true">${KEYS[pos]}</span>${q.kind === 'ratio' ? frame(o[2]) : ''}<span class="ot">${o[0]}</span><span class="tick">${I.tick}</span></button>`; }).join('');
+      return `<button type="button" class="opt${sel === ok ? ' sel' : ''}${q.kind ? ' k-' + q.kind : ''}" role="radio" aria-checked="${sel === ok}" tabindex="${(sel == null ? pos === 0 : sel === ok) ? 0 : -1}" data-pos="${pos}"><span class="key" aria-hidden="true">${KEYS[pos]}</span>${q.kind === 'ratio' ? frame(o[2]) : ''}<span class="ot">${o[0]}</span><span class="tick">${I.tick}</span></button>`; }).join('');
     const lead = q.kind === 'prompt' ? '<p class="cx-lead">همه‌ی گزینه‌ها پرامپت‌های واقعی‌ان؛ اونی رو انتخاب کن که خودت استفاده می‌کنی.</p>' : '';
     swap(`<div class="cx-q">
       <div class="cx-meta">${chip}${q.profile ? '' : '<span class="cx-scn">سناریو</span>'}<span class="latin cx-count" dir="ltr">${String(i + 1).padStart(2, '0')} / ${Q.length}</span></div>
@@ -111,24 +111,28 @@
     </div>`, dir, n => {
       const bs = [...n.querySelectorAll('.opt')];
       bs.forEach((b, p) => {
-        b.onclick = () => pick(+b.dataset.k, b);
+        b.onclick = () => pick(ORDER[i][p], b);
         b.onkeydown = e => {
           const m = { ArrowDown: 1, ArrowLeft: 1, ArrowUp: -1, ArrowRight: -1 }[e.key];
           if (m) { e.preventDefault(); const t = bs[(p + m + bs.length) % bs.length]; bs.forEach(x => x.tabIndex = -1); t.tabIndex = 0; t.focus(); }
         };
       });
       const bk = n.querySelector('#back'); if (bk) bk.onclick = () => !busy && show(i - 1, -1);
+      // hover styling only after the pointer actually moves on this screen (no carried-over / sticky hover)
+      const q = n.querySelector('.cx-q'), arm = () => { q.classList.add('armed'); q.removeEventListener('pointermove', arm); };
+      q.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') arm(); });
     });
   }
   d.addEventListener('keydown', e => {
     if (idx < 0 || idx >= Q.length || e.metaKey || e.ctrlKey || e.altKey) return;
     if (/^(INPUT|TEXTAREA)$/.test((e.target || {}).tagName || '')) return;
     const p = ['1', '2', '3', '4'].indexOf(e.key) >= 0 ? +e.key - 1 : ['۱', '۲', '۳', '۴'].indexOf(e.key);
-    if (p >= 0) { const b = app.querySelector(`.scr:last-child .opt[data-pos="${p}"]`); if (b) { e.preventDefault(); pick(+b.dataset.k, b); } }
+    if (p >= 0) { const b = app.querySelector(`.scr:last-child .opt[data-pos="${p}"]`); if (b) { e.preventDefault(); pick(ORDER[idx][p], b); } }
   });
   function pick(k, el) {
     if (busy) return; busy = true;
     ans[idx] = k;
+    if (d.activeElement && d.activeElement.blur && !el.matches(':focus-visible')) d.activeElement.blur();
     el.parentNode.querySelectorAll('.opt').forEach(b => { const on = b === el; b.classList.toggle('sel', on); b.setAttribute('aria-checked', on); });
     setTimeout(() => { busy = false; idx < Q.length - 1 ? show(idx + 1, 1) : gate(); }, reduce ? 80 : 440);
   }
@@ -407,5 +411,5 @@
 
   const qs = new URLSearchParams(location.search);
   if (qs.get('export') === '1') admin(); else intro();
-  window.__quiz = { Q, LEVELS, SK, MAX, compute, ans, show, gate, result: () => lastResult };
+  window.__quiz = { Q, LEVELS, SK, MAX, compute, ans, show, gate, order: () => ORDER, result: () => lastResult };
 })();

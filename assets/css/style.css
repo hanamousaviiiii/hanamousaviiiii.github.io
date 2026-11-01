@@ -1160,3 +1160,11 @@ button.m-tile:hover .m-play{transform:scale(1.08)}
 .cx-card{grid-template-columns:minmax(0,1fr)}
 .cx-card .scr{min-width:0}
 @media (max-width:640px){.cx-alt{flex-wrap:wrap;row-gap:2px}.cx-alt em{margin-inline-start:0}.cx-alt>svg{margin-inline-start:auto}}
+/* challenge v3.1: options are visually identical; hover only for a real, moving mouse */
+.cx-q .opt,.cx-q .opt:hover{background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 1px var(--line);animation-delay:.08s}
+.cx-q .opt:active{transform:none}
+@media (hover:hover) and (pointer:fine){
+  .cx-q.armed .opt:hover{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03));box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(76,201,240,.35)}
+}
+.cx-q .opt.sel,.cx-q .opt.sel:hover{background:linear-gradient(135deg,rgba(215,38,61,.28),rgba(47,107,255,.14));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,110,125,.55),0 12px 34px -14px rgba(215,38,61,.7)}
+.cx-q .opt:focus:not(:focus-visible){outline:none}
