@@ -70,14 +70,15 @@ def build():
 def home_box():
     posters = media.teaser_posters(3); tot = media.total(); n = len(media.chapters())
     thumbs = ''.join(f'<span class="wb-thumb t{i+1}"><img src="{p}" alt="" loading="lazy" decoding="async"><i>{icon("play")}</i></span>' for i, (p, _) in enumerate(posters))
-    chips = ''.join(f'<span>{c[1]}</span>' for c in media.chapters()[:5])
+    k = int(media.settings()['home_chips'])
+    chips = ''.join(f'<span>{c[1]}</span>' for c in media.chapters()[:k])
     return f'''<a class="wbox rv" href="student-works.html" aria-label="نمونه‌کار هنرجوها — ورود به گالری">
    <span class="wb-glow" aria-hidden="true"></span><span class="wb-border" aria-hidden="true"></span>
    <span class="wb-text">
     <span class="kicker">ویژه <span class="latin">Student Works</span></span>
     <span class="wb-title">نمونه‌کار <span class="grad">هنرجوها</span></span>
     <span class="wb-sub">کارهای واقعی هنرجوها، فصل‌به‌فصل؛ از موشن‌گرافی تا تبلیغ محصول.</span>
-    <span class="wb-chips">{chips}<span class="more">+{fa(max(0, n-5))}</span></span>
+    <span class="wb-chips">{chips}<span class="more">+{fa(max(0, n-k))}</span></span>
     <span class="wb-cta"><span class="btn btn-primary">ورود به گالری {icon('arrow','arrow')}</span><span class="wb-stat"><b>{fa(tot)}</b> نمونه‌کار · <b>{fa(n)}</b> فصل</span></span>
    </span>
    <span class="wb-stack" aria-hidden="true">{thumbs}</span>

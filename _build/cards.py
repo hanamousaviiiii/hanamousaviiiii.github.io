@@ -1,15 +1,12 @@
 from common import icon, TG
 
-COURSES = {
- 'editor-plus': dict(name='ادیتور پلاس', latin='EDITOR PLUS', num='II', emb='emb-editor', price='۳٫۵ میلیون تومان',
-   sub='ادیت حرفه‌ای با موبایل',
-   back=['صفر تا ۱۰۰ الایت موشن', 'تدوین مکالمه‌محور، زیبایی و دندانپزشکی', 'موشن‌گرافی، استوری موشن، کاور؛ اینشات و کپکات'],
-   more='۱۴ سرفصل'),
- 'smart-assistant': dict(name='دستیار هوشمند', latin='AI EDITOR BOOTCAMP', num='I', emb='emb-assistant', price='۶٫۵ میلیون تومان',
-   sub='از صفر تا درآمد با هوش مصنوعی',
-   back=['مهندسی پرامپت و سناریونویسی', 'تصویر، شخصیت‌سازی و صداگذاری با AI', 'ویدیو از عکس، لیپ‌سینک و کسب درآمد', 'پروژه‌های واقعی و کسب درآمد'],
-   more='۱۴ فصل · شش ماه پشتیبانی · آپدیت رایگان'),
-}
+import content
+
+def _norm(c):
+    # card fields used by the templates below (edited in the admin panel: content/courses.json)
+    return dict(c, emb='emb-' + (c.get('emblem') or 'assistant'), sub=c.get('card_sub', ''), back=c.get('card_points') or [], more=c.get('card_more', ''))
+
+COURSES = {c['id']: _norm(c) for c in content.courses()}
 
 def suit(emb):
     # tiny index glyph

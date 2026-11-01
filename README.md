@@ -29,8 +29,17 @@ _build/               تولیدکننده‌ی HTML صفحه‌ها (python3 _b
 screenshots/          اسکرین‌شات‌های QA
 ```
 
-> صفحه‌ها با `python3 _build/gen.py` ساخته می‌شوند. برای تغییر متن‌ها، فایل‌های `_build/page_*.py` را ویرایش و دوباره اجرا کنید (یا مستقیم HTML را ویرایش کنید و دیگر gen را اجرا نکنید).
-> اطلاعات دوره‌ها در دو جا هست: `_build/cards.py` + `_build/page_course.py` (برای HTML) و `assets/js/data.js` (برای نتیجه‌ی چالش).
+> صفحه‌ها با `python3 _build/gen.py` ساخته می‌شوند. **متن‌ها و داده‌ها در `content/*.json` هستند** (همان چیزی که پنل مدیریت `/admin/` ویرایش می‌کند)؛ `_build/page_*.py` فقط قالب‌ها هستند. HTML ریشه‌ی مخزن را مستقیم ویرایش نکنید؛ هر push روی main با GitHub Action دوباره ساخته و منتشر می‌شود.
+> `assets/js/data.js` هم از `content/courses.json` ساخته می‌شود (قیمت و سرفصل در یک جا).
+
+## پنل مدیریت (Decap CMS) و ساخت خودکار
+- `admin/` — پنل مدیریت فارسی (Decap CMS 3، فایل‌ها self-host در `admin/vendor/`)، تنظیمات در `admin/config.yml`، افزونه‌های پنل در `admin/cms.js`.
+- ورود با ایمیل و رمز از طریق DecapBridge (`backend: git-gateway` در config.yml؛ شناسه‌ی سایت DecapBridge را جایگزین `DECAPBRIDGE_SITE_ID` کنید).
+- `content/` — home.json (ترتیب و نمایش بخش‌ها، کارت‌ها، متن‌ها)، works.json (فصل‌ها و نمونه‌کارها)، testimonials.json، courses.json، links.json، site.json (لینک‌ها و افزونه‌ها)، ai-faq.json، `articles/*.json`، `faq/*.json`.
+- `.github/workflows/deploy.yml` — روی هر push به main: `gen.py` را اجرا، کاور ویدیوهای بدون کاور را با ffmpeg می‌سازد و سایت را روی GitHub Pages منتشر می‌کند. (Settings → Pages → Source باید «GitHub Actions» باشد.)
+- آپلودهای پنل در `assets/media/uploads/` ذخیره می‌شوند. فایل‌هایی که دستی در `assets/media/students/<فصل>/` می‌گذارید را با `python3 _build/import_media.py` به works.json اضافه کنید.
+- تست محلی پنل: `npx decap-server` در ریشه‌ی مخزن + `python3 -m http.server 8080` و باز کردن `http://localhost:8080/admin/` (local_backend).
+- متن‌های داخل [براکت] به شکل «جای خالی/به‌زودی» نمایش داده می‌شوند.
 
 ## جاهای خالی (placeholder)
 با برچسب آبی کوچک «به‌زودی» یا متن داخل [براکت] مشخص شده‌اند:

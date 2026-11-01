@@ -1,13 +1,13 @@
 from common import *
-from faq_content import FAQ, BODY, SOURCES, REVIEWED
+import content, md
 
-QUICK = [
- ('نسخه‌ی رایگان هوش مصنوعی واقعاً به درد کار می‌خوره؟', 'برای یادگیری و اولین نمونه‌کارها، بله. محدودیت اصلی‌ش سقف استفاده و ساخت ویدیوئه، نه کیفیت پایه‌ی جواب‌ها.'),
- ('اکانت اشتراکی (چندنفره) بخرم که ارزون‌تر دربیاد؟', 'پیشنهاد نمی‌کنم. گفت‌وگوها و فایل‌هات برای بقیه قابل دیدنه و احتمال بسته‌شدن حساب بیشتره. اگه می‌خری، اکانت شخصی و به ایمیل خودت باشه.'),
- ('با گوشی می‌شه کار حرفه‌ای هوش مصنوعی انجام داد؟', 'بله. دستیارهای اصلی، ابزارهای تصویر و ویدیو و ادیتورهایی مثل CapCut و Alight Motion همه نسخه‌ی موبایل دارن؛ کلید کار، روش درست استفاده‌ست.'),
- ('اگه دسترسی به یه سرویس قطع شد چی کار کنم؟', 'همیشه یک جایگزین بلد باش؛ مثلاً اگه یکی از ChatGPT، Gemini یا Claude در دسترس نبود، کار رو با بعدی ادامه بده. اشتراک سالانه هم برای همین ریسک‌داره.'),
- ('اول اشتراک بخرم یا اول یاد بگیرم؟', 'اول یاد بگیر. وقتی روش کار رو بلد باشی، دقیقاً می‌دونی کدوم ابزار رو باید پولی کنی و پولت هدر نمی‌ره.'),
-]
+# FAQ guides live in content/faq/<url>.json, quick answers + review date in content/ai-faq.json (admin panel).
+_HUB = content.load('ai-faq.json')
+REVIEWED = _HUB.get('reviewed', '')
+_GUIDES = content.folder('faq')
+FAQ = [(g['url'], g.get('number', ''), g.get('question', ''), g.get('title', ''), g.get('short', ''), g.get('description', ''), g.get('minutes', ''), g.get('tag', '')) for g in _GUIDES]
+
+QUICK = [(x.get('q', ''), x.get('a', '')) for x in _HUB.get('quick') or []]
 
 def _qcard(k, f, pre=''):
     slug, n, q, t, short, d, m, tag = f
@@ -33,7 +33,7 @@ def hub():
   <div class="kicker rv">مرکز پاسخ <span class="latin">AI — Answers</span></div>
   <h1 class="h-xl" data-split>سؤالات پرتکرار <span class="grad">هوش مصنوعی</span></h1>
   <p class="lead rv">جواب صادقانه و به‌روز به سؤال‌هایی که هر روز در دایرکت و تلگرام می‌پرسید؛ بدون تبلیغ هیچ فروشنده‌ای.</p>
-  <div class="faq-chips rv"><span>{icon('book')} ۳ راهنمای کامل</span><span>{icon('refresh')} آخرین بازبینی: {REVIEWED}</span><span>{icon('shield')} بر پایه‌ی منابع رسمی</span></div>
+  <div class="faq-chips rv"><span>{icon('book')} {''.join('۰۱۲۳۴۵۶۷۸۹'[int(d)] for d in str(len(FAQ)))} راهنمای کامل</span><span>{icon('refresh')} آخرین بازبینی: {REVIEWED}</span><span>{icon('shield')} بر پایه‌ی منابع رسمی</span></div>
  </div>
 </section>
 <section class="section" style="padding-top:10px"><div class="wrap">
@@ -60,11 +60,11 @@ def hub():
 
 def article(i):
     slug, n, q, t, short, d, m, tag = FAQ[i]
-    b = BODY[slug]
-    toc = ''.join(f'<a href="#s{k+1}"><i>{"۰۱۲۳۴۵۶۷۸۹"[k+1] if k < 9 else k+1}</i>{x}</a>' for k, x in enumerate(b['toc']))
-    src = ''.join(f'<li><a href="{SOURCES[s][1]}" target="_blank" rel="noopener" dir="ltr">{SOURCES[s][0]}</a></li>' for s in b['src'])
+    g = _GUIDES[i]
+    toc = ''.join(f'<a href="#s{k+1}"><i>{"۰۱۲۳۴۵۶۷۸۹"[k+1] if k < 9 else k+1}</i>{x}</a>' for k, x in enumerate(md.headings(g.get('body', ''))))
+    src = ''.join(f'<li><a href="{x.get("url", "")}" target="_blank" rel="noopener" dir="ltr">{x.get("title", "")}</a></li>' for x in g.get('sources') or [])
     others = ''.join(_qcard(k, f, '../') for k, f in enumerate(FAQ) if f[0] != slug)
-    body = b['html'].replace('{rev}', REVIEWED)
+    body = md.render(g.get('body', ''), '../', h2_ids=True).replace('{reviewed}', REVIEWED)
     html = head(f'{t} | hana.aistudio', d, '../')
     html += nav('../', 'ai-faq.html')
     html += f'''<main><article class="reading faq-art">
@@ -79,7 +79,7 @@ def article(i):
   <nav class="toc rv" aria-label="فهرست مطالب"><b>در این راهنما</b>{toc}</nav>
  </div>
  <div class="wrap narrow prose">{body}
-  <aside class="srcs"><h3>منابع رسمی</h3><p>قیمت‌ها و قابلیت‌ها مرتب تغییر می‌کنن؛ پیش از خرید، صفحه‌ی رسمی هر سرویس را ببینید.</p><ul>{src}</ul></aside>
+  {f'<aside class="srcs"><h3>منابع رسمی</h3><p>قیمت‌ها و قابلیت‌ها مرتب تغییر می‌کنن؛ پیش از خرید، صفحه‌ی رسمی هر سرویس را ببینید.</p><ul>{src}</ul></aside>' if src else ''}
  </div>
  <div class="wrap narrow">
   <div class="final glass" style="padding:44px 26px;margin-top:60px"><div class="orb o1"></div><div class="orb o2"></div>

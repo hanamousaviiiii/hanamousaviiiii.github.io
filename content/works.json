@@ -1,0 +1,122 @@
+{
+  "settings": {
+    "home_chips": 5,
+    "home_thumbs": 3,
+    "tile_shape": "auto",
+    "show_student": true,
+    "empty_label": "نمونه‌کار هنرجو"
+  },
+  "chapters": [
+    {
+      "slug": "animation",
+      "title": "انیمیشن‌سازی",
+      "latin": "Animation",
+      "num": "I",
+      "icon": "spark",
+      "visible": true,
+      "items": []
+    },
+    {
+      "slug": "camera-shots",
+      "title": "اجرای نماهای دوربین",
+      "latin": "Camera Shots",
+      "num": "II",
+      "icon": "camera",
+      "visible": true,
+      "items": []
+    },
+    {
+      "slug": "motion-graphics",
+      "title": "موشن‌گرافی",
+      "latin": "Motion Graphics",
+      "num": "III",
+      "icon": "layers",
+      "visible": true,
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/01-ai-land-map.mp4",
+          "poster": "/assets/media/students/motion-graphics/01-ai-land-map.jpg",
+          "title": "نقشه‌ی سرزمین هوش مصنوعی",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/02-free-ai-sites.mp4",
+          "poster": "/assets/media/students/motion-graphics/02-free-ai-sites.jpg",
+          "title": "اینفوگرافیک سه سایت رایگان هوش مصنوعی",
+          "student": ""
+        }
+      ]
+    },
+    {
+      "slug": "beauty-dental",
+      "title": "حوزه‌ی زیبایی و دندان‌پزشکی",
+      "latin": "Beauty & Dental",
+      "num": "IV",
+      "icon": "smile",
+      "visible": true,
+      "items": []
+    },
+    {
+      "slug": "banners-images",
+      "title": "ساخت بنر و تصاویر",
+      "latin": "Banners & Images",
+      "num": "V",
+      "icon": "image",
+      "visible": true,
+      "items": []
+    },
+    {
+      "slug": "story-motion",
+      "title": "استوری موشن",
+      "latin": "Story Motion",
+      "num": "VI",
+      "icon": "phone",
+      "visible": true,
+      "items": []
+    },
+    {
+      "slug": "series",
+      "title": "ساخت سریال و ویدیوهای سریالی",
+      "latin": "Series",
+      "num": "VII",
+      "icon": "film",
+      "visible": true,
+      "items": []
+    },
+    {
+      "slug": "product-ads",
+      "title": "تبلیغ محصول و آنلاین‌شاپ",
+      "latin": "Product Ads",
+      "num": "VIII",
+      "icon": "bag",
+      "visible": true,
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/product-ads/01-bazaar-presenter.mp4",
+          "poster": "/assets/media/students/product-ads/01-bazaar-presenter.jpg",
+          "title": "تبلیغ بازار پوشاک با مجری AI",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/product-ads/02-scarf-product.mp4",
+          "poster": "/assets/media/students/product-ads/02-scarf-product.jpg",
+          "title": "از عکس موبایل تا ویدیوی محصول",
+          "student": ""
+        }
+      ]
+    },
+    {
+      "slug": "music-video",
+      "title": "موزیک ویدیو",
+      "latin": "Music Video",
+      "num": "IX",
+      "icon": "music",
+      "visible": false,
+      "items": []
+    }
+  ]
+}

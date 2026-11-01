@@ -1,0 +1,78 @@
+{
+  "rows": [
+    {
+      "kind": "link",
+      "icon": "target",
+      "title": "چالش سطح هوش مصنوعی",
+      "subtitle": "ببین کجای مسیری؛ حدود ۵ دقیقه",
+      "url": "challenge.html",
+      "highlight": true,
+      "course": ""
+    },
+    {
+      "kind": "course",
+      "icon": "spark",
+      "title": "",
+      "subtitle": "",
+      "url": "",
+      "highlight": false,
+      "course": "smart-assistant"
+    },
+    {
+      "kind": "course",
+      "icon": "edit",
+      "title": "",
+      "subtitle": "",
+      "url": "",
+      "highlight": false,
+      "course": "editor-plus"
+    },
+    {
+      "kind": "link",
+      "icon": "play",
+      "title": "نمونه‌کار هنرجوها",
+      "subtitle": "گالری کارهای هنرجوها، فصل‌به‌فصل",
+      "url": "student-works.html",
+      "highlight": false,
+      "course": ""
+    },
+    {
+      "kind": "link",
+      "icon": "telegram",
+      "title": "تلگرام · ثبت‌نام و مشاوره",
+      "subtitle": "@hanatrick",
+      "url": "{telegram}",
+      "highlight": false,
+      "course": ""
+    },
+    {
+      "kind": "link",
+      "icon": "book",
+      "title": "مجله‌ی هوش مصنوعی",
+      "subtitle": "آموزش‌ها و مقاله‌های کوتاه",
+      "url": "blog.html",
+      "highlight": false,
+      "course": ""
+    },
+    {
+      "kind": "link",
+      "icon": "brief",
+      "title": "همکاری با برندها",
+      "subtitle": "تبلیغ، تولید محتوا و ورکشاپ",
+      "url": "contact.html",
+      "highlight": false,
+      "course": ""
+    },
+    {
+      "kind": "link",
+      "icon": "globe",
+      "title": "وب‌سایت",
+      "subtitle": "صفحه‌ی اصلی hana.aistudio",
+      "url": "index.html",
+      "highlight": false,
+      "course": ""
+    }
+  ],
+  "bio": "آموزش ادیت موبایل و خلق محتوا با هوش مصنوعی",
+  "photo": ""
+}

@@ -1,0 +1,535 @@
+# Admin panel (Decap CMS) for hanamousaviiiii.github.io
+# Every "Publish" saves a JSON file in content/ to GitHub; the GitHub Action rebuilds and publishes the site in ~1-2 minutes.
+# Field labels are in Persian for Hana. Docs: https://decapcms.org/docs/configuration-options/
+
+backend:
+  # Email/password login through DecapBridge (https://decapbridge.com). Replace SITE_ID after creating the site there.
+  name: git-gateway
+  repo: hanamousaviiiii/hanamousaviiiii.github.io
+  branch: main
+  identity_url: https://auth.decapbridge.com/sites/DECAPBRIDGE_SITE_ID
+  gateway_url: https://gateway.decapbridge.com
+  commit_messages:
+    create: "پنل: ایجاد {{collection}} «{{slug}}» ({{author-name}})"
+    update: "پنل: ویرایش {{collection}} «{{slug}}» ({{author-name}})"
+    delete: "پنل: حذف {{collection}} «{{slug}}» ({{author-name}})"
+    uploadMedia: "پنل: آپلود {{path}} ({{author-name}})"
+    deleteMedia: "پنل: حذف فایل {{path}} ({{author-name}})"
+
+# Only used on http://localhost with `npx decap-server` (for testing); ignored on the live site.
+local_backend: true
+
+locale: fa
+site_url: https://hanamousaviiiii.github.io
+display_url: https://hanamousaviiiii.github.io
+logo_url: https://hanamousaviiiii.github.io/assets/img/mark.svg
+show_preview_links: false
+
+# Uploaded photos and videos go here. Paths are saved as /assets/media/uploads/<file>.
+media_folder: assets/media/uploads
+public_folder: /assets/media/uploads
+
+collections:
+  # ------------------------------------------------------------ homepage
+  - name: home
+    label: "صفحه‌ی اصلی"
+    description: "ترتیب بخش‌ها، کارت‌های مهارت، متن‌ها و سؤالات صفحه‌ی اول"
+    editor: { preview: false }
+    files:
+      - name: home
+        label: "صفحه‌ی اصلی سایت"
+        file: content/home.json
+        fields:
+          - label: "ترتیب و نمایش بخش‌ها"
+            name: sections
+            widget: list
+            hint: "برای جابه‌جایی، بخش‌ها را با گرفتن و کشیدن بالا و پایین ببرید. برای پنهان‌کردن یک بخش، تیک «نمایش» را بردارید. هدر بالای سایت (با منظومه‌ی متحرک) همیشه اول است و این‌جا نیست."
+            summary: "{{fields.key}}"
+            collapsed: false
+            fields:
+              - label: "بخش"
+                name: key
+                widget: select
+                options:
+                  - { label: "نوار کلمات متحرک", value: "marquee" }
+                  - { label: "جمله‌ی میانی ۱: همه‌چیز از یک نقطه شروع شد", value: "interlude-1" }
+                  - { label: "چرا همین حالا (کارت‌های مهارت)", value: "why" }
+                  - { label: "معرفی چالش", value: "challenge" }
+                  - { label: "کارت‌های دوره", value: "courses" }
+                  - { label: "جمله‌ی میانی ۲: نقطه‌ها به هم وصل شدن", value: "interlude-2" }
+                  - { label: "باکس نمونه‌کار هنرجوها", value: "showcase" }
+                  - { label: "رضایت هنرجوها", value: "voices" }
+                  - { label: "درباره‌ی من", value: "about" }
+                  - { label: "جمله‌ی میانی ۳: و آینده این‌جا شکل می‌گیره", value: "interlude-3" }
+                  - { label: "سؤالات پرتکرار هوش مصنوعی", value: "ai-faq" }
+                  - { label: "سؤالات متداول دوره‌ها", value: "faq" }
+                  - { label: "دعوت پایانی (قدم اول)", value: "final" }
+              - { label: "نمایش", name: visible, widget: boolean, default: true }
+          - label: "بالای صفحه (هدر)"
+            name: hero
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "متن زیر عنوان", name: lead, widget: text }
+              - { label: "برچسب‌های کوچک زیر دکمه‌ها", name: meta, widget: list, field: { label: "برچسب", name: item, widget: string } }
+          - label: "کارت‌های «چرا همین حالا»"
+            name: features
+            widget: list
+            summary: "{{fields.title}}"
+            collapsed: true
+            hint: "ترتیب کارت‌ها با کشیدن عوض می‌شود. شماره‌ی کارت‌ها (۰۱، ۰۲...) خودکار است."
+            fields:
+              - { label: "عنوان", name: title, widget: string }
+              - { label: "توضیح", name: text, widget: text }
+              - label: "آیکون"
+                name: icon
+                widget: select
+                options:
+                  - { label: "ستاره / جرقه", value: "spark" }
+                  - { label: "پرامپت", value: "prompt" }
+                  - { label: "تصویر", value: "image" }
+                  - { label: "ویدیو", value: "video" }
+                  - { label: "صدا", value: "wave" }
+                  - { label: "ادیت", value: "edit" }
+                  - { label: "رشد و درآمد", value: "growth" }
+                  - { label: "دوربین", value: "camera" }
+                  - { label: "لایه‌ها / موشن", value: "layers" }
+                  - { label: "لبخند / زیبایی", value: "smile" }
+                  - { label: "موبایل / استوری", value: "phone" }
+                  - { label: "فیلم / سریال", value: "film" }
+                  - { label: "کیف خرید / محصول", value: "bag" }
+                  - { label: "موسیقی", value: "music" }
+                  - { label: "پخش", value: "play" }
+                  - { label: "کتاب", value: "book" }
+                  - { label: "سپر / پشتیبانی", value: "shield" }
+                  - { label: "آپدیت", value: "refresh" }
+                  - { label: "هدف / چالش", value: "target" }
+                  - { label: "وب‌سایت", value: "globe" }
+                  - { label: "تلگرام", value: "telegram" }
+                  - { label: "اینستاگرام", value: "instagram" }
+                  - { label: "همکاری", value: "brief" }
+                  - { label: "ایمیل", value: "mail" }
+                  - { label: "ساعت", value: "clock" }
+                  - { label: "تیک", value: "check" }
+              - { label: "کارت پهن (دو ستونه)", name: wide, widget: boolean, default: false }
+          - { label: "کلمات نوار متحرک", name: marquee, widget: list, collapsed: true, field: { label: "کلمه", name: item, widget: string } }
+          - label: "درباره‌ی من"
+            name: about
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "عکس هانا", name: photo, widget: image, required: false, choose_url: false }
+              - { label: "متن داستان (برای پاراگراف جدید یک خط خالی بگذارید)", name: story, widget: text, required: false }
+          - label: "سؤالات متداول پایین صفحه"
+            name: faqs
+            widget: list
+            summary: "{{fields.q}}"
+            collapsed: true
+            fields:
+              - { label: "سؤال", name: q, widget: string }
+              - { label: "جواب", name: a, widget: text }
+
+  # ------------------------------------------------------------ student works
+  - name: works
+    label: "نمونه‌کار هنرجوها"
+    description: "فصل‌ها، ویدیوها و عکس‌های هنرجوها و نحوه‌ی نمایش گالری"
+    editor: { preview: false }
+    files:
+      - name: works
+        label: "گالری نمونه‌کارها"
+        file: content/works.json
+        fields:
+          - label: "فصل‌ها"
+            name: chapters
+            widget: list
+            summary: "{{fields.title}}"
+            collapsed: true
+            hint: "هر فصل یک کارت در صفحه‌ی نمونه‌کارهاست. ترتیب فصل‌ها با کشیدن عوض می‌شود. برای پنهان‌کردن یک فصل، تیک «نمایش در سایت» را بردارید."
+            fields:
+              - { label: "نام فصل", name: title, widget: string }
+              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
+              - label: "نمونه‌کارها"
+                name: items
+                widget: list
+                summary: "{{fields.title}}"
+                collapsed: true
+                required: false
+                hint: "ترتیب نمونه‌کارها با کشیدن عوض می‌شود."
+                fields:
+                  - label: "نوع"
+                    name: kind
+                    widget: select
+                    default: video
+                    options:
+                      - { label: "ویدیو", value: video }
+                      - { label: "عکس", value: img }
+                  - { label: "فایل ویدیو یا عکس", name: file, widget: file, choose_url: false, hint: "ویدیو با فرمت mp4 و ترجیحاً زیر ۲۵ مگابایت" }
+                  - { label: "عکس کاور ویدیو (اختیاری)", name: poster, widget: image, required: false, choose_url: false, hint: "اگر خالی بماند، اولین فریم ویدیو خودکار کاور می‌شود" }
+                  - { label: "عنوان", name: title, widget: string }
+                  - { label: "نام هنرجو (اختیاری)", name: student, widget: string, required: false, hint: "اگر خالی بماند «نمونه‌کار هنرجو» نوشته می‌شود" }
+                  - label: "شکل کاشی"
+                    name: shape
+                    widget: select
+                    required: false
+                    default: ""
+                    options:
+                      - { label: "پیش‌فرض گالری", value: "" }
+                      - { label: "عمودی (مثل ریلز)", value: tall }
+                      - { label: "مربع", value: square }
+                  - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
+              - { label: "نام انگلیسی فصل", name: latin, widget: string, required: false }
+              - { label: "شماره‌ی رومی (I, II, ...)", name: num, widget: string, required: false }
+              - label: "آیکون"
+                name: icon
+                widget: select
+                options:
+                      - { label: "ستاره / جرقه", value: "spark" }
+                      - { label: "پرامپت", value: "prompt" }
+                      - { label: "تصویر", value: "image" }
+                      - { label: "ویدیو", value: "video" }
+                      - { label: "صدا", value: "wave" }
+                      - { label: "ادیت", value: "edit" }
+                      - { label: "رشد و درآمد", value: "growth" }
+                      - { label: "دوربین", value: "camera" }
+                      - { label: "لایه‌ها / موشن", value: "layers" }
+                      - { label: "لبخند / زیبایی", value: "smile" }
+                      - { label: "موبایل / استوری", value: "phone" }
+                      - { label: "فیلم / سریال", value: "film" }
+                      - { label: "کیف خرید / محصول", value: "bag" }
+                      - { label: "موسیقی", value: "music" }
+                      - { label: "پخش", value: "play" }
+                      - { label: "کتاب", value: "book" }
+                      - { label: "سپر / پشتیبانی", value: "shield" }
+                      - { label: "آپدیت", value: "refresh" }
+                      - { label: "هدف / چالش", value: "target" }
+                      - { label: "وب‌سایت", value: "globe" }
+                      - { label: "تلگرام", value: "telegram" }
+                      - { label: "اینستاگرام", value: "instagram" }
+                      - { label: "همکاری", value: "brief" }
+                      - { label: "ایمیل", value: "mail" }
+                      - { label: "ساعت", value: "clock" }
+                      - { label: "تیک", value: "check" }
+              - { label: "نشانی فصل (انگلیسی، بدون فاصله)", name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "فقط حروف کوچک انگلیسی، عدد و خط تیره"], hint: "در لینک صفحه استفاده می‌شود؛ برای فصل‌های موجود تغییرش ندهید" }
+          - label: "تنظیمات نمایش گالری"
+            name: settings
+            widget: object
+            collapsed: true
+            fields:
+              - label: "شکل پیش‌فرض کاشی‌ها"
+                name: tile_shape
+                widget: select
+                default: auto
+                options:
+                  - { label: "خودکار (ویدیو عمودی، عکس مربع)", value: auto }
+                  - { label: "همه عمودی", value: tall }
+                  - { label: "همه مربع", value: square }
+              - { label: "نمایش نام هنرجو", name: show_student, widget: boolean, default: true }
+              - { label: "متن جایگزین وقتی نام هنرجو نیست", name: empty_label, widget: string, default: "نمونه‌کار هنرجو" }
+              - { label: "تعداد اسم فصل‌ها در باکس صفحه‌ی اول", name: home_chips, widget: number, value_type: int, min: 1, max: 9, default: 5 }
+              - { label: "تعداد عکس‌های باکس صفحه‌ی اول", name: home_thumbs, widget: number, value_type: int, min: 1, max: 3, default: 3 }
+
+  # ------------------------------------------------------------ testimonials
+  - name: testimonials
+    label: "رضایت هنرجوها"
+    description: "نظرها و اسکرین‌شات‌های رضایت هنرجوها در صفحه‌ی اول"
+    editor: { preview: false }
+    files:
+      - name: testimonials
+        label: "رضایت هنرجوها"
+        file: content/testimonials.json
+        fields:
+          - label: "نظرها"
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            collapsed: true
+            required: false
+            hint: "تا وقتی هیچ نظری اضافه نشده، سه کادر نمونه نشان داده می‌شود."
+            fields:
+              - { label: "نام هنرجو", name: name, widget: string }
+              - { label: "دوره", name: course, widget: string, required: false }
+              - { label: "متن نظر", name: text, widget: text, required: false }
+              - { label: "اسکرین‌شات رضایت (اختیاری)", name: screenshot, widget: image, required: false, choose_url: false }
+              - { label: "عکس هنرجو (اختیاری)", name: photo, widget: image, required: false, choose_url: false }
+              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
+
+  # ------------------------------------------------------------ courses
+  - name: courses
+    label: "دوره‌ها"
+    description: "قیمت، سرفصل‌ها، ویژگی‌ها و سؤالات هر دوره"
+    editor: { preview: false }
+    files:
+      - name: courses
+        label: "دوره‌ها"
+        file: content/courses.json
+        fields:
+          - label: "دوره‌ها"
+            name: courses
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}}"
+            collapsed: true
+            allow_add: false
+            hint: "ترتیب دوره‌ها همان ترتیب کارت‌ها در صفحه‌ی اول است."
+            fields:
+              - { label: "نام دوره", name: name, widget: string }
+              - { label: "شهریه", name: price, widget: string, hint: "مثلاً ۶٫۵ میلیون تومان" }
+              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
+              - { label: "نام انگلیسی", name: latin, widget: string }
+              - { label: "شماره‌ی رومی روی کارت", name: num, widget: string }
+              - label: "نقش وسط کارت"
+                name: emblem
+                widget: select
+                options:
+                  - { label: "چشم و ستاره (دستیار هوشمند)", value: assistant }
+                  - { label: "فیلم (ادیتور پلاس)", value: editor }
+              - { label: "زیرعنوان پشت کارت", name: card_sub, widget: string }
+              - { label: "سه نکته‌ی پشت کارت", name: card_points, widget: list, field: { label: "نکته", name: item, widget: string }, hint: "فقط سه مورد اول نمایش داده می‌شود" }
+              - { label: "خط پایین پشت کارت", name: card_more, widget: string }
+              - { label: "زیرعنوان صفحه‌ی دوره", name: page_sub, widget: string }
+              - { label: "معرفی دوره", name: intro, widget: text }
+              - { label: "تعداد فصل‌ها (متن)", name: count_label, widget: string, hint: "مثلاً ۱۴ فصل" }
+              - { label: "سرفصل‌ها", name: syllabus, widget: list, collapsed: true, field: { label: "سرفصل", name: item, widget: string } }
+              - label: "ویژگی‌ها (سه کادر بالای سرفصل‌ها)"
+                name: perks
+                widget: list
+                summary: "{{fields.title}}"
+                collapsed: true
+                fields:
+                  - { label: "عنوان", name: title, widget: string, hint: "{count} = تعداد فصل‌ها" }
+                  - { label: "توضیح", name: text, widget: string }
+                  - label: "آیکون"
+                    name: icon
+                    widget: select
+                    options:
+                      - { label: "ستاره / جرقه", value: "spark" }
+                      - { label: "پرامپت", value: "prompt" }
+                      - { label: "تصویر", value: "image" }
+                      - { label: "ویدیو", value: "video" }
+                      - { label: "صدا", value: "wave" }
+                      - { label: "ادیت", value: "edit" }
+                      - { label: "رشد و درآمد", value: "growth" }
+                      - { label: "دوربین", value: "camera" }
+                      - { label: "لایه‌ها / موشن", value: "layers" }
+                      - { label: "لبخند / زیبایی", value: "smile" }
+                      - { label: "موبایل / استوری", value: "phone" }
+                      - { label: "فیلم / سریال", value: "film" }
+                      - { label: "کیف خرید / محصول", value: "bag" }
+                      - { label: "موسیقی", value: "music" }
+                      - { label: "پخش", value: "play" }
+                      - { label: "کتاب", value: "book" }
+                      - { label: "سپر / پشتیبانی", value: "shield" }
+                      - { label: "آپدیت", value: "refresh" }
+                      - { label: "هدف / چالش", value: "target" }
+                      - { label: "وب‌سایت", value: "globe" }
+                      - { label: "تلگرام", value: "telegram" }
+                      - { label: "اینستاگرام", value: "instagram" }
+                      - { label: "همکاری", value: "brief" }
+                      - { label: "ایمیل", value: "mail" }
+                      - { label: "ساعت", value: "clock" }
+                      - { label: "تیک", value: "check" }
+              - { label: "برای چه کسانی؟", name: audience, widget: text, required: false }
+              - { label: "ویدیوی معرفی دوره (اختیاری)", name: intro_video, widget: file, required: false, choose_url: false }
+              - { label: "کاور ویدیوی معرفی (اختیاری)", name: intro_poster, widget: image, required: false, choose_url: false }
+              - label: "سؤالات دوره"
+                name: faqs
+                widget: list
+                summary: "{{fields.q}}"
+                collapsed: true
+                fields:
+                  - { label: "سؤال", name: q, widget: string }
+                  - { label: "جواب (خالی = به‌زودی)", name: a, widget: text, required: false }
+              - label: "زیرعنوان دوره در نتیجه‌ی چالش"
+                name: js_subtitle
+                widget: string
+                required: false
+              - { label: "توضیح کوتاه دوره در نتیجه‌ی چالش", name: js_teaser, widget: text, required: false }
+              - { label: "مزایا در نتیجه‌ی چالش", name: js_perks, widget: list, required: false, field: { label: "مزیت", name: item, widget: string } }
+              - { label: "شناسه‌ی فنی (تغییر ندهید)", name: id, widget: string, pattern: ["^(smart-assistant|editor-plus|[a-z0-9-]+)$", "فقط حروف انگلیسی"] }
+
+  # ------------------------------------------------------------ articles
+  - name: articles
+    label: "مقاله‌های مجله"
+    label_singular: "مقاله"
+    description: "مقاله‌های صفحه‌ی مجله (blog.html)"
+    folder: content/articles
+    extension: json
+    format: json
+    create: true
+    delete: true
+    identifier_field: url
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { label: "عنوان مقاله", name: title, widget: string }
+      - { label: "نشانی مقاله (انگلیسی، بدون فاصله)", name: url, widget: string, pattern: ["^[a-z0-9-]+$", "فقط حروف کوچک انگلیسی، عدد و خط تیره، مثل ai-tools-guide"], hint: "آدرس صفحه می‌شود: articles/این-نشانی.html" }
+      - { label: "توضیح کوتاه (برای گوگل و کارت مقاله)", name: description, widget: text }
+      - { label: "برچسب", name: tag, widget: string, hint: "مثلاً پرامپت یا ویدیو" }
+      - { label: "زمان مطالعه (دقیقه)", name: minutes, widget: string, default: "۵" }
+      - { label: "ترتیب نمایش (عدد کمتر = بالاتر، اولی ویژه است)", name: order, widget: number, value_type: int, default: 10 }
+      - { label: "منتشر شود", name: published, widget: boolean, default: true }
+      - { label: "عکس کاور (اختیاری)", name: image, widget: image, required: false, choose_url: false }
+      - label: "طرح رنگی کاور (اگر عکس ندارید)"
+        name: cover
+        widget: select
+        default: a1
+        options:
+            - { label: "طرح ۱", value: "a1" }
+            - { label: "طرح ۲", value: "a2" }
+            - { label: "طرح ۳", value: "a3" }
+            - { label: "طرح ۴", value: "a4" }
+            - { label: "طرح ۵", value: "a5" }
+            - { label: "طرح ۶", value: "a6" }
+            - { label: "طرح ۷", value: "a7" }
+      - label: "متن مقاله"
+        name: body
+        widget: markdown
+        buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+        editor_components: ["image", "code-block"]
+        hint: "«نقل‌قول» به شکل کادر نکته نمایش داده می‌شود."
+
+  # ------------------------------------------------------------ AI FAQ guides
+  - name: faq
+    label: "راهنماهای سؤالات AI"
+    label_singular: "راهنما"
+    description: "راهنماهای کامل صفحه‌ی سؤالات پرتکرار هوش مصنوعی (ai-faq.html)"
+    folder: content/faq
+    extension: json
+    format: json
+    create: true
+    delete: true
+    identifier_field: url
+    slug: "{{slug}}"
+    summary: "{{question}}"
+    sortable_fields: ["order", "question"]
+    fields:
+      - { label: "سؤال (عنوان کارت)", name: question, widget: string }
+      - { label: "عنوان کامل راهنما", name: title, widget: string }
+      - { label: "نشانی (انگلیسی، بدون فاصله)", name: url, widget: string, pattern: ["^[a-z0-9-]+$", "فقط حروف کوچک انگلیسی، عدد و خط تیره"] }
+      - { label: "شماره روی کارت", name: number, widget: string, hint: "مثلاً 04" }
+      - { label: "پاسخ کوتاه", name: short, widget: text }
+      - { label: "توضیح کوتاه (برای گوگل)", name: description, widget: text }
+      - { label: "برچسب", name: tag, widget: string }
+      - { label: "زمان مطالعه (دقیقه)", name: minutes, widget: string, default: "۵" }
+      - { label: "ترتیب نمایش", name: order, widget: number, value_type: int, default: 10 }
+      - { label: "منتشر شود", name: published, widget: boolean, default: true }
+      - label: "منابع رسمی"
+        name: sources
+        widget: list
+        required: false
+        summary: "{{fields.title}}"
+        fields:
+          - { label: "نام منبع", name: title, widget: string }
+          - { label: "لینک", name: url, widget: string }
+      - label: "متن راهنما"
+        name: body
+        widget: markdown
+        modes: ["raw", "rich_text"]
+        buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+        editor_components: ["image", "code-block"]
+        hint: "هر تیتر ## خودکار وارد فهرست مطالب می‌شود. جدول‌ها و کادرهای ویژه را در حالت Markdown ویرایش کنید. {reviewed} = تاریخ بازبینی."
+
+  - name: pages
+    label: "صفحه‌های دیگر و تنظیمات"
+    description: "جواب‌های کوتاه AI، صفحه‌ی لینک‌ها، لینک شبکه‌های اجتماعی و افزونه‌ها"
+    editor: { preview: false }
+    files:
+      - name: ai-faq
+        label: "سؤالات AI: جواب‌های کوتاه و تاریخ بازبینی"
+        file: content/ai-faq.json
+        fields:
+          - { label: "آخرین بازبینی", name: reviewed, widget: string, hint: "مثلاً آبان ۱۴۰۵" }
+          - label: "سؤال‌های یک‌خطی"
+            name: quick
+            widget: list
+            summary: "{{fields.q}}"
+            collapsed: true
+            fields:
+              - { label: "سؤال", name: q, widget: string }
+              - { label: "جواب", name: a, widget: text }
+      - name: links
+        label: "صفحه‌ی لینک‌ها (لینک بیو اینستاگرام)"
+        file: content/links.json
+        fields:
+          - { label: "عکس پروفایل", name: photo, widget: image, required: false, choose_url: false }
+          - { label: "متن زیر نام", name: bio, widget: string }
+          - label: "دکمه‌ها"
+            name: rows
+            widget: list
+            summary: "{{fields.title}} {{fields.course}}"
+            collapsed: true
+            fields:
+              - label: "نوع"
+                name: kind
+                widget: select
+                default: link
+                options:
+                  - { label: "لینک معمولی", value: link }
+                  - { label: "دوره (نام و قیمت خودکار)", value: course }
+              - label: "دوره"
+                name: course
+                widget: select
+                required: false
+                options:
+                  - { label: "دستیار هوشمند", value: smart-assistant }
+                  - { label: "ادیتور پلاس", value: editor-plus }
+              - { label: "عنوان", name: title, widget: string, required: false, hint: "برای دوره خالی بگذارید" }
+              - { label: "زیرعنوان", name: subtitle, widget: string, required: false, hint: "برای دوره خالی بگذارید" }
+              - { label: "لینک", name: url, widget: string, required: false, hint: "مثلاً challenge.html یا https://...؛ {telegram} = لینک تلگرام" }
+              - label: "آیکون"
+                name: icon
+                widget: select
+                options:
+                  - { label: "ستاره / جرقه", value: "spark" }
+                  - { label: "پرامپت", value: "prompt" }
+                  - { label: "تصویر", value: "image" }
+                  - { label: "ویدیو", value: "video" }
+                  - { label: "صدا", value: "wave" }
+                  - { label: "ادیت", value: "edit" }
+                  - { label: "رشد و درآمد", value: "growth" }
+                  - { label: "دوربین", value: "camera" }
+                  - { label: "لایه‌ها / موشن", value: "layers" }
+                  - { label: "لبخند / زیبایی", value: "smile" }
+                  - { label: "موبایل / استوری", value: "phone" }
+                  - { label: "فیلم / سریال", value: "film" }
+                  - { label: "کیف خرید / محصول", value: "bag" }
+                  - { label: "موسیقی", value: "music" }
+                  - { label: "پخش", value: "play" }
+                  - { label: "کتاب", value: "book" }
+                  - { label: "سپر / پشتیبانی", value: "shield" }
+                  - { label: "آپدیت", value: "refresh" }
+                  - { label: "هدف / چالش", value: "target" }
+                  - { label: "وب‌سایت", value: "globe" }
+                  - { label: "تلگرام", value: "telegram" }
+                  - { label: "اینستاگرام", value: "instagram" }
+                  - { label: "همکاری", value: "brief" }
+                  - { label: "ایمیل", value: "mail" }
+                  - { label: "ساعت", value: "clock" }
+                  - { label: "تیک", value: "check" }
+              - { label: "برجسته", name: highlight, widget: boolean, default: false }
+              - { label: "نمایش", name: visible, widget: boolean, default: true }
+      - name: site
+        label: "تنظیمات کلی و افزونه‌ها"
+        file: content/site.json
+        fields:
+          - { label: "لینک اینستاگرام", name: instagram, widget: string }
+          - { label: "لینک تلگرام", name: telegram, widget: string }
+          - label: "افزونه‌ها (کد اضافه در همه‌ی صفحه‌ها)"
+            name: plugins
+            widget: list
+            required: false
+            summary: "{{fields.name}}"
+            collapsed: true
+            hint: "برای ابزارهایی مثل آمار بازدید، چت آنلاین یا کد تأیید گوگل. فقط کدی بگذارید که از سرویس معتبر گرفته‌اید."
+            fields:
+              - { label: "نام افزونه", name: name, widget: string }
+              - { label: "فعال", name: enabled, widget: boolean, default: true }
+              - label: "محل قرارگیری"
+                name: place
+                widget: select
+                default: head
+                options:
+                  - { label: "بالای صفحه (head)", value: head }
+                  - { label: "پایین صفحه (قبل از body/)", value: body }
+              - { label: "فقط در این صفحه‌ها (اختیاری)", name: pages, widget: string, required: false, hint: "مثلاً index.html, blog.html — خالی = همه‌ی صفحه‌ها" }
+              - { label: "کد", name: code, widget: code, default_language: html, output_code_only: true, allow_language_selection: false }

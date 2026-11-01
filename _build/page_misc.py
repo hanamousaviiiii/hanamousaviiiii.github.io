@@ -1,30 +1,28 @@
 import re
 from common import *
 
-ARTS = [
- ('start-ai-content', 'شروع تولید محتوا با هوش مصنوعی: از کجا شروع کنم؟', 'نقشه‌ی راه ساده برای استفاده از ابزارهای هوش مصنوعی در تولید محتوای شبکه‌های اجتماعی.', '۶', 'راهنمای شروع', 'a1'),
- ('better-prompts', 'هنر پرامپت‌نویسی: چطور از AI جواب بهتر بگیریم؟', 'فرمول یک پرامپت خوب، اشتباه‌های رایج و نمونه‌های کاربردی برای گرفتن جواب بهتر از هوش مصنوعی.', '۷', 'پرامپت', 'a3'),
- ('ai-video-basics', 'ساخت ویدیو با هوش مصنوعی: مفاهیم پایه برای شروع', 'آشنایی با ساخت ویدیو با هوش مصنوعی: متن‌به‌ویدیو، تصویر‌به‌ویدیو و نکات ساخت کلیپ‌های طبیعی‌تر.', '۷', 'ویدیو', 'a6'),
-]
-EMOJI = re.compile('[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\uFE0F\u200d\u2300-\u23FF]')
+import content, md
 
-def article_body(slug):
-    s = open(f'/workspace/hana-site/articles/{slug}.html', encoding='utf-8').read()
-    body = s.split('<div class="hero-cover">', 1)[1].split('</div>', 1)[1]
-    body = body.split('<div class="cta-band"', 1)[0]
-    body = EMOJI.sub('', body)
-    body = body.replace('<div class="tip">', '<aside class="callout glass">').replace('</div>', '</aside>')
-    body = body.replace('soft purple and pink pastel background', 'deep crimson and electric blue rim light, dark background')
-    body = body.replace('<pre>', '<pre dir="auto">')
-    body = re.sub(r'<aside class="callout glass">\s*', '<aside class="callout glass">', body)
-    return body.strip()
+# Articles live in content/articles/<url>.json (edited in the admin panel); order = `order` field.
+_ARTICLES = content.folder('articles')
+ARTS = [(a['url'], a.get('title', ''), a.get('description', ''), a.get('minutes', ''), a.get('tag', ''), a.get('cover') or 'a1') for a in _ARTICLES]
+
+def _cover(i, pre=''):
+    a = _ARTICLES[i]; img = content.media_path(a.get('image'), pre)
+    if img: return f'<div class="art" style="background:url(\'{img}\') center/cover no-repeat"></div>'
+    return f'<div class="art {a.get("cover") or "a1"}"></div>'
+
+def article_body(slug, pre=''):
+    for a in _ARTICLES:
+        if a['url'] == slug: return md.render(a.get('body', ''), pre)
+    return ''
 
 def blog():
     feat = ARTS[0]
     cards = ''
     for k,(slug,t,d,m,tag,art) in enumerate(ARTS):
         cards += f'''<a class="post glass rv{' feat' if k==0 else ''}" style="--d:{k*0.08:.2f}s" href="articles/{slug}.html" data-tilt="4">
-   <div class="cover"><div class="art {art}"></div><span class="tag">{tag}</span></div>
+   <div class="cover">{_cover(k)}<span class="tag">{tag}</span></div>
    <div class="post-body"><div class="meta">{icon('clock')} {m} دقیقه مطالعه</div><h2>{t}</h2><p>{d}</p><span class="read">خواندن مقاله {icon('arrow','arrow')}</span></div></a>'''
     html = head('مجله‌ی هوش مصنوعی | hana.aistudio', 'مقاله‌ها و آموزش‌های کوتاه درباره‌ی تولید محتوا، پرامپت‌نویسی و ساخت ویدیو با هوش مصنوعی.')
     html += nav('', 'blog.html')
@@ -49,8 +47,8 @@ def article(i):
   <h1 class="h-lg rv">{t}</h1>
   <div class="byline rv"><span class="av"><svg viewBox="0 0 40 40"><use href="#mark"/></svg></span><span><b>هانا موسوی</b><small>{m} دقیقه مطالعه</small></span></div>
  </div></header>
- <div class="wrap narrow"><div class="art-cover rv"><div class="art {art}"></div><div class="gridlines"></div></div></div>
- <div class="wrap narrow prose">{article_body(slug)}</div>
+ <div class="wrap narrow"><div class="art-cover rv">{_cover(i, '../')}<div class="gridlines"></div></div></div>
+ <div class="wrap narrow prose">{article_body(slug, '../')}</div>
  <div class="wrap narrow">
   <div class="final glass" style="padding:44px 26px;margin-top:60px"><div class="orb o1"></div><div class="orb o2"></div>
    <h2 class="h-md" style="margin-bottom:12px">می‌خوای این‌ها رو قدم‌به‌قدم و عملی یاد بگیری؟</h2>
@@ -63,26 +61,31 @@ def article(i):
     html += footer('../') + scripts('../')
     return html
 
+def _avatar(L):
+    ph = content.media_path(L.get('photo'))
+    if ph:
+        return f'  <div class="lp-avatar"><div class="ring"></div><img src="{ph}" alt="هانا موسوی" style="position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:cover;border-radius:50%"></div>'
+    return '''  <div class="lp-avatar"><div class="ring"></div><svg viewBox="0 0 100 120" fill="none" stroke="url(#gl)" stroke-width="1.2"><circle cx="50" cy="40" r="20"/><path d="M14 118c4-26 19-40 36-40s32 14 36 40"/></svg></div>
+  <span class="ph-tag" style="margin-top:-8px">عکس پروفایل</span>'''
+
 def links():
-    rows = [
-      ('target', 'چالش سطح هوش مصنوعی', 'ببین کجای مسیری؛ حدود ۵ دقیقه', 'challenge.html', True),
-      ('spark', 'دوره‌ی دستیار هوشمند', 'از صفر تا درآمد با هوش مصنوعی، ۶٫۵ میلیون تومان', 'course.html?c=smart-assistant', False),
-      ('edit', 'دوره‌ی ادیتور پلاس', 'ادیت حرفه‌ای با موبایل، ۳٫۵ میلیون تومان', 'course.html?c=editor-plus', False),
-      ('play', 'نمونه‌کار هنرجوها', 'گالری کارهای هنرجوها، فصل‌به‌فصل', 'student-works.html', False),
-      ('telegram', 'تلگرام · ثبت‌نام و مشاوره', '@hanatrick', TG, False),
-      ('book', 'مجله‌ی هوش مصنوعی', 'آموزش‌ها و مقاله‌های کوتاه', 'blog.html', False),
-      ('brief', 'همکاری با برندها', 'تبلیغ، تولید محتوا و ورکشاپ', 'contact.html', False),
-      ('globe', 'وب‌سایت', 'صفحه‌ی اصلی hana.aistudio', 'index.html', False),
-    ]
+    L = content.load('links.json')
+    rows = []
+    for r in L.get('rows') or []:
+        if r.get('visible') is False: continue
+        c = content.course(r.get('course')) if r.get('kind') == 'course' else None
+        if c:
+            rows.append((r.get('icon') or 'spark', r.get('title') or f"دوره‌ی {c['name']}", r.get('subtitle') or f"{c.get('card_sub', '')}، {c['price']}", f"course.html?c={c['id']}", bool(r.get('highlight'))))
+        else:
+            rows.append((r.get('icon') or 'globe', r.get('title', ''), r.get('subtitle', ''), (r.get('url') or '').replace('{telegram}', TG).replace('{instagram}', IG), bool(r.get('highlight'))))
     rh = ''.join(f'<a class="link-row glass rv{" hot" if hot else ""}" style="--d:{k*0.05+.2:.2f}s" href="{h}"{" target=_blank rel=noopener" if h.startswith("http") else ""}><span class="lr-ic">{icon(ic)}</span><span class="lr-tx"><b>{t}</b><small>{s}</small></span>{icon("arrow","arrow")}</a>' for k,(ic,t,s,h,hot) in enumerate(rows))
     html = head('لینک‌ها | hana.aistudio', 'همه‌ی لینک‌های هانا موسوی: چالش سطح AI، دوره‌ها، تلگرام و مجله.')
     html += f'''<main class="links-page">
  <div class="lp-head rv">
-  <div class="lp-avatar"><div class="ring"></div><svg viewBox="0 0 100 120" fill="none" stroke="url(#gl)" stroke-width="1.2"><circle cx="50" cy="40" r="20"/><path d="M14 118c4-26 19-40 36-40s32 14 36 40"/></svg></div>
-  <span class="ph-tag" style="margin-top:-8px">عکس پروفایل</span>
+{_avatar(L)}
   <h1>هانا موسوی</h1>
   <p class="latin">hana.aistudio</p>
-  <p class="muted lp-bio">آموزش ادیت موبایل و خلق محتوا با هوش مصنوعی</p>
+  <p class="muted lp-bio">{L.get('bio', '')}</p>
   <div class="lp-social"><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{icon('instagram')}</a><a href="{TG}" target="_blank" rel="noopener" aria-label="Telegram">{icon('telegram')}</a></div>
  </div>
  <div class="link-list">{rh}</div>

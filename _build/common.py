@@ -1,6 +1,11 @@
 # Shared partials for the static generator (run: python3 _build/gen.py)
-TG = 'https://t.me/hanatrick'
-IG = 'https://instagram.com/hana.aistudio'
+import content as _content
+TG = _content.site().get('telegram') or 'https://t.me/hanatrick'
+IG = _content.site().get('instagram') or 'https://instagram.com/hana.aistudio'
+
+def _plug(place):
+    s = _content.plugins(place, getattr(_content, 'CURRENT', ''))
+    return s + '\n' if s else ''
 
 def T(s, **kw):
     for k, v in kw.items():
@@ -130,7 +135,7 @@ def head(title, desc, pre='', extra=''):
 <link rel="preload" href="{pre}assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{pre}assets/css/style.css">
 {extra}
-</head>
+{_plug('head')}</head>
 <body>
 {SPRITE}
 <div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
@@ -170,7 +175,7 @@ def scripts(pre='', extra=''):
 <script src="{pre}assets/js/data.js"></script>
 <script src="{pre}assets/js/main.js"></script>
 {extra}
-</body></html>
+{_plug('body')}</body></html>
 '''
 
 PH = lambda t='به‌زودی': f'<span class="ph-tag">{t}</span>'
