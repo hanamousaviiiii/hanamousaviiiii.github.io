@@ -64,6 +64,7 @@ def _shape(m):
     s = m.get('shape') or settings()['tile_shape']
     if s == 'tall': return 'tall'
     if s == 'square': return 'sq'
+    if s == 'portrait': return 'pt'
     return 'tall' if m['kind'] == 'video' else 'sq'
 
 def tile(m, icon, chapter_title):
@@ -79,7 +80,7 @@ def teaser_posters(n=None):
     out = []
     for c in chapters():
         for m in scan(c[0]):
-            if m['poster']: out.append((m['poster'], c[1]))
+            if m['poster'] and m['kind'] == 'video': out.append((m['poster'], c[1]))  # home thumbs carry a play icon: video covers only
     # spread across chapters: alternate
     if len(out) <= n: return out
     if n == 3: return [out[i] for i in (0, len(out) // 2, len(out) - 1)]

@@ -33,13 +33,13 @@
     d.addEventListener('keydown', e => { if (!lb.hidden && e.key === 'Escape') close(); });
   }
   function open(btn) {
-    if (!lb) build(); lastFocus = btn; stage.innerHTML = '';
+    if (!lb) build(); lastFocus = btn; stage.innerHTML = ''; stage.classList.remove('zoom');
     const src = btn.dataset.src;
     if (btn.dataset.lb === 'video') {
       const v = d.createElement('video'); v.controls = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'metadata';
       if (btn.dataset.poster) v.poster = btn.dataset.poster; v.src = src; stage.appendChild(v);
       const p = v.play(); if (p && p.catch) p.catch(() => {});
-    } else { const im = d.createElement('img'); im.src = src; im.alt = btn.getAttribute('aria-label') || ''; stage.appendChild(im); }
+    } else { const im = d.createElement('img'); im.src = src; im.alt = btn.getAttribute('aria-label') || ''; im.title = 'برای دیدن در اندازه‌ی کامل بزنید'; im.addEventListener('click', () => { stage.classList.toggle('zoom'); stage.scrollTop = 0; }); stage.appendChild(im); }
     lb.hidden = false; d.documentElement.classList.add('lb-open');
     requestAnimationFrame(() => lb.classList.add('on')); lb.querySelector('.lb-x').focus();
   }

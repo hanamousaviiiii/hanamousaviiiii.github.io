@@ -176,6 +176,7 @@ collections:
                       - { label: "پیش‌فرض گالری", value: "" }
                       - { label: "عمودی (مثل ریلز)", value: tall }
                       - { label: "مربع", value: square }
+                      - { label: "پرتره (۲:۳، پوستر و اینفوگرافیک)", value: portrait }
                   - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
               - { label: "نام انگلیسی فصل", name: latin, widget: string, required: false }
               - { label: "شماره‌ی رومی (I, II, ...)", name: num, widget: string, required: false }

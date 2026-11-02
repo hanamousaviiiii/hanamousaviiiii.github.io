@@ -46,6 +46,41 @@
           "poster": "/assets/media/students/motion-graphics/02-free-ai-sites.jpg",
           "title": "اینفوگرافیک سه سایت رایگان هوش مصنوعی",
           "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/03-ai-income-map.mp4",
+          "poster": "/assets/media/students/motion-graphics/03-ai-income-map.jpg",
+          "title": "راه‌های درآمد با هوش مصنوعی",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/04-old-photo-revival.mp4",
+          "poster": "/assets/media/students/motion-graphics/04-old-photo-revival.jpg",
+          "title": "عکس قدیمی که جون گرفت",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/05-dental-implant.mp4",
+          "poster": "/assets/media/students/motion-graphics/05-dental-implant.jpg",
+          "title": "ایمپلنت دندان مدرن",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/06-faster-with-ai.mp4",
+          "poster": "/assets/media/students/motion-graphics/06-faster-with-ai.jpg",
+          "title": "جایگاه ویژه با هوش مصنوعی",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/07-dental-veneers.mp4",
+          "poster": "/assets/media/students/motion-graphics/07-dental-veneers.jpg",
+          "title": "لمینت دندان؛ لبخندی که قایمش نمی‌کنی",
+          "student": ""
         }
       ]
     },
@@ -65,7 +100,44 @@
       "num": "V",
       "icon": "image",
       "visible": true,
-      "items": []
+      "items": [
+        {
+          "kind": "img",
+          "file": "/assets/media/students/banners-images/01-smile-care-dental-carousel.webp",
+          "poster": "",
+          "title": "کمپین کاروسل دندانپزشکی کودک «Smile Care»",
+          "student": "",
+          "shape": "square",
+          "visible": true
+        },
+        {
+          "kind": "img",
+          "file": "/assets/media/students/banners-images/02-skincare-clinic-carousel.webp",
+          "poster": "",
+          "title": "کاروسل کلینیک پوست؛ کمپین لک‌های پوستی",
+          "student": "",
+          "shape": "square",
+          "visible": true
+        },
+        {
+          "kind": "img",
+          "file": "/assets/media/students/banners-images/03-content-7-step-infographic.webp",
+          "poster": "",
+          "title": "اینفوگرافیک ساختار ۷ مرحله‌ای محتوا",
+          "student": "",
+          "shape": "portrait",
+          "visible": true
+        },
+        {
+          "kind": "img",
+          "file": "/assets/media/students/banners-images/04-kids-robotics-campaign.webp",
+          "poster": "",
+          "title": "کمپین آموزش رباتیک کودکان با ساختار ۷ مرحله‌ای",
+          "student": "",
+          "shape": "portrait",
+          "visible": true
+        }
+      ]
     },
     {
       "slug": "story-motion",
