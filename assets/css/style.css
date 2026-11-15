@@ -306,6 +306,7 @@ section{position:relative}
 .portrait .ring.r2{width:62%;border-color:rgba(215,38,61,.22)}
 .about .story{color:var(--ink-2);font-size:16.5px}
 .about .story h2{color:#fff}
+.about .story p{margin:22px 0 28px;line-height:2.1;max-width:52ch}
 .about .story .ph-box{padding:22px 24px;margin:22px 0 28px;line-height:2.1}
 .sig{display:flex;gap:10px;flex-wrap:wrap}
 .chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--line);font-size:14px;direction:ltr;transition:background .3s,box-shadow .3s}

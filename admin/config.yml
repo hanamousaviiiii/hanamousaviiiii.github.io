@@ -119,6 +119,7 @@ collections:
             collapsed: true
             fields:
               - { label: "عکس هانا", name: photo, widget: image, required: false, choose_url: false }
+              - { label: "متن جایگزین عکس", name: alt, widget: string, required: false, hint: "توضیح کوتاه عکس برای دسترسی و سئو" }
               - { label: "متن داستان (برای پاراگراف جدید یک خط خالی بگذارید)", name: story, widget: text, required: false }
           - label: "سؤالات متداول پایین صفحه"
             name: faqs

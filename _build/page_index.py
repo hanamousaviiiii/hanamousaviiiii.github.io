@@ -57,8 +57,10 @@ def build():
 
     marq = ''.join(f'<span>{w}</span>' for w in H.get('marquee', []))
 
-    photo = content.media_path(H.get('about', {}).get('photo')) or media.about_photo()
-    inner = f'<img src="{photo}" alt="هانا موسوی" loading="lazy" decoding="async">' if photo else f'<svg class="silhouette" viewBox="0 0 100 120" fill="none" stroke="url(#gl)" stroke-width=".8"><circle cx="50" cy="38" r="20"/><path d="M12 118c4-26 20-40 38-40s34 14 38 40"/></svg>{PH('عکس حرفه‌ای هانا')}'
+    about = H.get('about', {})
+    photo = content.media_path(about.get('photo')) or media.about_photo()
+    alt = (about.get('alt') or 'هانا موسوی، مدرس هوش مصنوعی و تولید محتوا').replace('"', '&quot;')
+    inner = f'<img src="{photo}" alt="{alt}" width="800" height="1067" loading="lazy" decoding="async">' if photo else f'<svg class="silhouette" viewBox="0 0 100 120" fill="none" stroke="url(#gl)" stroke-width=".8"><circle cx="50" cy="38" r="20"/><path d="M12 118c4-26 20-40 38-40s34 14 38 40"/></svg>{PH('عکس حرفه‌ای هانا')}'
     portrait = f'<div class="pf-halo" aria-hidden="true"></div><div class="pf-orbit" aria-hidden="true"><i></i></div><div class="portrait glass" data-tilt="5"><div class="pf-photo">{inner}</div></div><div class="pf-badge glass"><b>hana.aistudio</b><span>مدرس تولید محتوا با AI</span></div>'
     html = head('هانا موسوی | hana.aistudio — خلق محتوا با هوش مصنوعی',
                 'آموزش ادیت حرفه‌ای با موبایل و تولید تصویر، صدا و ویدیو با هوش مصنوعی. دوره‌های دستیار هوشمند و ادیتور پلاس.',
