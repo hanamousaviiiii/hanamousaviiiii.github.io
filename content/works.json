@@ -182,10 +182,34 @@
       ]
     },
     {
+      "slug": "ai-editing",
+      "title": "تدوین با هوش مصنوعی",
+      "latin": "AI Editing",
+      "num": "IX",
+      "icon": "edit",
+      "visible": true,
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/ai-editing/01-body-filler-aftercare.mp4",
+          "poster": "/assets/media/students/ai-editing/01-body-filler-aftercare.jpg",
+          "title": "فیلر بادی؛ واکنش بدن و بهترین نتیجه",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/ai-editing/02-editing-as-emotion.mp4",
+          "poster": "/assets/media/students/ai-editing/02-editing-as-emotion.jpg",
+          "title": "تدوین؛ هنر انتقال حس",
+          "student": ""
+        }
+      ]
+    },
+    {
       "slug": "music-video",
       "title": "موزیک ویدیو",
       "latin": "Music Video",
-      "num": "IX",
+      "num": "X",
       "icon": "music",
       "visible": false,
       "items": []
