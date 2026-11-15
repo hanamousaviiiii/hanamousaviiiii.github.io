@@ -14,7 +14,50 @@
       "num": "I",
       "icon": "spark",
       "visible": true,
-      "items": []
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/animation/01-silent-heroes-father.mp4",
+          "poster": "/assets/media/students/animation/01-silent-heroes-father.jpg",
+          "title": "اگه هنوز کنارت هست، بغلش کن",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/animation/02-kitchen-mouse.mp4",
+          "poster": "/assets/media/students/animation/02-kitchen-mouse.jpg",
+          "title": "آشوب شیرین در آشپزخانه",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/animation/03-snowy-bicycle-ride.mp4",
+          "poster": "/assets/media/students/animation/03-snowy-bicycle-ride.jpg",
+          "title": "دوچرخه‌سواری عاشقانه در برف",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/animation/04-cafe-cat.mp4",
+          "poster": "/assets/media/students/animation/04-cafe-cat.jpg",
+          "title": "چای عصر با گربه در کافه",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/animation/05-mummy-and-witch.mp4",
+          "poster": "/assets/media/students/animation/05-mummy-and-witch.jpg",
+          "title": "مومیایی و جادوگر در مقبره",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/animation/06-clumsy-chef.mp4",
+          "poster": "/assets/media/students/animation/06-clumsy-chef.jpg",
+          "title": "آشپز تازه‌کار و شورش تخم‌مرغ",
+          "student": ""
+        }
+      ]
     },
     {
       "slug": "camera-shots",
@@ -81,6 +124,20 @@
           "poster": "/assets/media/students/motion-graphics/07-dental-veneers.jpg",
           "title": "لمینت دندان؛ لبخندی که قایمش نمی‌کنی",
           "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/08-on-time-edit.mp4",
+          "poster": "/assets/media/students/motion-graphics/08-on-time-edit.jpg",
+          "title": "میانبر ادیت؛ به‌موقع بهتر از بی‌نقصِ دیر",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/motion-graphics/09-samaneh-intro.mp4",
+          "poster": "/assets/media/students/motion-graphics/09-samaneh-intro.jpg",
+          "title": "این منم، سمانه؛ مسیر کمتر از سه ماه",
+          "student": ""
         }
       ]
     },
@@ -91,7 +148,22 @@
       "num": "IV",
       "icon": "smile",
       "visible": true,
-      "items": []
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/beauty-dental/01-nose-profile.mp4",
+          "poster": "/assets/media/students/beauty-dental/01-nose-profile.jpg",
+          "title": "طراحی فرم بینی",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/beauty-dental/02-real-smile.mp4",
+          "poster": "/assets/media/students/beauty-dental/02-real-smile.jpg",
+          "title": "لبخند؛ امضای اعتمادبه‌نفس",
+          "student": ""
+        }
+      ]
     },
     {
       "slug": "banners-images",
@@ -155,7 +227,15 @@
       "num": "VII",
       "icon": "film",
       "visible": true,
-      "items": []
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/series/01-suited-gentleman.mp4",
+          "poster": "/assets/media/students/series/01-suited-gentleman.jpg",
+          "title": "لبخند در کت‌وشلوار مشکی",
+          "student": ""
+        }
+      ]
     },
     {
       "slug": "product-ads",
@@ -211,8 +291,47 @@
       "latin": "Music Video",
       "num": "X",
       "icon": "music",
-      "visible": false,
-      "items": []
+      "visible": true,
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/music-video/01-sunset-love.mp4",
+          "poster": "/assets/media/students/music-video/01-sunset-love.jpg",
+          "title": "عشق در غروب ساحل",
+          "student": ""
+        }
+      ]
+    },
+    {
+      "slug": "real-estate",
+      "title": "ساخت ویدیو حوزه املاک",
+      "latin": "Real Estate",
+      "num": "XI",
+      "icon": "brief",
+      "visible": true,
+      "items": [
+        {
+          "kind": "video",
+          "file": "/assets/media/students/real-estate/01-iranian-living-room.mp4",
+          "poster": "/assets/media/students/real-estate/01-iranian-living-room.jpg",
+          "title": "از فضای خام تا نشیمن ایرانی",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/real-estate/02-plan-to-house.mp4",
+          "poster": "/assets/media/students/real-estate/02-plan-to-house.jpg",
+          "title": "از پلان تا خانه‌ی حیاط‌دار",
+          "student": ""
+        },
+        {
+          "kind": "video",
+          "file": "/assets/media/students/real-estate/03-plan-to-villa.mp4",
+          "poster": "/assets/media/students/real-estate/03-plan-to-villa.jpg",
+          "title": "از نقشه تا عمارت شبانه",
+          "student": ""
+        }
+      ]
     }
   ]
 }
