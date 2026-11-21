@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>hana.aistudio</title>
+  <link>https://hanamousaviiiii.github.io/blog.html</link>
+  <description>مجله‌ی آموزش هوش مصنوعی و تولید محتوا، نوشته‌ی هانا موسوی.</description>
+  <language>fa-IR</language>
+  <lastBuildDate>Sat, 21 Nov 2026 11:11:09 +0000</lastBuildDate>
+  <atom:link href="https://hanamousaviiiii.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>برای هر کار محتوا، کدام ابزار هوش مصنوعی را انتخاب کنی؟</title>
+    <link>https://hanamousaviiiii.github.io/articles/choose-ai-tool-for-each-task.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/choose-ai-tool-for-each-task.html</guid>
+    <description>نقشه‌ای کاربردی برای ادمین‌ها و تولیدکننده‌های محتوا: برای نوشتن، تحقیق، تصویر، ویدیو، صدا و برنامه‌ریزی کارها، کدام ابزار هوش مصنوعی را انتخاب کنی و از ایران به کدام‌ها با فیلترشکن نیاز داری.</description>
+    <pubDate>Thu, 19 Nov 2026 15:27:36 +0330</pubDate>
+    <category>ابزارها</category>
+  </item>
+  <item>
+    <title>اخبار هوش مصنوعی هفته: موزیک‌ویدیو با Suno، تصویر 8K در Kling و آواتار طبیعی‌تر HeyGen</title>
+    <link>https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-18.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-18.html</guid>
+    <description>خبرهای مهم هوش مصنوعی ۱۱ تا ۱۸ نوامبر برای تولیدکننده‌های محتوا: Suno Visuals، Kling Image 4.0، MAI Image 2.7 مایکروسافت، HeyGen Avatar 6، GPT-6.2 و حالت Tasks در Gemini.</description>
+    <pubDate>Wed, 18 Nov 2026 11:46:56 +0330</pubDate>
+    <category>اخبار</category>
+  </item>
+  <item>
+    <title>عکس محصول با هوش مصنوعی: راهنمای فروشگاه‌های آنلاین</title>
+    <link>https://hanamousaviiiii.github.io/articles/ai-product-photos.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/ai-product-photos.html</guid>
+    <description>یاد بگیر چطور با گوشی و هوش مصنوعی عکس محصول تمیز و حرفه‌ای بسازی؛ از عکس پایه و پرامپت صحنه تا اشتباه‌هایی که اعتماد مشتری را از بین می‌برد.</description>
+    <pubDate>Sun, 15 Nov 2026 11:45:37 +0330</pubDate>
+    <category>تصویر</category>
+  </item>
+  <item>
+    <title>اخبار هوش مصنوعی هفته: GIF در ChatGPT، ویدیوی ۱۵ ثانیه‌ای Gemini و افکت‌ساز اینستاگرام</title>
+    <link>https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-11.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-11.html</guid>
+    <description>مرور خبرهای مهم هوش مصنوعی این هفته برای تولیدکننده‌های محتوا: Images 2.6 در ChatGPT، Gemini Omni 1.2، Seedream 5.5 در CapCut، Effect Builder اینستاگرام و Adobe Firefly.</description>
+    <pubDate>Wed, 11 Nov 2026 11:49:58 +0330</pubDate>
+    <category>اخبار</category>
+  </item>
+  <item>
+    <title>سناریوی ریلز با هوش مصنوعی: از قلاب تا دعوت به اقدام</title>
+    <link>https://hanamousaviiiii.github.io/articles/reels-script-with-ai.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/reels-script-with-ai.html</guid>
+    <description>راهنمای عملی نوشتن سناریوی ریلز با هوش مصنوعی؛ از قلاب چندثانیه‌ی اول تا دعوت به اقدام، با قالب آماده برای ادمین‌ها و فروشگاه‌های آنلاین.</description>
+    <pubDate>Sun, 08 Nov 2026 11:39:23 +0330</pubDate>
+    <category>ریلز</category>
+  </item>
+  <item>
+    <title>اخبار هوش مصنوعی هفته: ویدیو داخل ChatGPT، تدوین متنی CapCut و آواتار متن‌باز</title>
+    <link>https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-04.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-04.html</guid>
+    <description>مهم‌ترین خبرهای هوش مصنوعی هفته برای تولیدکننده‌های محتوا: افزونه‌ی Synthesia در ChatGPT، ابزارهای جدید CapCut، ویرایش فایل در Gemini و مدل‌های متن‌باز تازه.</description>
+    <pubDate>Wed, 04 Nov 2026 11:34:43 +0330</pubDate>
+    <category>اخبار</category>
+  </item>
+  <item>
+    <title>ساخت ویدیو با هوش مصنوعی: مفاهیم پایه برای شروع</title>
+    <link>https://hanamousaviiiii.github.io/articles/ai-video-basics.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/ai-video-basics.html</guid>
+    <description>آشنایی با ساخت ویدیو با هوش مصنوعی: متن‌به‌ویدیو، تصویر‌به‌ویدیو و نکات ساخت کلیپ‌های طبیعی‌تر.</description>
+    <pubDate>Sun, 01 Nov 2026 04:12:22 +0330</pubDate>
+    <category>ویدیو</category>
+  </item>
+  <item>
+    <title>هنر پرامپت‌نویسی: چطور از AI جواب بهتر بگیریم؟</title>
+    <link>https://hanamousaviiiii.github.io/articles/better-prompts.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/better-prompts.html</guid>
+    <description>فرمول یک پرامپت خوب، اشتباه‌های رایج و نمونه‌های کاربردی برای گرفتن جواب بهتر از هوش مصنوعی.</description>
+    <pubDate>Sun, 01 Nov 2026 04:12:22 +0330</pubDate>
+    <category>پرامپت</category>
+  </item>
+  <item>
+    <title>شروع تولید محتوا با هوش مصنوعی: از کجا شروع کنم؟</title>
+    <link>https://hanamousaviiiii.github.io/articles/start-ai-content.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/start-ai-content.html</guid>
+    <description>نقشه‌ی راه ساده برای استفاده از ابزارهای هوش مصنوعی در تولید محتوای شبکه‌های اجتماعی.</description>
+    <pubDate>Sun, 01 Nov 2026 04:12:22 +0330</pubDate>
+    <category>راهنمای شروع</category>
+  </item>
+</channel>
+</rss>

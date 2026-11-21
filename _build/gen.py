@@ -3,7 +3,7 @@
 import sys, os, glob, json
 sys.path.insert(0, os.path.dirname(__file__))
 import content, security
-import page_index, page_course, page_misc, page_challenge, page_faq, page_works
+import page_index, page_course, page_misc, page_challenge, page_faq, page_works, feeds
 OUT = os.path.join(os.path.dirname(__file__), '..')
 
 def w(p, build, *a):
@@ -46,3 +46,4 @@ for i, f in enumerate(page_faq.FAQ):
 clean('faq', [f[0] for f in page_faq.FAQ])
 w('student-works.html', page_works.build)
 data_js()
+feeds.write()
