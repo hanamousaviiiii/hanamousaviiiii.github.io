@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'none'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>تحلیل ویدیو با Gemini: ریلزت را به هوش مصنوعی نشان بده | هانا موسوی</title>
+<meta name="description" content="آموزش ساده‌ی دادن ویدیو به Gemini برای نقد قلاب، ساخت کپشن و مقایسه‌ی ریلزها؛ همراه با محدودیت‌های رسمی، نمونه درخواست و ساخت دستیار ثابت با Gem.">
+<meta name="theme-color" content="#05060b">
+<meta property="og:title" content="تحلیل ویدیو با Gemini: ریلزت را به هوش مصنوعی نشان بده | هانا موسوی">
+<meta property="og:description" content="آموزش ساده‌ی دادن ویدیو به Gemini برای نقد قلاب، ساخت کپشن و مقایسه‌ی ریلزها؛ همراه با محدودیت‌های رسمی، نمونه درخواست و ساخت دستیار ثابت با Gem.">
+<link rel="icon" href="../assets/img/mark.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+<svg class="sprite" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+ <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fe0ff"/><stop offset=".45" stop-color="#cfd8ff"/><stop offset="1" stop-color="#ff5a6e"/></linearGradient>
+ <linearGradient id="gl2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4CC9F0"/><stop offset="1" stop-color="#D7263D"/></linearGradient>
+ <radialGradient id="gcore" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".4" stop-color="#ff5a6e" stop-opacity=".35"/><stop offset="1" stop-color="#2F6BFF" stop-opacity="0"/></radialGradient>
+ <symbol id="frame" viewBox="0 0 250 370">
+  <g fill="none" stroke="url(#gl)" stroke-linecap="round">
+   <rect x="9" y="9" width="232" height="352" rx="14" stroke-width=".9" opacity=".9"/>
+   <rect x="17" y="17" width="216" height="336" rx="9" stroke-width=".5" opacity=".55"/>
+   <!-- ornate corners (top-left / bottom-right) -->
+   <g id="corner" stroke-width=".8">
+     <path d="M17 62C17 36 36 17 62 17"/>
+     <path d="M25 70V40q0-15 15-15h30" opacity=".7"/>
+     <path d="M33 33l8 8M41 33l-8 8" opacity=".6"/>
+     <path d="M37 27l6 6-6 6-6-6z"/>
+     <circle cx="70" cy="25" r="1.6" fill="url(#gl)" stroke="none"/><circle cx="25" cy="70" r="1.6" fill="url(#gl)" stroke="none"/>
+   </g>
+   <use href="#corner" transform="rotate(180 125 185)"/>
+   <!-- top & bottom crest -->
+   <g id="crest" stroke-width=".7">
+     <path d="M92 17c12 0 20 4 33 14 13-10 21-14 33-14" />
+     <path d="M125 22l5 5-5 5-5-5z" fill="rgba(255,90,110,.35)"/>
+     <path d="M104 25h-14M146 25h14" opacity=".5"/>
+   </g>
+   <use href="#crest" transform="rotate(180 125 185)"/>
+   <!-- side beads -->
+   <g opacity=".6" stroke-width=".6"><path d="M17 160v50M233 160v50"/><circle cx="17" cy="185" r="3"/><circle cx="233" cy="185" r="3"/></g>
+   <!-- emblem halo rings -->
+   <circle cx="125" cy="152" r="78" stroke-width=".5" opacity=".35" stroke-dasharray="1 5"/>
+   <circle cx="125" cy="152" r="86" stroke-width=".4" opacity=".2"/>
+   <!-- title cartouche -->
+   <path d="M46 268h158M46 316h158" stroke-width=".5" opacity=".45"/>
+   <path d="M46 268l-8 24 8 24M204 268l8 24-8 24" stroke-width=".6" opacity=".55"/>
+  </g>
+ </symbol>
+ <symbol id="emb-editor" viewBox="0 0 120 120">
+  <g fill="none" stroke="url(#gl)" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="60" cy="60" r="56" stroke-width="5" stroke-dasharray=".8 6.2" opacity=".8" class="spin"/>
+   <circle cx="60" cy="60" r="47" stroke-width="1"/>
+   <circle cx="60" cy="60" r="43" stroke-width=".5" opacity=".5"/>
+   <path d="M60 13v10M60 97v10M13 60h10M97 60h10" stroke-width="1"/>
+   <rect x="34" y="34" width="52" height="52" rx="3" transform="rotate(45 60 60)" stroke-width="1"/>
+   <!-- film frame -->
+   <rect x="40" y="44" width="40" height="32" rx="4" stroke-width="1.2"/>
+   <path d="M40 50h40M40 70h40" stroke-width=".7" opacity=".7"/>
+   <path d="M45 47h2M51 47h2M57 47h2M63 47h2M69 47h2M75 47h0M45 73h2M51 73h2M57 73h2M63 73h2M69 73h2" stroke-width="1.2" opacity=".8"/>
+   <path d="M55 54v12l10-6z" fill="url(#gl)" stroke-width="1"/>
+   <circle cx="60" cy="60" r="3" fill="#fff" stroke="none" opacity=".0"/>
+  </g>
+ </symbol>
+ <symbol id="emb-assistant" viewBox="0 0 120 120">
+  <g fill="none" stroke="url(#gl)" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="60" cy="60" r="56" stroke-width="5" stroke-dasharray=".8 6.2" opacity=".8" class="spin"/>
+   <circle cx="60" cy="60" r="47" stroke-width="1"/>
+   <path d="M60 18 70 50 102 60 70 70 60 102 50 70 18 60 50 50z" stroke-width="1"/>
+   <path d="M60 30 66 54 90 60 66 66 60 90 54 66 30 60 54 54z" stroke-width=".5" opacity=".5" transform="rotate(45 60 60)"/>
+   <!-- eye -->
+   <path d="M38 60c8-10 16-14 22-14s14 4 22 14c-8 10-16 14-22 14s-14-4-22-14z" stroke-width="1.2"/>
+   <circle cx="60" cy="60" r="8" stroke-width="1.2"/>
+   <circle cx="60" cy="60" r="3.2" fill="url(#gl)" stroke="none"/>
+   <!-- neural nodes -->
+   <g fill="url(#gl)" stroke="none"><circle cx="60" cy="18" r="2.2"/><circle cx="102" cy="60" r="2.2"/><circle cx="60" cy="102" r="2.2"/><circle cx="18" cy="60" r="2.2"/></g>
+  </g>
+ </symbol>
+ <symbol id="mark" viewBox="0 0 40 40">
+  <g fill="none" stroke-linecap="round">
+   <circle cx="20" cy="20" r="17" stroke="url(#gl)" stroke-width="1.2"/>
+   <path d="M13 11v18M27 11v18M13 20h14" stroke="#fff" stroke-width="2.2"/>
+   <circle cx="20" cy="20" r="2.4" fill="#ff5a6e"/>
+  </g>
+ </symbol>
+</defs></svg>
+<div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="nav"><div class="nav-pill glass">
+  <a class="brand" href="../index.html" aria-label="hana.aistudio — خانه"><svg class="brand-mark"><use href="#mark"/></svg><span>hana<b>.</b>aistudio</span></a>
+  <nav class="nav-links" aria-label="منوی اصلی"><a href="../index.html#courses">دوره‌ها</a><a href="../challenge.html">چالش</a><a href="../student-works.html">نمونه‌کارها</a><a href="../ai-faq.html">سؤالات AI</a><a href="../blog.html" aria-current=page>مجله</a><a href="../links.html">لینک‌ها</a><a href="../contact.html">همکاری</a></nav>
+  <div class="nav-cta"><a class="btn btn-primary btn-sm mag" href="../challenge.html">شروع چالش</a><button class="menu-btn" aria-label="منو" aria-expanded="false"><i></i></button></div>
+</div></header>
+<nav class="sheet glass" aria-label="منوی موبایل"><a href="../index.html">خانه<small>Home</small></a><a href="../index.html#courses">دوره‌ها<small>Courses</small></a><a href="../challenge.html">چالش<small>Challenge</small></a><a href="../student-works.html">نمونه‌کارها<small>Works</small></a><a href="../ai-faq.html">سؤالات AI<small>AI FAQ</small></a><a href="../blog.html">مجله<small>Journal</small></a><a href="../links.html">لینک‌ها<small>Links</small></a><a href="../contact.html">همکاری<small>Collab</small></a></nav>
+<main><article class="reading">
+ <header class="art-head"><div class="wrap narrow">
+  <div class="crumbs rv"><a href="../index.html">خانه</a><span>/</span><a href="../blog.html">مجله</a><span>/</span><span>ابزارها</span></div>
+  <h1 class="h-lg rv">تحلیل ویدیو با Gemini: ریلزت را به هوش مصنوعی نشان بده</h1>
+  <div class="byline rv"><span class="av"><svg viewBox="0 0 40 40"><use href="#mark"/></svg></span><span><b>هانا موسوی</b><small>۶ دقیقه مطالعه</small></span></div>
+ </div></header>
+ <div class="wrap narrow"><div class="art-cover rv"><div class="art a3"></div><div class="gridlines"></div></div></div>
+ <div class="wrap narrow prose"><p>خیلی وقت‌ها بعد از انتشار یک ریلز، فقط عدد بازدید را می‌بینیم و نمی‌دانیم دقیقاً کجای ویدیو مخاطب را از دست دادیم. حالا می‌شود خود ویدیو را به هوش مصنوعی نشان داد و مثل یک همکار دقیق، نظرش را درباره‌ی شروع، ریتم، متن روی تصویر و دعوت به اقدام پرسید. Gemini گوگل یکی از ابزارهایی است که این کار را ساده کرده و در این مطلب یاد می‌گیری چطور از آن برای تحلیل محتوای خودت استفاده کنی.</p>
+<aside class="callout glass"><b>نکته برای کاربران ایران:</b> سرویس Gemini از ایران در دسترس نیست و برای استفاده به فیلترشکن نیاز داری. خرید اشتراک Google AI Pro هم پرداخت بین‌المللی می‌خواهد.</aside>
+<h2>Gemini از ویدیو چه چیزی می‌فهمد؟</h2>
+<p>وقتی فایل ویدیو را در Gemini بارگذاری می‌کنی، هم تصویر و هم صدا را بررسی می‌کند. یعنی می‌تواند بگوید در ثانیه‌های اول چه چیزی دیده می‌شود، چه جمله‌ای گفته شده، متن روی تصویر کجا آمده و ویدیو با چه پیامی تمام می‌شود. از او می‌توانی خلاصه، متن پیاده‌شده‌ی گفتار، فهرست صحنه‌ها با زمان تقریبی، یا نقد ساختار ویدیو بخواهی.</p>
+<p>برای ادمین پیج و صاحب فروشگاه آنلاین، کاربرد اصلی همین است: به‌جای حدس زدن، یک نگاه بیرونی و منظم به ویدیوی خودت داشته باشی.</p>
+<h2>دو راه برای دادن ویدیو به Gemini</h2>
+<p><b>۱. بارگذاری فایل:</b> در اپ موبایل یا سایت gemini.google.com، کنار کادر نوشتن روی گزینه‌ی افزودن فایل بزن و ویدیو را از گالری، فایل‌های گوشی یا Google Drive انتخاب کن، بعد سؤالت را بنویس. طبق راهنمای رسمی گوگل، هر ویدیو می‌تواند تا ۲ گیگابایت باشد؛ مجموع زمان ویدیوها در حساب رایگان تا ۵ دقیقه است و با اشتراک Google AI Pro یا Ultra به یک ساعت می‌رسد. برای ریلزهای کوتاه، حتی حساب رایگان هم کافی است.</p>
+<p><b>۲. لینک یوتیوب:</b> اگر ویدیو در یوتیوب عمومی است، کافی است لینکش را در گفتگو بگذاری و سؤال بپرسی. برای این کار باید وارد حساب گوگل شده باشی و تنظیم Activity روشن باشد. یادت باشد در این حالت تحلیل بیشتر بر پایه‌ی گفتار و زیرنویس ویدیوست، پس برای نقد تصویر و قاب‌بندی، بارگذاری مستقیم فایل نتیجه‌ی دقیق‌تری می‌دهد.</p>
+<p>برای ویدیوهای اینستاگرام، بهتر است فایل اصلی ویدیوی خودت را از گالری بارگذاری کنی، نه لینک پست را.</p>
+<h2>سه کاربرد عملی برای تولیدکننده‌ی محتوا</h2>
+<ul><li><b>نقد قلاب:</b> از Gemini بپرس آیا در سه ثانیه‌ی اول دلیل روشنی برای ماندن مخاطب وجود دارد و چه جایگزینی پیشنهاد می‌کند.</li><li><b>ساخت کپشن و زیرنویس:</b> متن گفتار ویدیو را بگیر، اشتباه‌هایش را خودت اصلاح کن و از روی آن کپشن و متن روی تصویر بنویس.</li><li><b>مقایسه‌ی دو ویدیو:</b> دو ریلز خودت را، یکی پربازدید و یکی کم‌بازدید، در یک گفتگو بارگذاری کن و بپرس تفاوت اصلی شروع و ریتم آن‌ها چیست.</li></ul>
+<h3>نمونه‌ی یک درخواست ساده</h3>
+<pre dir="auto">این ریلز ۳۰ ثانیه‌ای مربوط به پیج فروش لوازم آرایشی است و مخاطبش زن‌های ۲۵ تا ۴۰ ساله‌اند. ویدیو را ببین و جداگانه بگو: ۱. سه ثانیه‌ی اول چه حسی منتقل می‌کند؟ ۲. کجای ویدیو احتمالاً مخاطب حوصله‌اش سر می‌رود؟ ۳. متن روی تصویر خوانا و کافی است؟ ۴. دعوت به اقدام روشن است؟ در پایان دو پیشنهاد مشخص برای نسخه‌ی بعدی بده. جواب را کوتاه و فارسی بنویس.</pre>
+<h2>یک دستیار ثابت با Gem بساز</h2>
+<p>اگر هر هفته چند ویدیو را بررسی می‌کنی، لازم نیست هر بار همان توضیح‌ها را تکرار کنی. در Gemini می‌توانی یک Gem بسازی؛ یعنی دستیاری با دستورالعمل ثابت که مخاطب پیج، لحن برند و معیارهای نقد تو را از قبل می‌داند. بعد هر بار فقط ویدیوی جدید را در همان Gem بارگذاری می‌کنی و یک گزارش یکدست می‌گیری. این اولین قدم برای کار با دستیارهای هوشمندی است که بخشی از روال کاری‌ات را به عهده می‌گیرند.</p>
+<h2>چند نکته قبل از شروع</h2>
+<ul><li><b>خروجی را چک کن:</b> زمان‌بندی‌ها و جزئیات گاهی دقیق نیستند. قبل از تصمیم، خودت به همان لحظه از ویدیو برگرد.</li><li><b>حریم خصوصی را جدی بگیر:</b> ویدیویی که چهره یا اطلاعات مشتری در آن هست، بدون رضایت او بارگذاری نکن.</li><li><b>سؤال مشخص بپرس:</b> «نظرت چیه؟» جواب کلی می‌گیرد؛ «قلاب این ویدیو را از ۱ تا ۱۰ نمره بده و دلیلش را بگو» جواب کاربردی.</li><li><b>تصمیم نهایی با توست:</b> هوش مصنوعی الگوهای کلی را می‌بیند، ولی مخاطب پیجت را تو بهتر از هر ابزاری می‌شناسی.</li></ul>
+<h2>جمع‌بندی</h2>
+<p>تحلیل ویدیو با Gemini یعنی قبل و بعد از انتشار، یک نگاه دوم و بی‌طرف روی کارت داشته باشی. امروز یکی از ریلزهای قبلی‌ات را بردار، با درخواست بالا بررسی کن و فقط یکی از پیشنهادها را در ویدیوی بعدی اجرا کن؛ همین تغییرهای کوچک و پیوسته است که کیفیت پیج را بالا می‌برد.</p>
+<p>اگر می‌خواهی کار با ابزارهای هوش مصنوعی، پرامپت‌نویسی و تولید محتوا را منظم و عملی یاد بگیری، دوره‌ی <a href="../course.html?c=smart-assistant">دستیار هوشمند</a> برای همین مسیر طراحی شده. برای تدوین تمیزتر روی موبایل هم دوره‌ی <a href="../course.html?c=editor-plus">ادیتور پلاس</a> را داریم. می‌توانی سطح فعلی‌ات را با <a href="../challenge.html">چالش سایت</a> بسنجی و برای آموزش‌های بیشتر به <a href="https://t.me/hanatrick" target="_blank" rel="noopener noreferrer">کانال تلگرام</a> سر بزنی.</p>
+<p>منبع: <a href="https://support.google.com/gemini/answer/14903178" target="_blank" rel="noopener noreferrer">راهنمای رسمی بارگذاری فایل در Gemini</a> و <a href="https://support.google.com/gemini/answer/16622858" target="_blank" rel="noopener noreferrer">راهنمای یوتیوب در Gemini</a></p></div>
+ <div class="wrap narrow">
+  <div class="final glass" style="padding:44px 26px;margin-top:60px"><div class="orb o1"></div><div class="orb o2"></div>
+   <h2 class="h-md" style="margin-bottom:12px">می‌خوای این‌ها رو قدم‌به‌قدم و عملی یاد بگیری؟</h2>
+   <p class="muted" style="margin:0 0 24px">اول سطحت رو با چالش بسنج، یا برای اطلاعات دوره‌ها در تلگرام پیام بده.</p>
+   <div class="cta-row" style="justify-content:center"><a class="btn btn-primary" href="../challenge.html">شروع چالش <svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="btn btn-glass" href="https://t.me/hanatrick" target="_blank" rel="noopener noreferrer"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.6 2.8 10.9c-.8.3-.8 1.4 0 1.7l4.6 1.6 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6L22.9 5c.2-.9-.6-1.7-1.4-1.4ZM7.6 14.2l11-7.4-8.6 8.4"/></svg> تلگرام</a></div>
+  </div>
+  <h3 style="margin:60px 0 16px;font-size:18px">مقاله‌های دیگر</h3><div class="link-list"><a class="link-row glass" href="start-ai-content.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>شروع تولید محتوا با هوش مصنوعی: از کجا شروع کنم؟</b><small>۶ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="better-prompts.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>هنر پرامپت‌نویسی: چطور از AI جواب بهتر بگیریم؟</b><small>۷ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="ai-video-basics.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>ساخت ویدیو با هوش مصنوعی: مفاهیم پایه برای شروع</b><small>۷ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="ai-news-week-2026-11-04.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>اخبار هوش مصنوعی هفته: ویدیو داخل ChatGPT، تدوین متنی CapCut و آواتار متن‌باز</b><small>۶ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="reels-script-with-ai.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>سناریوی ریلز با هوش مصنوعی: از قلاب تا دعوت به اقدام</b><small>۷ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="ai-news-week-2026-11-11.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>اخبار هوش مصنوعی هفته: GIF در ChatGPT، ویدیوی ۱۵ ثانیه‌ای Gemini و افکت‌ساز اینستاگرام</b><small>۶ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="ai-product-photos.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>عکس محصول با هوش مصنوعی: راهنمای فروشگاه‌های آنلاین</b><small>۷ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="ai-news-week-2026-11-18.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>اخبار هوش مصنوعی هفته: موزیک‌ویدیو با Suno، تصویر 8K در Kling و آواتار طبیعی‌تر HeyGen</b><small>۶ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="link-row glass" href="choose-ai-tool-for-each-task.html"><span class="lr-ic"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span><span class="lr-tx"><b>برای هر کار محتوا، کدام ابزار هوش مصنوعی را انتخاب کنی؟</b><small>۷ دقیقه مطالعه</small></span><svg class="i arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+ </div>
+</article></main><footer>
+ <div class="wrap">
+  <div class="foot">
+   <div><a class="brand" href="../index.html" style="padding:0;margin-bottom:14px;display:inline-flex"><svg class="brand-mark"><use href="#mark"/></svg><span>hana<b>.</b>aistudio</span></a>
+    <p>آموزش ادیت موبایل و خلق محتوا با هوش مصنوعی، توسط هانا موسوی.</p></div>
+   <div><h4>صفحه‌ها</h4><a href="../index.html#courses">دوره‌ها</a><a href="../challenge.html">چالش سطح AI</a><a href="../student-works.html">نمونه‌کار هنرجوها</a><a href="../ai-faq.html">سؤالات پرتکرار AI</a><a href="../blog.html">مجله</a><a href="../contact.html">همکاری با برندها</a></div>
+   <div><h4>ارتباط</h4><a href="https://instagram.com/hana.aistudio" target="_blank" rel="noopener noreferrer">Instagram · hana.aistudio</a><a href="https://t.me/hanatrick" target="_blank" rel="noopener noreferrer">Telegram · hanatrick</a><a href="../links.html">همه‌ی لینک‌ها</a></div>
+  </div>
+  <div class="big-word" aria-hidden="true">hana.aistudio</div>
+  <div class="foot-bottom"><span>© <span data-year></span> hana.aistudio · تمام حقوق محفوظ است.</span><span class="latin" style="font-size:11px">Crafted with intelligence</span></div>
+ </div>
+</footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body></html>
