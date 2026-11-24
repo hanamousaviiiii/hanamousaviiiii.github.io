@@ -144,6 +144,27 @@ def write_api(rows, built):
         })
 
     site = content.site()
+    courses_out = []
+    for c in content.courses(True):
+        chs = []
+        for i, ch in enumerate(c.get('chapters') or [], 1):
+            slug = ch.get('slug') or ''
+            chs.append({
+                'slug': slug,
+                'num': i,
+                'title': ch.get('title') or '',
+                'summary': ch.get('summary') or '',
+                'outcomes': ch.get('outcomes') or [],
+                'path': f'/chapters/{slug}.html' if slug else '',
+                'href': _abs(f'chapters/{slug}.html') if slug else '',
+            })
+        courses_out.append({
+            'id': c['id'],
+            'name': c['name'],
+            'path': f"/courses/{c['id']}.html",
+            'href': _abs(f"courses/{c['id']}.html"),
+            'chapters': chs,
+        })
     payload = {
         'generated': built.isoformat(),
         'site': {
@@ -155,6 +176,7 @@ def write_api(rows, built):
             'telegram': site.get('telegram') or '',
         },
         'articles': articles,
+        'courses': courses_out,
         'works': {
             'settings': {
                 'tile_shape': settings.get('tile_shape') or 'auto',

@@ -75,7 +75,7 @@ def links():
         if r.get('visible') is False: continue
         c = content.course(r.get('course')) if r.get('kind') == 'course' else None
         if c:
-            rows.append((r.get('icon') or 'spark', r.get('title') or f"دوره‌ی {c['name']}", r.get('subtitle') or f"{c.get('card_sub', '')}، {c['price']}", f"course.html?c={c['id']}", bool(r.get('highlight'))))
+            rows.append((r.get('icon') or 'spark', r.get('title') or f"دوره‌ی {c['name']}", r.get('subtitle') or f"{c.get('card_sub', '')}، {c['price']}", f"{course_href(c['id'])}", bool(r.get('highlight'))))
         else:
             rows.append((r.get('icon') or 'globe', r.get('title', ''), r.get('subtitle', ''), (r.get('url') or '').replace('{telegram}', TG).replace('{instagram}', IG), bool(r.get('highlight'))))
     rh = ''.join(f'<a class="link-row glass rv{" hot" if hot else ""}" style="--d:{k*0.05+.2:.2f}s" href="{h}"{" target=_blank rel=noopener" if h.startswith("http") else ""}><span class="lr-ic">{icon(ic)}</span><span class="lr-tx"><b>{t}</b><small>{s}</small></span>{icon("arrow","arrow")}</a>' for k,(ic,t,s,h,hot) in enumerate(rows))

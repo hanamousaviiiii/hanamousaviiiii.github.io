@@ -1,4 +1,4 @@
-from common import icon, TG
+from common import icon, TG, course_href
 
 import content
 
@@ -27,7 +27,7 @@ def front(cid, c):
    <div class="spec"></div><div class="holo"></div>
   </div>'''
 
-def card(cid, flip=True):
+def card(cid, flip=True, pre=''):
     c = COURSES[cid]
     lis = ''.join(f'<li>{x}</li>' for x in c['back'][:3])
     back = f'''<div class="face back">
@@ -38,7 +38,7 @@ def card(cid, flip=True):
     <ul>{lis}</ul>
     <div class="more">{c['more']}</div>
     <div class="price"><b>{c['price']}</b></div>
-    <div class="btns"><a class="btn btn-primary" href="course.html?c={cid}">جزئیات دوره {icon('arrow','arrow')}</a><a class="btn btn-glass" href="{TG}" target="_blank" rel="noopener">{icon('telegram')} ثبت‌نام در تلگرام</a></div>
+    <div class="btns"><a class="btn btn-primary" href="{course_href(cid, pre)}">جزئیات دوره {icon('arrow','arrow')}</a><a class="btn btn-glass" href="{TG}" target="_blank" rel="noopener">{icon('telegram')} ثبت‌نام در تلگرام</a></div>
    </div>
    </div>''' if flip else ''
     attrs = 'tabindex="0" role="button" aria-pressed="false" aria-label="کارت دوره‌ی ' + c['name'] + ' — برای دیدن جزئیات بچرخانید"' if flip else 'aria-hidden="true"'

@@ -3,7 +3,7 @@
 import sys, os, glob, json
 sys.path.insert(0, os.path.dirname(__file__))
 import content, security
-import page_index, page_course, page_misc, page_challenge, page_faq, page_works, feeds
+import page_index, page_course, page_chapters, page_misc, page_challenge, page_faq, page_works, feeds
 OUT = os.path.join(os.path.dirname(__file__), '..')
 
 def w(p, build, *a):
@@ -33,6 +33,12 @@ def data_js():
 
 w('index.html', page_index.build)
 w('course.html', page_course.build)
+for _c in content.courses(True):
+    w(f'courses/{_c["id"]}.html', page_course.build_one, _c['id'])
+clean('courses', [_c['id'] for _c in content.courses(True)])
+for _c, _i, _ch, _chs in page_chapters.all_entries():
+    w(f'chapters/{_ch["slug"]}.html', page_chapters.build, _c, _i, _ch, _chs)
+clean('chapters', page_chapters.slugs())
 w('challenge.html', page_challenge.build)
 w('blog.html', page_misc.blog)
 w('links.html', page_misc.links)

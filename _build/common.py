@@ -1,4 +1,5 @@
 # Shared partials for the static generator (run: python3 _build/gen.py)
+import json as _json
 import content as _content
 TG = _content.site().get('telegram') or 'https://t.me/hanatrick'
 IG = _content.site().get('instagram') or 'https://instagram.com/hana.aistudio'
@@ -120,7 +121,40 @@ SPRITE = '''<svg class="sprite" width="0" height="0" style="position:absolute" a
  </symbol>
 </defs></svg>'''
 
-def head(title, desc, pre='', extra=''):
+SITE = 'https://hanamousaviiiii.github.io'
+
+def abs_url(path):
+    return SITE + '/' + path.lstrip('/')
+
+def course_href(cid, pre=''):
+    return f'{pre}courses/{cid}.html'
+
+def chapter_href(slug, pre=''):
+    return f'{pre}chapters/{slug}.html'
+
+def jsonld_tags(objs):
+    if not objs:
+        return ''
+    if not isinstance(objs, list):
+        objs = [objs]
+    out = []
+    for obj in objs:
+        raw = _json.dumps(obj, ensure_ascii=False, separators=(',', ':'))
+        raw = raw.replace('<', '\\u003c')
+        out.append(f'<script type="application/ld+json">{raw}</script>')
+    return '\n'.join(out) + '\n'
+
+def head(title, desc, pre='', extra='', canonical='', og_url='', og_type='website', json_ld=None):
+    seo = ''
+    if canonical:
+        seo += f'<link rel="canonical" href="{canonical}">\n'
+    seo += f'<meta property="og:type" content="{og_type}">\n'
+    seo += '<meta property="og:locale" content="fa_IR">\n'
+    seo += '<meta property="og:site_name" content="hana.aistudio">\n'
+    if og_url:
+        seo += f'<meta property="og:url" content="{og_url}">\n'
+    seo += '<meta name="twitter:card" content="summary">\n'
+    seo += jsonld_tags(json_ld)
     return f'''<!doctype html>
 <html lang="fa" dir="rtl" class="no-js">
 <head>
@@ -131,7 +165,7 @@ def head(title, desc, pre='', extra=''):
 <meta name="theme-color" content="#05060b">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<link rel="icon" href="{pre}assets/img/mark.svg" type="image/svg+xml">
+{seo}<link rel="icon" href="{pre}assets/img/mark.svg" type="image/svg+xml">
 <link rel="preload" href="{pre}assets/fonts/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{pre}assets/css/style.css">
 {extra}
@@ -141,6 +175,7 @@ def head(title, desc, pre='', extra=''):
 <div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="grain" aria-hidden="true"></div>
 '''
+
 
 NAV_ITEMS = [('index.html#courses', 'دوره‌ها', 'Courses'), ('challenge.html', 'چالش', 'Challenge'), ('student-works.html', 'نمونه‌کارها', 'Works'), ('ai-faq.html', 'سؤالات AI', 'AI FAQ'), ('blog.html', 'مجله', 'Journal'), ('links.html', 'لینک‌ها', 'Links'), ('contact.html', 'همکاری', 'Collab')]
 

@@ -1177,3 +1177,21 @@ button.m-tile:hover .m-play{transform:scale(1.08)}
 }
 .cx-q .opt.sel,.cx-q .opt.sel:hover{background:linear-gradient(135deg,rgba(215,38,61,.28),rgba(47,107,255,.14));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,110,125,.55),0 12px 34px -14px rgba(215,38,61,.7)}
 .cx-q .opt:focus:not(:focus-visible){outline:none}
+
+/* Smart Assistant chapter pages and linked syllabus rows */
+.syllabus li > a{display:flex;gap:18px;align-items:center;color:inherit;width:100%;margin:-16px -20px;padding:16px 20px;border-radius:inherit}
+.syllabus li > a:focus-visible{outline:2px solid var(--blue-2);outline-offset:-2px}
+.course-seo-h2{margin:8px 0 0;font-size:clamp(18px,2.2vw,24px);color:var(--ink);font-weight:700}
+.ch-hero .h-xl{font-size:clamp(34px,5.4vw,68px)}
+.ch-num{display:flex;align-items:baseline;gap:8px;margin:0 0 8px;color:var(--blue-2);font-size:15px}
+.ch-num b{font-family:var(--serif);font-size:42px;line-height:1;font-weight:500;color:transparent;background:linear-gradient(var(--blue-2),var(--crimson-2));-webkit-background-clip:text;background-clip:text}
+.ch-seo-h2{margin:10px 0 0}
+.ch-outcomes{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ch-outcomes li{padding:16px 20px;border-radius:18px;font-size:15.5px}
+.ch-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.ch-nav:has(.ch-nav-item:only-child){grid-template-columns:1fr}
+.ch-nav-item{display:grid;gap:4px;padding:22px 24px;border-radius:24px}
+.ch-nav-item b{font-size:clamp(16px,2vw,20px)}
+@media (max-width:640px){
+  .ch-nav{grid-template-columns:1fr}
+}
