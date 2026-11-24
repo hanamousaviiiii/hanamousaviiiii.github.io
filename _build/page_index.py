@@ -168,7 +168,7 @@ def build():
   <div class="sec-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center">
    <div class="kicker rv" style="justify-content:center">سؤالات متداول <span class="latin">07 — FAQ</span></div>
    <h2 class="h-lg" data-split>قبل از <span class="grad-b">شروع</span></h2>
-   <p class="rv" style="margin:14px 0 0">{PH('پاسخ‌ها در انتظار تأیید هانا')}</p>
+   <p class="lead rv" style="margin:14px 0 0">جواب سؤال‌های پرتکرار قبل از ثبت‌نام؛ اگر چیز دیگه‌ای مدنظرته، در تلگرام بپرس.</p>
   </div>
   <div class="faq">{fq}</div>
  </div>

@@ -24,6 +24,19 @@ def course_block(cid):
     syl = ''.join(f'<li class="rv" style="--d:{min(k,8)*0.04:.2f}s"><span class="n">{fa(k+1).rjust(2,"۰")}</span><span>{s}</span></li>' for k,s in enumerate(c.get('syllabus') or []))
     perks = '\n        '.join(f'<div class="perk glass">{icon(p.get("icon") or "book")}<div><b>{(p.get("title") or "").replace("{count}", count)}</b><span{' class="ph"' if (p.get("text") or "").startswith("[") else ''}>{p.get("text") or ""}</span></div></div>' for p in (c.get('perks') or []))
     faq = ''.join(f'<details class="qa glass"><summary>{f.get("q","")}<span class="pm"></span></summary><div class="ans">{ph(f.get("a") or "[پاسخ — به‌زودی]")}</div></details>' for f in (c.get('faqs') or []))
+    support_title = (c.get('support_title') or '').strip()
+    support_text = (c.get('support_text') or '').strip()
+    support = ''
+    if support_text:
+        support = f'''<section class="section" style="padding-top:0">
+ <div class="wrap">
+  <div class="glass side-box rv" style="max-width:880px;margin-inline:auto">
+   <h3>{support_title or "سه ماه پشتیبانی"}</h3>
+   <p>{support_text}</p>
+  </div>
+ </div>
+</section>
+'''
     first = content.courses(True)[0]['id']
     return f'''<div class="course-view" data-course="{cid}"{'' if cid==first else ' hidden'}>
 <section class="page-head course-hero">
@@ -41,6 +54,7 @@ def course_block(cid):
  </div>
 </section>
 <section class="section" style="padding-top:20px"><div class="wrap"><div class="perks">{perks}</div></div></section>
+{support}
 <section class="section" style="padding-top:0">
  <div class="wrap course-grid">
   <div>

@@ -329,6 +329,8 @@ collections:
                       - { label: "ایمیل", value: "mail" }
                       - { label: "ساعت", value: "clock" }
                       - { label: "تیک", value: "check" }
+              - { label: "عنوان بلوک پشتیبانی", name: support_title, widget: string, required: false, hint: "مثلاً سه ماه پشتیبانی، مستقیم با مدرس" }
+              - { label: "متن بلوک پشتیبانی", name: support_text, widget: text, required: false, hint: "اگر خالی باشد، بلوک پشتیبانی در صفحه‌ی دوره نمایش داده نمی‌شود" }
               - { label: "برای چه کسانی؟", name: audience, widget: text, required: false }
               - { label: "ویدیوی معرفی دوره (اختیاری)", name: intro_video, widget: file, required: false, choose_url: false }
               - { label: "کاور ویدیوی معرفی (اختیاری)", name: intro_poster, widget: image, required: false, choose_url: false }
