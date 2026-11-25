@@ -121,7 +121,7 @@ SPRITE = '''<svg class="sprite" width="0" height="0" style="position:absolute" a
  </symbol>
 </defs></svg>'''
 
-SITE = 'https://hanamousaviiiii.github.io'
+SITE = 'https://aistudiohana.ir'
 
 def abs_url(path):
     return SITE + '/' + path.lstrip('/')

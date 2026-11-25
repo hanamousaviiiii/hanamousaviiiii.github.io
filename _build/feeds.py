@@ -8,7 +8,7 @@ from email.utils import format_datetime
 import content
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-SITE = 'https://hanamousaviiiii.github.io'
+SITE = 'https://aistudiohana.ir'
 TITLE = 'hana.aistudio'
 DESC = 'مجله‌ی آموزش هوش مصنوعی و تولید محتوا، نوشته‌ی هانا موسوی.'
 

@@ -20,9 +20,9 @@ backend:
 local_backend: true
 
 locale: fa
-site_url: https://hanamousaviiiii.github.io
-display_url: https://hanamousaviiiii.github.io
-logo_url: https://hanamousaviiiii.github.io/assets/img/mark.svg
+site_url: https://aistudiohana.ir
+display_url: https://aistudiohana.ir
+logo_url: https://aistudiohana.ir/assets/img/mark.svg
 show_preview_links: false
 
 # Uploaded photos and videos go here. Paths are saved as /assets/media/uploads/<file>.
