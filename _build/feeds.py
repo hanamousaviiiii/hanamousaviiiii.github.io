@@ -114,7 +114,7 @@ def write_api(rows, built):
             'body': a.get('body') or '',
         })
 
-    works = content.load('works.json', {'settings': {}, 'chapters': []})
+    works = content.works()
     settings = works.get('settings') or {}
     chapters = []
     for c in works.get('chapters') or []:
@@ -207,12 +207,12 @@ _SKIP_FILES = {'404.html'}
 _CONTENT_SOURCES = {
     'index.html': ['content/home.json', 'content/site.json', 'content/testimonials.json'],
     'blog.html': ['content/articles'],
-    'course.html': ['content/courses.json'],
-    'challenge.html': ['content/courses.json'],
+    'course.html': ['content/courses.json', 'content/courses'],
+    'challenge.html': ['content/courses.json', 'content/courses'],
     'links.html': ['content/links.json'],
     'contact.html': ['content/site.json'],
     'ai-faq.html': ['content/ai-faq.json', 'content/faq'],
-    'student-works.html': ['content/works.json'],
+    'student-works.html': ['content/works.json', 'content/works'],
 }
 
 
@@ -242,9 +242,9 @@ def _sources_for(rel):
     elif rel.startswith('articles/') and rel.endswith('.html'):
         srcs.append(os.path.join('content', 'articles', rel[9:-5] + '.json'))
     elif rel.startswith('courses/') and rel.endswith('.html'):
-        srcs.append('content/courses.json')
+        srcs.extend(['content/courses.json', 'content/courses', os.path.join('content', 'courses', rel[8:-5] + '.json')])
     elif rel.startswith('chapters/') and rel.endswith('.html'):
-        srcs.append('content/courses.json')
+        srcs.extend(['content/courses.json', 'content/courses'])
     elif rel.startswith('faq/') and rel.endswith('.html'):
         srcs.append(os.path.join('content', 'faq', rel[4:-5] + '.json'))
         srcs.append('content/ai-faq.json')

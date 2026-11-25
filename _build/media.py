@@ -1,5 +1,5 @@
 # Media pipeline: student works by course chapter + the About photo.
-# The list of chapters and samples lives in content/works.json (edited in the admin panel at /admin/).
+# The list of chapters lives in content/works.json; samples are in content/works/<slug>/*.json (edited in the admin panel at /admin/).
 # To bulk-add files dropped into assets/media/students/<chapter-slug>/ run `python3 _build/import_media.py`.
 import os, json, html, shutil, subprocess, hashlib
 import content
@@ -8,7 +8,7 @@ IMG = ('.jpg', '.jpeg', '.png', '.webp', '.avif')
 VID = ('.mp4', '.webm', '.mov')
 
 def _works():
-    return content.load('works.json', {'settings': {}, 'chapters': []})
+    return content.works()
 
 def settings():
     d = dict(home_chips=5, home_thumbs=3, tile_shape='auto', show_student=True, empty_label='نمونه‌کار هنرجو')

@@ -14,11 +14,14 @@ body,button,input,textarea,select{font-family:Vazirmatn,system-ui,sans-serif!imp
 /* Persian text reads right-to-left inside fields; English/URLs stay left-to-right automatically */
 input,textarea,[contenteditable=true],[data-slate-editor=true]{unicode-bidi:plaintext;text-align:start}
 label{unicode-bidi:plaintext}
+html,body{background:#05060b;color:#f3f4f8}
 </style>
 </head>
 <body>
 <!-- Decap CMS (MIT), self-hosted so the panel does not depend on outside CDNs -->
 <script src="vendor/decap-cms.js"></script>
 <script src="cms.js"></script>
+<!-- Loaded after the CMS so the theme can override Decap's injected styles -->
+<link rel="stylesheet" href="admin.css">
 </body>
 </html>
