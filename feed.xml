@@ -5,8 +5,16 @@
   <link>https://hanamousaviiiii.github.io/blog.html</link>
   <description>مجله‌ی آموزش هوش مصنوعی و تولید محتوا، نوشته‌ی هانا موسوی.</description>
   <language>fa-IR</language>
-  <lastBuildDate>Tue, 24 Nov 2026 14:09:01 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 08:23:14 +0000</lastBuildDate>
   <atom:link href="https://hanamousaviiiii.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>اخبار هوش مصنوعی هفته: دستیار متا در دایرکت اینستاگرام، ویرایش دقیق Ideogram و GIF در Gemini</title>
+    <link>https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-25.html</link>
+    <guid isPermaLink="true">https://hanamousaviiiii.github.io/articles/ai-news-week-2026-11-25.html</guid>
+    <description>مهم‌ترین خبرهای هوش مصنوعی ۱۸ تا ۲۵ نوامبر برای تولیدکننده‌های محتوا: Muse در دایرکت اینستاگرام، Ideogram 4.6، GPT-6.2 در گفتگوی ChatGPT، ساخت GIF در Gemini و مدل ویدیویی MAGI-2.</description>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 +0330</pubDate>
+    <category>اخبار</category>
+  </item>
   <item>
     <title>تحلیل ویدیو با Gemini: ریلزت را به هوش مصنوعی نشان بده</title>
     <link>https://hanamousaviiiii.github.io/articles/gemini-video-analysis.html</link>
