@@ -1,4 +1,4 @@
-# Admin panel (Decap CMS) for hanamousaviiiii.github.io
+# Admin panel (Decap CMS) for aistudiohana.ir
 # Every "Publish" saves a JSON file in content/ to GitHub; the GitHub Action rebuilds and publishes the site in ~1-2 minutes.
 # Field labels are in Persian for Hana. Docs: https://decapcms.org/docs/configuration-options/
 
@@ -7,7 +7,7 @@ backend:
   name: git-gateway
   repo: hanamousaviiiii/hanamousaviiiii.github.io
   branch: main
-  identity_url: https://auth.decapbridge.com/sites/b74f0f16-7146-42af-af07-72f7b9601037
+  identity_url: https://auth.decapbridge.com/sites/4dac6425-2d13-4cc2-ab14-41d00f7a38eb
   gateway_url: https://gateway.decapbridge.com
   commit_messages:
     create: "پنل: ایجاد {{collection}} «{{slug}}» ({{author-name}})"
@@ -30,14 +30,14 @@ media_folder: assets/media/uploads
 public_folder: /assets/media/uploads
 
 collections:
-  # ------------------------------------------------------------ homepage
+  # ------------------------------------------------------------ سایت › صفحه اصلی
   - name: home
-    label: "صفحه‌ی اصلی"
-    description: "ترتیب بخش‌ها، کارت‌های مهارت، متن‌ها و سؤالات صفحه‌ی اول"
+    label: "سایت › صفحه اصلی"
+    description: "متن‌ها، ترتیب بخش‌ها، کارت‌های مهارت و سؤالات متداول پایین صفحه. نمایش در https://aistudiohana.ir/"
     editor: { preview: false }
     files:
       - name: home
-        label: "صفحه‌ی اصلی سایت"
+        label: "صفحه اصلی"
         file: content/home.json
         fields:
           - label: "ترتیب و نمایش بخش‌ها"
@@ -130,14 +130,176 @@ collections:
               - { label: "سؤال", name: q, widget: string }
               - { label: "جواب", name: a, widget: text }
 
-  # ------------------------------------------------------------ student works
+  # ------------------------------------------------------------ سایت › صفحه اصلی › رضایت هنرجوها
+  - name: testimonials
+    label: "سایت › صفحه اصلی › رضایت هنرجوها"
+    description: "نظرها و اسکرین‌شات‌های رضایت هنرجوها. فقط در صفحه اصلی (https://aistudiohana.ir/) نمایش داده می‌شوند."
+    editor: { preview: false }
+    files:
+      - name: testimonials
+        label: "رضایت هنرجوها"
+        file: content/testimonials.json
+        fields:
+          - label: "نظرها"
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            collapsed: true
+            required: false
+            hint: "تا وقتی هیچ نظری اضافه نشده، سه کادر نمونه نشان داده می‌شود."
+            fields:
+              - { label: "نام هنرجو", name: name, widget: string }
+              - { label: "دوره", name: course, widget: string, required: false }
+              - { label: "متن نظر", name: text, widget: text, required: false }
+              - { label: "اسکرین‌شات رضایت (اختیاری)", name: screenshot, widget: image, required: false, choose_url: false }
+              - { label: "عکس هنرجو (اختیاری)", name: photo, widget: image, required: false, choose_url: false }
+              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
+
+  # ------------------------------------------------------------ سایت › دوره‌ها
+  - name: courses
+    label: "سایت › دوره‌ها"
+    description: "قیمت، سرفصل‌ها، ویژگی‌ها، سؤالات و فصل‌های هر دوره. فهرست دوره‌ها: https://aistudiohana.ir/course.html — دوره دستیار هوشمند: https://aistudiohana.ir/courses/smart-assistant.html و صفحه‌های فصل‌ها در https://aistudiohana.ir/chapters/ — دوره ادیتور پلاس: https://aistudiohana.ir/courses/editor-plus.html"
+    editor: { preview: false }
+    files:
+      - name: courses
+        label: "دوره دستیار هوشمند و دوره ادیتور پلاس"
+        file: content/courses.json
+        fields:
+          - label: "دوره‌ها"
+            name: courses
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}}"
+            collapsed: true
+            allow_add: false
+            hint: "دو دوره این‌جا هستند: دستیار هوشمند و ادیتور پلاس. ترتیب همان ترتیب کارت‌ها در صفحه اصلی و صفحه فهرست دوره‌هاست. شناسه smart-assistant صفحه courses/smart-assistant.html و فصل‌های chapters/ را می‌سازد؛ شناسه editor-plus صفحه courses/editor-plus.html را."
+            fields:
+              - { label: "نام دوره", name: name, widget: string }
+              - { label: "شهریه", name: price, widget: string, hint: "مثلاً ۶٫۵ میلیون تومان" }
+              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
+              - { label: "نام انگلیسی", name: latin, widget: string }
+              - { label: "شماره‌ی رومی روی کارت", name: num, widget: string }
+              - label: "نقش وسط کارت"
+                name: emblem
+                widget: select
+                options:
+                  - { label: "چشم و ستاره (دستیار هوشمند)", value: assistant }
+                  - { label: "فیلم (ادیتور پلاس)", value: editor }
+              - { label: "زیرعنوان پشت کارت", name: card_sub, widget: string }
+              - { label: "سه نکته‌ی پشت کارت", name: card_points, widget: list, field: { label: "نکته", name: item, widget: string }, hint: "فقط سه مورد اول نمایش داده می‌شود" }
+              - { label: "خط پایین پشت کارت", name: card_more, widget: string }
+              - { label: "زیرعنوان صفحه‌ی دوره", name: page_sub, widget: string }
+              - { label: "معرفی دوره", name: intro, widget: text }
+              - { label: "تعداد فصل‌ها (متن)", name: count_label, widget: string, hint: "مثلاً ۱۴ فصل" }
+              - { label: "سرفصل‌ها", name: syllabus, widget: list, collapsed: true, field: { label: "سرفصل", name: item, widget: string } }
+              - label: "ویژگی‌ها (سه کادر بالای سرفصل‌ها)"
+                name: perks
+                widget: list
+                summary: "{{fields.title}}"
+                collapsed: true
+                fields:
+                  - { label: "عنوان", name: title, widget: string, hint: "{count} = تعداد فصل‌ها" }
+                  - { label: "توضیح", name: text, widget: string }
+                  - label: "آیکون"
+                    name: icon
+                    widget: select
+                    options:
+                      - { label: "ستاره / جرقه", value: "spark" }
+                      - { label: "پرامپت", value: "prompt" }
+                      - { label: "تصویر", value: "image" }
+                      - { label: "ویدیو", value: "video" }
+                      - { label: "صدا", value: "wave" }
+                      - { label: "ادیت", value: "edit" }
+                      - { label: "رشد و درآمد", value: "growth" }
+                      - { label: "دوربین", value: "camera" }
+                      - { label: "لایه‌ها / موشن", value: "layers" }
+                      - { label: "لبخند / زیبایی", value: "smile" }
+                      - { label: "موبایل / استوری", value: "phone" }
+                      - { label: "فیلم / سریال", value: "film" }
+                      - { label: "کیف خرید / محصول", value: "bag" }
+                      - { label: "موسیقی", value: "music" }
+                      - { label: "پخش", value: "play" }
+                      - { label: "کتاب", value: "book" }
+                      - { label: "سپر / پشتیبانی", value: "shield" }
+                      - { label: "آپدیت", value: "refresh" }
+                      - { label: "هدف / چالش", value: "target" }
+                      - { label: "وب‌سایت", value: "globe" }
+                      - { label: "تلگرام", value: "telegram" }
+                      - { label: "اینستاگرام", value: "instagram" }
+                      - { label: "همکاری", value: "brief" }
+                      - { label: "ایمیل", value: "mail" }
+                      - { label: "ساعت", value: "clock" }
+                      - { label: "تیک", value: "check" }
+              - { label: "عنوان بلوک پشتیبانی", name: support_title, widget: string, required: false, hint: "مثلاً سه ماه پشتیبانی، مستقیم با مدرس" }
+              - { label: "متن بلوک پشتیبانی", name: support_text, widget: text, required: false, hint: "اگر خالی باشد، بلوک پشتیبانی در صفحه‌ی دوره نمایش داده نمی‌شود" }
+              - { label: "برای چه کسانی؟", name: audience, widget: text, required: false }
+              - { label: "ویدیوی معرفی دوره (اختیاری)", name: intro_video, widget: file, required: false, choose_url: false }
+              - { label: "کاور ویدیوی معرفی (اختیاری)", name: intro_poster, widget: image, required: false, choose_url: false }
+              - label: "سؤالات دوره"
+                name: faqs
+                widget: list
+                summary: "{{fields.q}}"
+                collapsed: true
+                fields:
+                  - { label: "سؤال", name: q, widget: string }
+                  - { label: "جواب (خالی = به‌زودی)", name: a, widget: text, required: false }
+              - label: "زیرعنوان دوره در نتیجه‌ی چالش"
+                name: js_subtitle
+                widget: string
+                required: false
+              - { label: "توضیح کوتاه دوره در نتیجه‌ی چالش", name: js_teaser, widget: text, required: false }
+              - { label: "مزایا در نتیجه‌ی چالش", name: js_perks, widget: list, required: false, field: { label: "مزیت", name: item, widget: string } }
+              - { label: "شناسه‌ی فنی (تغییر ندهید)", name: id, widget: string, pattern: ["^(smart-assistant|editor-plus|[a-z0-9-]+)$", "فقط حروف انگلیسی"] }
+
+  # ------------------------------------------------------------ سایت › مقالات
+  - name: articles
+    label: "سایت › مقالات"
+    label_singular: "مقاله"
+    description: "مقاله‌های مجله. فهرست در https://aistudiohana.ir/blog.html و هر مقاله صفحه جدا در https://aistudiohana.ir/articles/ دارد. همه مقاله‌های منتشرشده همین‌جا نمایش داده می‌شوند."
+    folder: content/articles
+    extension: json
+    format: json
+    create: true
+    delete: true
+    identifier_field: url
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { label: "عنوان مقاله", name: title, widget: string }
+      - { label: "نشانی مقاله (انگلیسی، بدون فاصله)", name: url, widget: string, pattern: ["^[a-z0-9-]+$", "فقط حروف کوچک انگلیسی، عدد و خط تیره، مثل ai-tools-guide"], hint: "آدرس صفحه می‌شود: https://aistudiohana.ir/articles/این-نشانی.html و کارت آن در صفحه مجله می‌آید." }
+      - { label: "توضیح کوتاه (برای گوگل و کارت مقاله)", name: description, widget: text }
+      - { label: "برچسب", name: tag, widget: string, hint: "مثلاً پرامپت یا ویدیو" }
+      - { label: "زمان مطالعه (دقیقه)", name: minutes, widget: string, default: "۵" }
+      - { label: "ترتیب نمایش (عدد کمتر = بالاتر، اولی ویژه است)", name: order, widget: number, value_type: int, default: 10 }
+      - { label: "منتشر شود", name: published, widget: boolean, default: true }
+      - { label: "عکس کاور (اختیاری)", name: image, widget: image, required: false, choose_url: false }
+      - label: "طرح رنگی کاور (اگر عکس ندارید)"
+        name: cover
+        widget: select
+        default: a1
+        options:
+            - { label: "طرح ۱", value: "a1" }
+            - { label: "طرح ۲", value: "a2" }
+            - { label: "طرح ۳", value: "a3" }
+            - { label: "طرح ۴", value: "a4" }
+            - { label: "طرح ۵", value: "a5" }
+            - { label: "طرح ۶", value: "a6" }
+            - { label: "طرح ۷", value: "a7" }
+      - label: "متن مقاله"
+        name: body
+        widget: markdown
+        buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+        editor_components: ["image", "code-block"]
+        hint: "«نقل‌قول» به شکل کادر نکته نمایش داده می‌شود."
+
+  # ------------------------------------------------------------ سایت › نمونه‌کار هنرجو
   - name: works
-    label: "نمونه‌کار هنرجوها"
-    description: "فصل‌ها، ویدیوها و عکس‌های هنرجوها و نحوه‌ی نمایش گالری"
+    label: "سایت › نمونه‌کار هنرجو"
+    description: "فصل‌ها، ویدیوها و عکس‌های گالری نمونه‌کار هنرجو. نمایش در https://aistudiohana.ir/student-works.html و باکس نمونه‌کار در صفحه اصلی."
     editor: { preview: false }
     files:
       - name: works
-        label: "گالری نمونه‌کارها"
+        label: "گالری نمونه‌کار هنرجو"
         file: content/works.json
         fields:
           - label: "فصل‌ها"
@@ -230,173 +392,30 @@ collections:
               - { label: "تعداد اسم فصل‌ها در باکس صفحه‌ی اول", name: home_chips, widget: number, value_type: int, min: 1, max: 9, default: 5 }
               - { label: "تعداد عکس‌های باکس صفحه‌ی اول", name: home_thumbs, widget: number, value_type: int, min: 1, max: 3, default: 3 }
 
-  # ------------------------------------------------------------ testimonials
-  - name: testimonials
-    label: "رضایت هنرجوها"
-    description: "نظرها و اسکرین‌شات‌های رضایت هنرجوها در صفحه‌ی اول"
+  # ------------------------------------------------------------ سایت › سؤالات متداول
+  - name: ai_faq_page
+    label: "سایت › سؤالات متداول"
+    description: "جواب‌های کوتاه و تاریخ بازبینی صفحه https://aistudiohana.ir/ai-faq.html"
     editor: { preview: false }
     files:
-      - name: testimonials
-        label: "رضایت هنرجوها"
-        file: content/testimonials.json
+      - name: ai-faq
+        label: "صفحه سؤالات متداول هوش مصنوعی"
+        file: content/ai-faq.json
         fields:
-          - label: "نظرها"
-            name: items
+          - { label: "آخرین بازبینی", name: reviewed, widget: string, hint: "مثلاً آبان ۱۴۰۵" }
+          - label: "سؤال‌های یک‌خطی"
+            name: quick
             widget: list
-            summary: "{{fields.name}}"
+            summary: "{{fields.q}}"
             collapsed: true
-            required: false
-            hint: "تا وقتی هیچ نظری اضافه نشده، سه کادر نمونه نشان داده می‌شود."
             fields:
-              - { label: "نام هنرجو", name: name, widget: string }
-              - { label: "دوره", name: course, widget: string, required: false }
-              - { label: "متن نظر", name: text, widget: text, required: false }
-              - { label: "اسکرین‌شات رضایت (اختیاری)", name: screenshot, widget: image, required: false, choose_url: false }
-              - { label: "عکس هنرجو (اختیاری)", name: photo, widget: image, required: false, choose_url: false }
-              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
-
-  # ------------------------------------------------------------ courses
-  - name: courses
-    label: "دوره‌ها"
-    description: "قیمت، سرفصل‌ها، ویژگی‌ها و سؤالات هر دوره"
-    editor: { preview: false }
-    files:
-      - name: courses
-        label: "دوره‌ها"
-        file: content/courses.json
-        fields:
-          - label: "دوره‌ها"
-            name: courses
-            widget: list
-            summary: "{{fields.name}} — {{fields.price}}"
-            collapsed: true
-            allow_add: false
-            hint: "ترتیب دوره‌ها همان ترتیب کارت‌ها در صفحه‌ی اول است."
-            fields:
-              - { label: "نام دوره", name: name, widget: string }
-              - { label: "شهریه", name: price, widget: string, hint: "مثلاً ۶٫۵ میلیون تومان" }
-              - { label: "نمایش در سایت", name: visible, widget: boolean, default: true }
-              - { label: "نام انگلیسی", name: latin, widget: string }
-              - { label: "شماره‌ی رومی روی کارت", name: num, widget: string }
-              - label: "نقش وسط کارت"
-                name: emblem
-                widget: select
-                options:
-                  - { label: "چشم و ستاره (دستیار هوشمند)", value: assistant }
-                  - { label: "فیلم (ادیتور پلاس)", value: editor }
-              - { label: "زیرعنوان پشت کارت", name: card_sub, widget: string }
-              - { label: "سه نکته‌ی پشت کارت", name: card_points, widget: list, field: { label: "نکته", name: item, widget: string }, hint: "فقط سه مورد اول نمایش داده می‌شود" }
-              - { label: "خط پایین پشت کارت", name: card_more, widget: string }
-              - { label: "زیرعنوان صفحه‌ی دوره", name: page_sub, widget: string }
-              - { label: "معرفی دوره", name: intro, widget: text }
-              - { label: "تعداد فصل‌ها (متن)", name: count_label, widget: string, hint: "مثلاً ۱۴ فصل" }
-              - { label: "سرفصل‌ها", name: syllabus, widget: list, collapsed: true, field: { label: "سرفصل", name: item, widget: string } }
-              - label: "ویژگی‌ها (سه کادر بالای سرفصل‌ها)"
-                name: perks
-                widget: list
-                summary: "{{fields.title}}"
-                collapsed: true
-                fields:
-                  - { label: "عنوان", name: title, widget: string, hint: "{count} = تعداد فصل‌ها" }
-                  - { label: "توضیح", name: text, widget: string }
-                  - label: "آیکون"
-                    name: icon
-                    widget: select
-                    options:
-                      - { label: "ستاره / جرقه", value: "spark" }
-                      - { label: "پرامپت", value: "prompt" }
-                      - { label: "تصویر", value: "image" }
-                      - { label: "ویدیو", value: "video" }
-                      - { label: "صدا", value: "wave" }
-                      - { label: "ادیت", value: "edit" }
-                      - { label: "رشد و درآمد", value: "growth" }
-                      - { label: "دوربین", value: "camera" }
-                      - { label: "لایه‌ها / موشن", value: "layers" }
-                      - { label: "لبخند / زیبایی", value: "smile" }
-                      - { label: "موبایل / استوری", value: "phone" }
-                      - { label: "فیلم / سریال", value: "film" }
-                      - { label: "کیف خرید / محصول", value: "bag" }
-                      - { label: "موسیقی", value: "music" }
-                      - { label: "پخش", value: "play" }
-                      - { label: "کتاب", value: "book" }
-                      - { label: "سپر / پشتیبانی", value: "shield" }
-                      - { label: "آپدیت", value: "refresh" }
-                      - { label: "هدف / چالش", value: "target" }
-                      - { label: "وب‌سایت", value: "globe" }
-                      - { label: "تلگرام", value: "telegram" }
-                      - { label: "اینستاگرام", value: "instagram" }
-                      - { label: "همکاری", value: "brief" }
-                      - { label: "ایمیل", value: "mail" }
-                      - { label: "ساعت", value: "clock" }
-                      - { label: "تیک", value: "check" }
-              - { label: "عنوان بلوک پشتیبانی", name: support_title, widget: string, required: false, hint: "مثلاً سه ماه پشتیبانی، مستقیم با مدرس" }
-              - { label: "متن بلوک پشتیبانی", name: support_text, widget: text, required: false, hint: "اگر خالی باشد، بلوک پشتیبانی در صفحه‌ی دوره نمایش داده نمی‌شود" }
-              - { label: "برای چه کسانی؟", name: audience, widget: text, required: false }
-              - { label: "ویدیوی معرفی دوره (اختیاری)", name: intro_video, widget: file, required: false, choose_url: false }
-              - { label: "کاور ویدیوی معرفی (اختیاری)", name: intro_poster, widget: image, required: false, choose_url: false }
-              - label: "سؤالات دوره"
-                name: faqs
-                widget: list
-                summary: "{{fields.q}}"
-                collapsed: true
-                fields:
-                  - { label: "سؤال", name: q, widget: string }
-                  - { label: "جواب (خالی = به‌زودی)", name: a, widget: text, required: false }
-              - label: "زیرعنوان دوره در نتیجه‌ی چالش"
-                name: js_subtitle
-                widget: string
-                required: false
-              - { label: "توضیح کوتاه دوره در نتیجه‌ی چالش", name: js_teaser, widget: text, required: false }
-              - { label: "مزایا در نتیجه‌ی چالش", name: js_perks, widget: list, required: false, field: { label: "مزیت", name: item, widget: string } }
-              - { label: "شناسه‌ی فنی (تغییر ندهید)", name: id, widget: string, pattern: ["^(smart-assistant|editor-plus|[a-z0-9-]+)$", "فقط حروف انگلیسی"] }
-
-  # ------------------------------------------------------------ articles
-  - name: articles
-    label: "مقاله‌های مجله"
-    label_singular: "مقاله"
-    description: "مقاله‌های صفحه‌ی مجله (blog.html)"
-    folder: content/articles
-    extension: json
-    format: json
-    create: true
-    delete: true
-    identifier_field: url
-    slug: "{{slug}}"
-    summary: "{{title}}"
-    sortable_fields: ["order", "title"]
-    fields:
-      - { label: "عنوان مقاله", name: title, widget: string }
-      - { label: "نشانی مقاله (انگلیسی، بدون فاصله)", name: url, widget: string, pattern: ["^[a-z0-9-]+$", "فقط حروف کوچک انگلیسی، عدد و خط تیره، مثل ai-tools-guide"], hint: "آدرس صفحه می‌شود: articles/این-نشانی.html" }
-      - { label: "توضیح کوتاه (برای گوگل و کارت مقاله)", name: description, widget: text }
-      - { label: "برچسب", name: tag, widget: string, hint: "مثلاً پرامپت یا ویدیو" }
-      - { label: "زمان مطالعه (دقیقه)", name: minutes, widget: string, default: "۵" }
-      - { label: "ترتیب نمایش (عدد کمتر = بالاتر، اولی ویژه است)", name: order, widget: number, value_type: int, default: 10 }
-      - { label: "منتشر شود", name: published, widget: boolean, default: true }
-      - { label: "عکس کاور (اختیاری)", name: image, widget: image, required: false, choose_url: false }
-      - label: "طرح رنگی کاور (اگر عکس ندارید)"
-        name: cover
-        widget: select
-        default: a1
-        options:
-            - { label: "طرح ۱", value: "a1" }
-            - { label: "طرح ۲", value: "a2" }
-            - { label: "طرح ۳", value: "a3" }
-            - { label: "طرح ۴", value: "a4" }
-            - { label: "طرح ۵", value: "a5" }
-            - { label: "طرح ۶", value: "a6" }
-            - { label: "طرح ۷", value: "a7" }
-      - label: "متن مقاله"
-        name: body
-        widget: markdown
-        buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
-        editor_components: ["image", "code-block"]
-        hint: "«نقل‌قول» به شکل کادر نکته نمایش داده می‌شود."
-
-  # ------------------------------------------------------------ AI FAQ guides
+              - { label: "سؤال", name: q, widget: string }
+              - { label: "جواب", name: a, widget: text }
+  # ------------------------------------------------------------ سایت › سؤالات متداول › راهنماها
   - name: faq
-    label: "راهنماهای سؤالات AI"
+    label: "سایت › سؤالات متداول › راهنماها"
     label_singular: "راهنما"
-    description: "راهنماهای کامل صفحه‌ی سؤالات پرتکرار هوش مصنوعی (ai-faq.html)"
+    description: "راهنماهای کامل که در https://aistudiohana.ir/ai-faq.html فهرست می‌شوند و هر کدام صفحه جدا در https://aistudiohana.ir/faq/ دارند."
     folder: content/faq
     extension: json
     format: json
@@ -433,26 +452,14 @@ collections:
         editor_components: ["image", "code-block"]
         hint: "هر تیتر ## خودکار وارد فهرست مطالب می‌شود. جدول‌ها و کادرهای ویژه را در حالت Markdown ویرایش کنید. {reviewed} = تاریخ بازبینی."
 
-  - name: pages
-    label: "صفحه‌های دیگر و تنظیمات"
-    description: "جواب‌های کوتاه AI، صفحه‌ی لینک‌ها، لینک شبکه‌های اجتماعی و افزونه‌ها"
+  # ------------------------------------------------------------ سایت › لینک‌ها
+  - name: links
+    label: "سایت › لینک‌ها"
+    description: "صفحه لینک‌های بیو اینستاگرام. نمایش در https://aistudiohana.ir/links.html"
     editor: { preview: false }
     files:
-      - name: ai-faq
-        label: "سؤالات AI: جواب‌های کوتاه و تاریخ بازبینی"
-        file: content/ai-faq.json
-        fields:
-          - { label: "آخرین بازبینی", name: reviewed, widget: string, hint: "مثلاً آبان ۱۴۰۵" }
-          - label: "سؤال‌های یک‌خطی"
-            name: quick
-            widget: list
-            summary: "{{fields.q}}"
-            collapsed: true
-            fields:
-              - { label: "سؤال", name: q, widget: string }
-              - { label: "جواب", name: a, widget: text }
       - name: links
-        label: "صفحه‌ی لینک‌ها (لینک بیو اینستاگرام)"
+        label: "صفحه لینک‌ها"
         file: content/links.json
         fields:
           - { label: "عکس پروفایل", name: photo, widget: image, required: false, choose_url: false }
@@ -512,8 +519,14 @@ collections:
                   - { label: "تیک", value: "check" }
               - { label: "برجسته", name: highlight, widget: boolean, default: false }
               - { label: "نمایش", name: visible, widget: boolean, default: true }
+  # ------------------------------------------------------------ سایت › تنظیمات کلی
+  - name: site
+    label: "سایت › تنظیمات کلی"
+    description: "لینک اینستاگرام و تلگرام و افزونه‌هایی که در همه یا بعضی صفحه‌ها می‌آیند. صفحه جدا ندارند. صفحه‌های چالش و همکاری متن ثابتی دارند و از این پنل ویرایش نمی‌شوند."
+    editor: { preview: false }
+    files:
       - name: site
-        label: "تنظیمات کلی و افزونه‌ها"
+        label: "تنظیمات و افزونه‌ها"
         file: content/site.json
         fields:
           - { label: "لینک اینستاگرام", name: instagram, widget: string }
